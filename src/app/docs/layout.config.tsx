@@ -1,5 +1,5 @@
 import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
-import { pageTree } from '@/app/source';
+import { pageTree } from '@/app/docs/source';
 
 // shared configuration
 export const baseOptions: BaseLayoutProps = {
