@@ -1,4 +1,4 @@
-import { map } from '@/.map';
+import { map } from '@root/.map';
 import { createMDXSource } from 'fumadocs-mdx';
 import { loader } from 'fumadocs-core/source';
 
