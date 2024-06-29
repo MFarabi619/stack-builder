@@ -8,6 +8,7 @@ export default function HomePage() {
       <p className="text-muted-foreground">
         You can open{' '}
         <Button variant="secondary" asChild>
+        {/* <Button variant="destructive" asChild> */}
           <Link href="/docs" className="text-foreground font-semibold underline">
             /docs
           </Link>
