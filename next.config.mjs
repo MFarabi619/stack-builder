@@ -1,6 +1,6 @@
 import createMDX from 'fumadocs-mdx/config';
 
-const withMDX = createMDX();
+const withMDX = createMDX({ rootContentPath: './src/content' })
 
 /** @type {import('next').NextConfig} */
 const config = {
