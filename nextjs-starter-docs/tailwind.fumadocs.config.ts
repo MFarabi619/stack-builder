@@ -5,8 +5,8 @@ const config= {
   darkMode: ["class"],
   prefix: "",
   content: [
-    './app/docs/**/*.{ts,tsx}',
-    './content/**/*.{md,mdx}',
+    './src/app/docs/**/*.{ts,tsx}',
+    './src/content/**/*.{md,mdx}',
     './mdx-components.{ts,tsx}',
     './node_modules/fumadocs-ui/dist/**/*.js',
   ],

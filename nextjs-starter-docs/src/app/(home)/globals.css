@@ -1,4 +1,5 @@
-@config "../../tailwind.config.ts";
+/*@config "@root/tailwind.config.ts";*/
+@config "../../../tailwind.config.ts";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
