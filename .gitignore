@@ -12,6 +12,9 @@
 /build
 *.tsbuildinfo
 
+# caches
+.eslintcache
+
 # misc
 .DS_Store
 *.pem
