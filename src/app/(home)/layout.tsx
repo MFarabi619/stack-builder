@@ -1,10 +1,10 @@
-import './global.css';
-import { Inter } from 'next/font/google';
-import type { ReactNode } from 'react';
+import './global.css'
+import { Inter } from 'next/font/google'
+import type { ReactNode } from 'react'
 
 const inter = Inter({
   subsets: ['latin'],
-});
+})
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -13,5 +13,5 @@ export default function Layout({ children }: { children: ReactNode }) {
         {children}
       </body>
     </html>
-  );
+  )
 }
