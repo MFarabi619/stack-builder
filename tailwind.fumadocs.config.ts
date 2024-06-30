@@ -1,9 +1,9 @@
-import { createPreset } from 'fumadocs-ui/tailwind-plugin';
-import type { Config } from "tailwindcss"
+import { createPreset } from 'fumadocs-ui/tailwind-plugin'
+import type { Config } from 'tailwindcss'
 
-const config= {
-  darkMode: ["class"],
-  prefix: "",
+const config = {
+  darkMode: ['class'],
+  prefix: '',
   content: [
     './src/app/docs/**/*.{ts,tsx}',
     './src/content/**/*.{md,mdx}',
