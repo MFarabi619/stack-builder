@@ -1,0 +1,63 @@
+---
+title: Manual Setup
+description: Set up the template your way
+---
+
+import { File, Folder, Files } from "fumadocs-ui/components/files";
+
+## Steps
+
+You can either start with a folder, or let the Fumadocs command create one for you.
+
+Option 1: Make a directory, and navigate to it.
+
+Once you're in your desired directory, run the Fumadocs quick start command:
+
+```bash
+pnpm create fumadocs-app
+```
+
+Let it install with the default name. Copy everything from that directory into your root directory, then delete that directory.
+
+Option 2: Just run the command, and when prompted, pick the name. It doesn't make it a Git repo by default, so you'll have to initialize it.
+
+Navigate into the directory, then run the following then navigate to `localhost:3000` to check if it works.
+
+```bash
+pnpm i; pnpm dev
+```
+
+As the time of writing this, Fumadocs creates a Next.js app with the `app` directory at the root level, and does not provide the option to use the `src` directory, which would be provided by the Next.js CLI.
+
+Therefore, we need to manually move the `app` directory into the `src` directory, and then make some pathing changes in various files.
+
+Create a `src` directory at the root level, and move the `app` and `content` directories into it. At this point, your project structure should look like this:
+
+<Files>
+  <Folder name="src" defaultOpen>
+    <Folder name="app" defaultOpen>
+      <Folder name="api" defaultOpen></Folder>
+      <Folder name="docs" defaultOpen>
+        <Folder name="[[...slug]]">
+          <File name="page.tsx" />
+        </Folder>
+        <File name="layout.tsx" />
+        <File name="global.css" />
+      </Folder>
+    </Folder>
+  </Folder>
+  <File name="package.json" />
+  <File name="other config files...." />
+</Files>
+
+Make the following changes:
+
+`paths` key in `tsconfig.json`.
+
+```diff json title="tsconfig.json"
+"paths": {
+-  "@/*": ["./*"],
++  "@/*": ["./src/*"], // [!code highlight]
++  "@root/*": ["./*"], // [!code highlight]
+}
+```
