@@ -1,3 +1,8 @@
+// This is a flat ESLint config file
+// To see all linting rules, run `pnpm lint:inspect` or `npx @eslint/config-inspector`
+// To run ESLint on the entire project without applying any fixes, run `pnpm lint`
+// To run ESLint on the entire project and apply fixes, run `pnpm lint:fix`
+
 import antfu from '@antfu/eslint-config'
 import { FlatCompat } from '@eslint/eslintrc'
 
@@ -24,7 +29,7 @@ export default antfu(
       * By default uses Prettier
       */
       // markdown: 'prettier'
-  },
+    },
   },
 
   // Legacy config
