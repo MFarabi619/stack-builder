@@ -1,4 +1,4 @@
-import './global.css';
+import './fumadocs.global.css';
 import { DocsLayout } from 'fumadocs-ui/layout';
 import type { ReactNode } from 'react';
 import { docsOptions } from './layout.config';
