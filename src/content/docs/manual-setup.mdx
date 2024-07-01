@@ -50,9 +50,9 @@ Create a `src` directory at the root level, and move the `app` and `content` dir
   <File name="other config files...." />
 </Files>
 
-Make the following changes:
+If you try to run the app, you'll see that it doesn't work. This is because the paths in the `tsconfig.json`, `tailwind.config.js`, `route.ts`, `app/page.tsx`, `layout.config.tsx`, `source.ts`, and `next.config.mjs` files are still pointing to the `app` and `content` directories at the root level. Let's fix them.
 
-`paths` key in `tsconfig.json`.
+Make the following changes:
 
 ```diff json title="tsconfig.json"
 "paths": {
@@ -61,3 +61,53 @@ Make the following changes:
 +  "@root/*": ["./*"], // [!code highlight]
 }
 ```
+
+```diff title="tailwind.config.js"
+content: [
+- './components/**/*.{ts,tsx}',
+- './app/**/*.{ts,tsx}',
+- './content/**/*.{md,mdx}',
++ './src/components/**/*.{ts,tsx}', // [!code highlight]
++ './src/app/**/*.{ts,tsx}', // [!code highlight]
++ './src/content/**/*.{md,mdx}', // [!code highlight]
+]
+```
+
+```diff title="route.ts"
+- import { getPages } from '@/source';
++ import { getPages } from '@/app/source'; // [!code highlight]
+```
+
+```diff title="app/page.tsx"
+- import { get Page, getPages } from '@/source';
++ import { get Page, getPages } from '@/app/source'; // [!code highlight]
+```
+
+```diff title="layout.config.tsx"
+- import { pageTree } from '@/source';
++ import { pageTree } from '@/app/source'; // [!code highlight]
+```
+
+```diff title="source.ts"
+- import { map } from './map'
++ import { map } from '@root/.map'; // [!code highlight]
+```
+
+```diff title="next.config.mjs"
+- const withMDX = createMDX({ rootContentPath: './content' })
++ const withMDX = createMDX({ rootContentPath: './src/content' }) // [!code highlight]
+```
+
+To more easily see the UI differences between the home route and the docs route...
+
+```diff title="tailwind.config.js"
+-  presets: [createPreset({ preset: 'purple' })],
++  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+```
+
+Run the app again, everything should be working now.
+
+```bash
+pnpm i; pnpm dev
+```
+
