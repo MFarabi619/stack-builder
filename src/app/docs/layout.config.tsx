@@ -6,6 +6,7 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: 'Stack Builder Docs',
   },
+  githubUrl: 'https://github.com/MFarabi619/stack-builder',
   links: [
     {
       text: 'Documentation',
