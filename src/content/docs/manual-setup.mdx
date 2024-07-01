@@ -503,64 +503,6 @@ Create a `public/` directory at the root level to store static assets.
 
 Put `favicon.ico` and `icon.ico` files in both the `(home)` and `docs` directories. Also add it under the 'app' directory as both 'favicon.ico' and 'icon.ico'. As of right now I'm not sure which one it was that made it work.
 
-### Install ESLint
-
-#### Fix VS Code settings.json
-
-Go to `.vscode/settings.json` and change the comments to key-value pairs, like so:
-
-```diff title=".vscode/settings.json"
-{
-+  "@comment1": "Disable the default formatter, use eslint instead", // [!code highlight]
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
-
-+  "@comment2": "Autofix", // [!code highlight]
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
-  },
-
-+  "@comment3": "Silent the stylistic rules in you IDE, but still auto fix them", // [!code highlight]
-  "eslint.rules.customizations": [
-    { "rule": "style/*", "severity": "off" },
-    { "rule": "format/*", "severity": "off" },
-    { "rule": "*-indent", "severity": "off" },
-    { "rule": "*-spacing", "severity": "off" },
-    { "rule": "*-spaces", "severity": "off" },
-    { "rule": "*-order", "severity": "off" },
-    { "rule": "*-dangle", "severity": "off" },
-    { "rule": "*-newline", "severity": "off" },
-    { "rule": "*quotes", "severity": "off" },
-    { "rule": "*semi", "severity": "off" }
-  ],
-
-+  "@comment4": "Enable ESlint for all supported languages", // [!code highlight]
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml",
-    "toml",
-    "xml",
-    "gql",
-    "graphql",
-    "astro",
-    "css",
-    "less",
-    "scss",
-    "pcss",
-    "postcss"
-  ]
-}
-```
-
 ```diff title="tailwind.config.ts"
 import type { Config } from 'tailwindcss'
 + import tailwindcssAnimate from 'tailwindcss-animate' // [!code highlight]
@@ -715,7 +657,7 @@ export const docsOptions: DocsLayoutProps = {
 
 For the header to appear, the `DocsLayout` component needs to be wrapped in the `HomeLayout` component.
 
-```diff title="docs/layout.tsx"
+````diff title="docs/layout.tsx"
 ```diff title="docs/layout.tsx"
  import './fumadocs.global.css'
 -import { DocsLayout } from 'fumadocs-ui/layout'
@@ -737,7 +679,7 @@ For the header to appear, the `DocsLayout` component needs to be wrapped in the 
          </RootProvider>
        </body>
      </html>
-```
+````
 
 At this point the header should appear on the docs site. However, it contains many of the same elements as the sidebar, such as the title, search bar, theme toggle, links, etc.
 
@@ -790,3 +732,153 @@ Add the following:
 /*Fumadocs Presets*/
 ...
 ```
+
+### Install ESLint
+
+#### Use Anthony Fu's configuration
+
+[Anthony Fu's ESLint Configuration](https://github.com/antfu/eslint-config)
+
+```bash
+pnpm dlx @antfu/eslint-config@latest
+```
+
+This uses ESLint 9, which is still buggy and incompatible with many plugins. We're going to downversion to `8.57.0`.
+
+```bash
+pnpm i -D eslint@8
+```
+
+Add compatibility function to the ESLint flat config file.
+
+```diff title="eslint.config.mjs"
++import { FlatCompat } from '@eslint/eslintrc' // [!code highlight]
+
+-export default antfu({
++const compat = new FlatCompat() // [!code highlight]
+
+-})
++export default antfu( // [!code highlight]
++  { // [!code highlight]
++    ignores: [], // [!code highlight]
++  }, // [!code highlight]
++ // [!code highlight]
++  // Legacy config // [!code highlight]
++  ...compat.config({ // [!code highlight]
++    extends: [ // [!code highlight]
++      // 'eslint:recommended', // [!code highlight]
++      // Other extends... // [!code highlight]
++    ], // [!code highlight]
++  }) // [!code highlight]
++ // [!code highlight]
++  // Other flat configs... // [!code highlight]
++) // [!code highlight]
+```
+
+#### Fix VS Code settings.json
+
+Go to `.vscode/settings.json` and change the comments to key-value pairs, like so:
+
+```diff title=".vscode/settings.json"
+{
+- // Disable the default formatter, use eslint instead
++  "@comment1": "Disable the default formatter, use eslint instead", // [!code highlight]
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+
+- // Autofix
++  "@comment2": "Autofix", // [!code highlight]
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
+  },
+
+- // Silent the stylistic rules in you IDE, but still auto fix them
++  "@comment3": "Silent the stylistic rules in you IDE, but still auto fix them", // [!code highlight]
+  "eslint.rules.customizations": [
+    { "rule": "style/*", "severity": "off" },
+    { "rule": "format/*", "severity": "off" },
+    { "rule": "*-indent", "severity": "off" },
+    { "rule": "*-spacing", "severity": "off" },
+    { "rule": "*-spaces", "severity": "off" },
+    { "rule": "*-order", "severity": "off" },
+    { "rule": "*-dangle", "severity": "off" },
+    { "rule": "*-newline", "severity": "off" },
+    { "rule": "*quotes", "severity": "off" },
+    { "rule": "*semi", "severity": "off" }
+  ],
+
+- // Enable ESlint for all supported languages
++  "@comment4": "Enable ESlint for all supported languages", // [!code highlight]
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml",
+    "toml",
+    "xml",
+    "gql",
+    "graphql",
+    "astro",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
+  ]
+}
+```
+
+#### Activate ESLint React rules and Formatter rules
+
+```diff title="eslint.config.mjs"
+     ignores: [],
++    react: true, // [!code highlight]
++    formatters: { // [!code highlight]
++      /** // [!code highlight]
++      * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue // [!code highlight]
++      * By default uses Prettier // [!code highlight]
++      */ // [!code highlight]
++      css: true, // [!code highlight]
++      /** // [!code highlight]
++      * Format HTML files // [!code highlight]
++      * By default uses Prettier // [!code highlight]
++      */ // [!code highlight]
++      html: true, // [!code highlight]
++      /** // [!code highlight]
++      * Format Markdown files // [!code highlight]
++      * Supports Prettier and dprint // [!code highlight]
++      * By default uses Prettier // [!code highlight]
++      */ // [!code highlight]
++      // markdown: 'prettier' // [!code highlight]
++  }, // [!code highlight]
+
+     // Legacy config
+```
+
+#### Add ESLint scripts to package.json
+
+```diff title="package.json"
+   "scripts": {
+     "build": "next build",
+     "dev": "next dev",
+     "start": "next start"
++    "lint": "eslint .", // [!code highlight]
++    "lint:fix": "eslint . --fix", // [!code highlight]
++    "lint:inspect": "npx @eslint/config-inspector" // [!code highlight]
+   },
+```
+
+The commands need to be run in order for all packages to be installed.
+
+```bash
+pnpm lint; pnpm lint:fix; pnpm lint:inspect
+```
+
+Your entire project will be linted and fixable errors will be fixed. You should also see a browser tap open up with the address `localhost:7777`. This is the ESLint config inspector, which is only available for flat ESLint configs, like the one we just configured.
