@@ -4,7 +4,7 @@ import { pageTree } from '@/app/docs/source'
 // shared configuration
 export const baseOptions: BaseLayoutProps = {
   nav: {
-    title: 'Next.js Starter Template',
+    title: 'Stack Builder Docs',
   },
   links: [
     {
