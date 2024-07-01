@@ -3,6 +3,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/*Hide the header on mobile screens, as the sidebar turns into the header on mobile screens*/
+#nd-nav {
+  @apply max-md:hidden md:sticky;
+}
+
+/*Make the header full width, otherwise it is constrained to a container and looks odd at larger screens*/
+#nd-nav nav {
+  @apply max-w-full;
+}
+
+/*Due to the addition of the header, the sidebar is pushed down.*/
+/*When the page is scrolled, the sidebar scrolls as well and is covered by the header. Fix this by making the sidebar sticky, and setting the height to be viewport height minus the header height.*/
+#nd-sidebar {
+  @apply md:sticky md:top-16 md:h-[calc(100vh-4rem)];
+}
+
+/*Hide the first container for sidebar, with title, horizontal rule, search bar, and dots button*/
+#nd-sidebar > div:first-child {
+  @apply md:hidden;
+}
+
+/*Sidebar search bar*/
+/*#nd-sidebar > div:first-child > button:last-child {*/
+/*  @apply md:hidden*/
+/*}*/
+
+/*Make the theme toggle button invisible on desktop screens, as the header already has a theme toggle button*/
+#nd-sidebar > div:nth-child(3) > [aria-label='Toggle Theme'] {
+  @apply md:invisible;
+}
+
+/*The Table of Contents also faces the same issue as the sidebar when desktop header is visible. Apply similar fixes*/
+#nd-docs-layout > div:last-child {
+  @apply md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:pt-8;
+}
+
 /*Fumadocs Presets*/
 /*var defaultPreset = {*/
 /*  light: {*/

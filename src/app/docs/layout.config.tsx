@@ -16,6 +16,11 @@ export const baseOptions: BaseLayoutProps = {
   ],
 }
 
+// home layout configuration
+export const homeOptions: BaseLayoutProps = {
+  ...baseOptions,
+}
+
 // docs layout configuration
 export const docsOptions: DocsLayoutProps = {
   ...baseOptions,
