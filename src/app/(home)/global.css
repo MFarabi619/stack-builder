@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/*Easily customize theme: https://zippystarter.com/tools/shadcn-ui-theme-generator*/
+/*Explore the Shadcn/ui ecosystem: https://github.com/birobirobiro/awesome-shadcn-ui*/
+
 @layer base {
   :root {
     --background: 0 0% 100%;
