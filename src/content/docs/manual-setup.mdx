@@ -4,10 +4,11 @@ description: Set up the template your way
 ---
 
 import { File, Folder, Files } from "fumadocs-ui/components/files";
+import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 
 ## Steps
 
-### Create project with documentation site
+### Install Fumadocs
 
 You can either start with a folder, or let the Fumadocs command create one for you.
 
@@ -104,11 +105,22 @@ content: [
 + const withMDX = createMDX({ rootContentPath: './src/content' }) // [!code highlight]
 ```
 
-To more easily see the UI differences between the home route and the docs route...
+#### Add theme presets
+
+Easily see the UI differences between the home route and the docs route. Use whichever one you prefer, this one uses purple.
 
 ```diff title="tailwind.config.js"
--  presets: [createPreset({ preset: 'purple' })],
-+  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+    './node_modules/fumadocs-ui/dist/**/*.js',
+  ],
++  presets: [createPreset({ // [!code highlight]
++    // preset: 'default', // [!code highlight]
++    // preset: 'neutral', // [!code highlight]
++    // preset: 'dusk', // [!code highlight]
++    preset: 'purple', // [!code highlight]
++    // preset: 'ocean', // [!code highlight]
++    // preset: 'catppuccin', // [!code highlight]
++  })], // [!code highlight]
+} satisfies Config
 ```
 
 Run the app again, everything should be working now.
@@ -117,7 +129,7 @@ Run the app again, everything should be working now.
 pnpm i; pnpm dev
 ```
 
-#### Document Fumadocs CSS Variables for future reference
+#### Document Fumadocs CSS Variables for future reference and easy customization
 
 ```css title="docs/fumadocs.global.css"
 @config '../../../tailwind.fumadocs.config.ts';
@@ -391,7 +403,7 @@ pnpm i; pnpm dev
 /*};*/
 ```
 
-### Add Shadcn UI
+### Install Shadcn/ui
 
 Our next step will be to add [Shadcn/ui](https://ui.shadcn.com/). The problem is that it's not fully compatible with the Fumadocs UI design system, which also uses Tailwind CSS. Installing Shadcn will overwrite the current Tailwind CSS configuration, which will break Fumadocs UI.
 
@@ -474,9 +486,9 @@ import { createPreset } from 'fumadocs-ui/tailwind-plugin'
 
 Remove `RootProvider` from `(home)/layout.tsx`
 
-#### Install Shadcn UI
+#### Run Shadcn/ui install script
 
-Follow the below steps and cross-check with the instructions in the [Shadcn UI docs](https://ui.shadcn.com/docs/installation/next) to install Shadcn.
+Follow the below steps and cross-check with the instructions in the [Shadcn/ui docs](https://ui.shadcn.com/docs/installation/next) to install Shadcn.
 Step 1 can be skipped, as we've already set up a Next.js project.
 
 ```bash
@@ -881,4 +893,99 @@ The commands need to be run in order for all packages to be installed.
 pnpm lint; pnpm lint:fix; pnpm lint:inspect
 ```
 
+Ensure that `eslint-plugin-format` is in your `package.json`, if not, install it.
+
+```bash
+pnpm i -D eslint-plugin-format
+```
+
 Your entire project will be linted and fixable errors will be fixed. You should also see a browser tap open up with the address `localhost:7777`. This is the ESLint config inspector, which is only available for flat ESLint configs, like the one we just configured.
+
+### Install Husky
+
+```bash
+pnpm i -D husky
+```
+
+In `.husky/` create a `pre-commit` file with the following content:
+
+```bash
+echo "Running pre-commit command"
+```
+
+### Install Lint Staged
+
+<Tabs items={["Terminal", ".gitignore", ".husky/pre-commit"]}>
+
+```bash tab="Terminal"
+pnpm i -D lint-staged
+```
+ 
+```diff tab=".gitignore"
+/build
+*.tsbuildinfo
++ // [!code highlight]
++ # caches // [!code highlight]
++ .eslintcache // [!code highlight]
++ // [!code highlight]
+# misc
+.DS_Store
+*.pem
+```
+ 
+```diff tab=".husky/pre-commit"
+- echo "Running pre-commit command"
++ pnpm lint-staged // [!code highlight]
+```
+ 
+</Tabs>
+
+### Install Commitlint
+
+#### Create Commitlint config
+
+#### Create Husky Git hook to run Commitint
+
+### Install Commitizen
+
+### Install Semantic Release
+
+### Set up CI/CD with GitHub Actions
+
+### Install Storybook
+
+#### Add essential Storybook plugins
+
+##### Dark Mode
+
+##### Backgrounds
+
+##### Accessibility
+
+##### Unit & Integration Testing with Jest, Testing Library, and Storybook Test Runner
+
+##### E2E Testing with Playwright
+
+##### Coverage Testing
+
+#### Run Storybook tests in CI pipeline
+
+### Install Chromatic
+
+#### Add project token
+
+#### Run Chromatic tests in CI pipeline
+
+### Set up Sanity
+
+#### Create new Sanity project
+
+#### Install Sanity CLI
+
+#### Install Sanity Client
+
+### Install Docker
+
+### Install Framer Motion
+
+### Install Swiper.js
