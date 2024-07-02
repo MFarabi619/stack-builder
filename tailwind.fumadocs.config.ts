@@ -10,7 +10,14 @@ const config = {
     './mdx-components.{ts,tsx}',
     './node_modules/fumadocs-ui/dist/**/*.js',
   ],
-  presets: [createPreset({ preset: 'purple' })],
+  presets: [createPreset({
+    preset: 'default',
+    // preset: 'neutral',
+    // preset: 'dusk',
+    // preset: 'purple',
+    // preset: 'ocean',
+    // preset: 'catppuccin',
+  })],
 } satisfies Config
 
 export default config
