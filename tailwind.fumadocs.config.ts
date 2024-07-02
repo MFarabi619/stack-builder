@@ -11,9 +11,9 @@ const config = {
     './node_modules/fumadocs-ui/dist/**/*.js',
   ],
   presets: [createPreset({
-    preset: 'default',
+    // preset: 'default',
     // preset: 'neutral',
-    // preset: 'dusk',
+    preset: 'dusk',
     // preset: 'purple',
     // preset: 'ocean',
     // preset: 'catppuccin',
