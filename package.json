@@ -1,7 +1,11 @@
 {
   "name": "stack-builder",
   "version": "0.0.0",
-  "private": true,
+  "homepage": "https://github.com/MFarabi619/stack-builder",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MFarabi619/stack-builder.git"
+  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
