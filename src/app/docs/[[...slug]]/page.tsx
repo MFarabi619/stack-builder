@@ -18,7 +18,11 @@ export default async function Page({
   const MDX = page.data.exports.default
 
   return (
-    <DocsPage toc={page.data.exports.toc} full={page.data.full}>
+    <DocsPage
+      toc={page.data.exports.toc}
+      lastUpdate={page.data.exports.lastModified}
+      full={page.data.full}
+    >
       <RollButton />
       <DocsBody>
         <h1>{page.data.title}</h1>
