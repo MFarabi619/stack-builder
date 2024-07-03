@@ -17,6 +17,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "fumadocs-core": "12.3.2",
+    "fumadocs-docgen": "^1.0.2",
     "fumadocs-mdx": "8.2.33",
     "fumadocs-ui": "12.3.2",
     "next": "^14.2.4",
