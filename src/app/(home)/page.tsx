@@ -5,24 +5,19 @@ export default function HomePage() {
   return (
     <main className="flex h-screen flex-col justify-center text-center">
       <h1 className="mb-4 text-2xl font-bold">
-        <Button asChild>
-          <a href="https://nextjs.org/" target="_blank" rel="noreferrer noopener">Next.js</a>
-        </Button>
+        Welcome to
         {' '}
-        Starter Template by
-        {' '}
-        <Button asChild variant="secondary">
-          <a href="https://github.com/mfarabi619" target="_blank" rel="noreferrer noopener">Mumtahin Farabi</a>
-        </Button>
+        <a href="https://github.com/MFarabi619/stack-builder" target="_blank" rel="noreferrer noopener" className="underline inline-flex transition-all duration-300 ease-in-out hover:scale-105">Stack Builder</a>
       </h1>
       <p className="text-muted-foreground">
-        You can see the documentation at
-        {' '}
-        <Link href="/docs" className="text-foreground font-semibold underline">
-          /docs
-        </Link>
-        {' '}
-        .
+        <Button asChild>
+          <Link
+            href="/docs"
+            className="text-foreground font-semibold transition-transform duration-500 ease-in-out hover:scale-105"
+          >
+            Read the Docs
+          </Link>
+        </Button>
       </p>
     </main>
   )
