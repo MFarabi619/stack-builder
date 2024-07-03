@@ -1,6 +1,8 @@
 {
   "name": "stack-builder",
   "version": "0.0.0",
+  "description": "Your dream, your stack, your way.",
+  "author": "Mumtahin Farabi",
   "homepage": "https://github.com/MFarabi619/stack-builder",
   "repository": {
     "type": "git",
