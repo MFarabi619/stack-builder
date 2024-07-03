@@ -1,5 +1,6 @@
 ---
 title: Fumadocs
+description: Make your documentation site with ease.
 ---
 
 import { File, Folder, Files } from "fumadocs-ui/components/files";
@@ -21,9 +22,25 @@ Option 1: Make a directory, and navigate to it.
 
 Once you're in your desired directory, run the Fumadocs quick start command:
 
-```bash
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm"
+npx create-fumadocs-app
+```
+
+```bash tab="pnpm"
 pnpm create fumadocs-app
 ```
+
+```bash tab="yarn"
+yarn create fumadocs-app
+```
+
+```bash tab="bun"
+bun create fumadocs-app
+```
+
+</InstallTabs>
 
 Let it install with the default name. Copy everything from that directory into your root directory, then delete that directory.
 
@@ -31,9 +48,25 @@ Option 2: Just run the command, and when prompted, pick the name. It doesn't mak
 
 Navigate into the directory, then run the following then navigate to `localhost:3000` to check if it works.
 
-```bash
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm"
+npm i; npm run dev
+```
+
+```bash tab="pnpm"
 pnpm i; pnpm dev
 ```
+
+```bash tab="yarn"
+yarn i; yarn dev
+```
+
+```bash tab="bun"
+bun i; bun dev
+```
+
+</InstallTabs>
 
 ### Migrate project to use 'src' directory
 
@@ -136,7 +169,7 @@ Run the app again, everything should be working now.
 pnpm i; pnpm dev
 ```
 
-### Document Fumadocs CSS Variables for future reference and easy customization
+### Document CSS Variables for future reference & customization
 
 ```css title="docs/fumadocs.global.css"
 @config '../../../tailwind.fumadocs.config.ts';
@@ -563,11 +596,10 @@ Add Remark plugin with custom Tabs configuration
  import createMDX from 'fumadocs-mdx/config'
 + import { remarkInstall } from 'fumadocs-docgen' // [!code highlight]
 
-- const withMDX = createMDX({ rootContentPath: './src/content', mdxOptions: { lastModifiedTime: 'git' } })
+- const withMDX = createMDX({ rootContentPath: './src/content' })
  const withMDX = createMDX({ // [!code highlight]
    rootContentPath: './src/content', // [!code highlight]
    mdxOptions: { // [!code highlight]
-     lastModifiedTime: 'git', // [!code highlight]
 +     remarkPlugins: [ // [!code highlight]
 +       [remarkInstall, { Tabs: 'InstallTabs' }], // [!code highlight]
 +     ], // [!code highlight]
@@ -699,7 +731,7 @@ Use a `pages` variable for single source of truth.
 +  }, // [!code highlight]
 +  { // [!code highlight]
 +    title: 'Design', // [!code highlight]
-+    description: 'Deliver outstanding UI/UX at high velocity', // [!code highlight]
++    description: 'Deliver outstanding UI/UX at record velocity', // [!code highlight]
 +    url: 'design', // [!code highlight]
 +    icon: DesignIcon, // [!code highlight]
 +  }, // [!code highlight]
@@ -717,6 +749,7 @@ Use a `pages` variable for single source of truth.
 ```
 
 You can import these pages in `.mdx` files and use them like this:
+
 ```mdx title="index.mdx"
 ---
 title: Welcome to Stack Builder
@@ -749,7 +782,6 @@ import { pages } from "../../app/docs/source";
 ```
 
 As of right now, I haven't been able to get path aliasing to work, hence the spaghetti import.
-
 
 The `url` property must be specified in that format, otherwise `RootToggle` will not change options when clicked.
 
@@ -815,4 +847,181 @@ The `url` property must be specified in that format, otherwise `RootToggle` will
 ```
 
 The `url` property must be specified in that format, otherwise `RootToggle` will not change options when clicked.
+
+### Add Roll Button
+
+Add the [button](https://fumadocs.vercel.app/docs/ui/components/roll-button) you currently see that scrolls to the top when clicked.
+
+```diff title="docs/[[...slug]]/page.tsx"
+ import type { Metadata } from 'next'
+ import { DocsBody, DocsPage } from 'fumadocs-ui/page'
+ import { notFound } from 'next/navigation'
++import { RollButton } from 'fumadocs-ui/components/roll-button' // [!code highlight]
+ import { getPage, getPages } from '@/app/docs/source'
+
+ ...
+
+   return (
+     <DocsPage toc={page.data.exports.toc} full={page.data.full}>
++      <RollButton /> // [!code highlight]
+       <DocsBody>
+         <h1>{page.data.title}</h1>
+         <MDX />
+```
+
+The button is hidden behind the desktop header. Apply the following CSS to make it visible.
+
+```diff title="docs/fumadocs.global.css"
+/*The Table of Contents also faces the same issue as the sidebar when desktop header is visible. Apply similar fixes*/
+#nd-docs-layout > div:last-child {
+  @apply md:sticky md:top-16 md:h-[calc(100vh-4rem)] md:pt-8;
+}
++ // [!code highlight]
++/*---------------- ROLL BUTTON ----------------*/ // [!code highlight]
++ // [!code highlight]
++/*The button appears behind the desktop header, move it down*/ // [!code highlight]
++[aria-label='Scroll to Top'] { // [!code highlight]
++  @apply md:top-20 !important; // [!code highlight]
++} // [!code highlight]
++ // [!code highlight]
+/*---------------- THEME PRESETS ----------------*/
+```
+
+### Add Steps
+
+```diff title="mdx-components.tsx"
+...
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
++import { Step, Steps } from 'fumadocs-ui/components/steps' // [!code highlight]
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...defaultComponents,
+    ...components,
+    Tab,
+    Tabs,
++   Step, // [!code highlight]
++   Steps, // [!code highlight]
+    InstallTabs: ({
+      items,
+    ...
+
+```
+
+### Add 'Last updated' time to footer
+
+```diff title="docs/[[...slug]]/page.tsx"
+   const MDX = page.data.exports.default
+
+   return (
+-    <DocsPage toc={page.data.exports.toc} full={page.data.full}>
++    <DocsPage // [!code highlight]
++      toc={page.data.exports.toc} // [!code highlight]
++      lastUpdate={page.data.exports.lastModified} // [!code highlight]
++      full={page.data.full} // [!code highlight]
++    > // [!code highlight]
+       <RollButton />
+       <DocsBody>
+         <h1>{page.data.title}</h1>
+```
+
+```diff title="next.config.mjs"
+ import createMDX from 'fumadocs-mdx/config'
+ import { remarkInstall } from 'fumadocs-docgen'
+
+ const withMDX = createMDX({
+   rootContentPath: './src/content',
+   mdxOptions: {
++    lastModifiedTime: 'git', // [!code highlight]
+     remarkPlugins: [
+       [remarkInstall, { Tabs: 'InstallTabs' }],
+     ],
+   },
+ })
+
+ /** @type {import('next').NextConfig} */
+ const config = {
+```
+
+### Render page descriptions under title
+
+```diff title="docs/[[...slug]]/page.tsx"
+       ...
+       <RollButton />
+       <DocsBody>
+         <h1>{page.data.title}</h1>
++        <p className="mb-8 text-lg text-muted-foreground"> // [!code highlight]
++          {page.data.description} // [!code highlight]
++        </p> // [!code highlight]
+         <MDX />
+       </DocsBody>
+     </DocsPage>
+      ...
+```
+
+### Add 'Edit on GitHub' button
+
+Use repository URL in `package.json` as source.
+
+```diff title="package.json"
+ {
+   "name": "stack-builder",
+   "version": "0.0.0",
+```diff title="package.json"
+ {
+   "name": "stack-builder",
+   "version": "0.0.0",
+-  "private": true,
++  "repository": { // [!code highlight]
++    "type": "git", // [!code highlight]
++    "url": "https://github.com/MFarabi619/stack-builder.git" // [!code highlight]
++  }, // [!code highlight]
++  "homepage": "https://github.com/MFarabi619/stack-builder", // [!code highlight]
+   "scripts": {
+ ...
+```
+
+Create button.
+
+```diff title="docs/[[...slug]]/page.tsx"
+...
+ import { DocsBody, DocsPage } from 'fumadocs-ui/page'
+ import { notFound } from 'next/navigation'
+ import { RollButton } from 'fumadocs-ui/components/roll-button'
++import { Edit } from 'lucide-react' // [!code highlight]
++import packageJson from '@root/package.json' // [!code highlight]
+ import { getPage, getPages } from '@/app/docs/source'
+
+...
+
+   const MDX = page.data.exports.default
++  const path = `src/content/docs/${page.file.path}` // [!code highlight]
++  const gitHubRepoUrl = packageJson.repository.url.replace(/\.git$/, '') // Remove .git suffix // [!code highlight]
++ // [!code highlight]
++  const footer = ( // [!code highlight]
++    <a // [!code highlight]
++      href={`${gitHubRepoUrl}/blob/main/${path}`} // [!code highlight]
++      target="_blank" // [!code highlight]
++      rel="noreferrer noopener" // [!code highlight]
++      className="inline-flex items-center justify-center rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border bg-secondary text-secondary-foreground hover:bg-secondary/80 h-9 px-3 text-xs gap-1.5" // [!code highlight]
++    > // [!code highlight]
++      <Edit className="size-3" /> // [!code highlight]
++      Edit on Github // [!code highlight]
++    </a> // [!code highlight]
++  ) // [!code highlight]
+
+   return (
+     <DocsPage
+       toc={page.data.exports.toc}
+       lastUpdate={page.data.exports.lastModified}
+       full={page.data.full}
++      tableOfContent={{ // [!code highlight]
++        footer, // [!code highlight]
++      }} // [!code highlight]
++      tableOfContentPopover={{ footer }} // [!code highlight]
+     >
+       <RollButton />
+       <DocsBody>
+      ...
+```
 

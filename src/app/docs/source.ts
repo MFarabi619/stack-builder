@@ -26,7 +26,7 @@ export const pages = [
   },
   {
     title: 'Design',
-    description: 'Deliver outstanding UI/UX at high velocity',
+    description: 'Deliver outstanding UI/UX at record velocity',
     url: 'design',
     icon: DesignIcon,
   },
