@@ -1,24 +1,80 @@
 ---
 title: ESLint
+description: Catch errors and enforce code styles.
 ---
 
-## Install ESLint
+<Cards>
+  <Card
+    title="ESLint"
+    description="A pluggable and configurable linter tool for identifying and reporting on patterns in JavaScript."
+    icon=""
+    href="https://eslint.org/"
+  />
+  <Card
+    title="Prettier"
+    description="An opinionated code formatter that enforces a consistent style by parsing your code and re-printing it with its own rules."
+    icon=""
+    href="https://prettier.io/"
+  />
+</Cards>
+
+## Installation
 
 ### Use Anthony Fu's configuration
 
 [Anthony Fu's ESLint Configuration](https://github.com/antfu/eslint-config)
 
-```bash
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npx @antfu/eslint-config@latest
+```
+
+```bash tab="pnpm" title="Terminal"
 pnpm dlx @antfu/eslint-config@latest
 ```
 
-This uses ESLint 9, which is still buggy and incompatible with many plugins. We're going to downversion to `8.57.0`.
+```bash tab="yarn" title="Terminal"
+yarn exec @antfu/eslint-config@latest
+```
 
-```bash
+```bash tab="bun" title="Terminal"
+bun exec @antfu/eslint-config@latest
+```
+
+</InstallTabs>
+
+## Downversion to ESLint `8.57.0`
+
+ESLint 9 is installed by default, which as of writing is still buggy and incompatible with many plugins.
+
+<Tabs items={['Terminal', 'eslint.config.mjs', '.vscode/settings.json', 'package.json']}>
+  <Tab value="Terminal">
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm i -D eslint@8
+```
+
+```bash tab="pnpm" title="Terminal"
 pnpm i -D eslint@8
 ```
 
-Add compatibility function to the ESLint flat config file.
+```bash tab="yarn" title="Terminal"
+yarn i -D eslint@8
+```
+
+```bash tab="bun" title="Terminal"
+bun i -D eslint@8
+```
+
+</InstallTabs>
+
+</Tab>
+
+  <Tab value="eslint.config.mjs">
+
+Add compatibility function.
 
 ```diff title="eslint.config.mjs"
 +import { FlatCompat } from '@eslint/eslintrc' // [!code highlight]
@@ -44,9 +100,38 @@ Add compatibility function to the ESLint flat config file.
 +) // [!code highlight]
 ```
 
-#### Fix VS Code settings.json
+Activate ESLint React rules and Formatter rules
 
-Go to `.vscode/settings.json` and change the comments to key-value pairs, like so:
+```diff title="eslint.config.mjs"
+     ignores: [],
++    react: true, // [!code highlight]
++    formatters: { // [!code highlight]
++      /** // [!code highlight]
++      * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue // [!code highlight]
++      * By default uses Prettier // [!code highlight]
++      */ // [!code highlight]
++      css: true, // [!code highlight]
++      /** // [!code highlight]
++      * Format HTML files // [!code highlight]
++      * By default uses Prettier // [!code highlight]
++      */ // [!code highlight]
++      html: true, // [!code highlight]
++      /** // [!code highlight]
++      * Format Markdown files // [!code highlight]
++      * Supports Prettier and dprint // [!code highlight]
++      * By default uses Prettier // [!code highlight]
++      */ // [!code highlight]
++      // markdown: 'prettier' // [!code highlight]
++  }, // [!code highlight]
+
+     // Legacy config
+```
+
+</Tab>
+
+  <Tab value=".vscode/settings.json">
+
+Change the comments to key-value pairs.
 
 ```diff title=".vscode/settings.json"
 {
@@ -104,34 +189,11 @@ Go to `.vscode/settings.json` and change the comments to key-value pairs, like s
 }
 ```
 
-#### Activate ESLint React rules and Formatter rules
+</Tab>
 
-```diff title="eslint.config.mjs"
-     ignores: [],
-+    react: true, // [!code highlight]
-+    formatters: { // [!code highlight]
-+      /** // [!code highlight]
-+      * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue // [!code highlight]
-+      * By default uses Prettier // [!code highlight]
-+      */ // [!code highlight]
-+      css: true, // [!code highlight]
-+      /** // [!code highlight]
-+      * Format HTML files // [!code highlight]
-+      * By default uses Prettier // [!code highlight]
-+      */ // [!code highlight]
-+      html: true, // [!code highlight]
-+      /** // [!code highlight]
-+      * Format Markdown files // [!code highlight]
-+      * Supports Prettier and dprint // [!code highlight]
-+      * By default uses Prettier // [!code highlight]
-+      */ // [!code highlight]
-+      // markdown: 'prettier' // [!code highlight]
-+  }, // [!code highlight]
+  <Tab value="package.json">
 
-     // Legacy config
-```
-
-#### Add ESLint scripts to package.json
+Add ESLint scripts to package.json
 
 ```diff title="package.json"
    "scripts": {
@@ -144,17 +206,38 @@ Go to `.vscode/settings.json` and change the comments to key-value pairs, like s
    },
 ```
 
-The commands need to be run in order for all packages to be installed.
+</Tab>
 
-```bash
+</Tabs>
+
+Install `eslint-plugin-format` if it's missing in `package.json`.
+
+```package-install title="Terminal"
+-D eslint-plugin-format
+```
+
+The commands need to be run in order for the rest of the packages to be installed.
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm run lint; npm run lint:fix; npm run lint:inspect
+```
+
+```bash tab="pnpm" title="Terminal"
 pnpm lint; pnpm lint:fix; pnpm lint:inspect
 ```
 
-Ensure that `eslint-plugin-format` is in your `package.json`, if not, install it.
-
-```bash
-pnpm i -D eslint-plugin-format
+```bash tab="yarn" title="Terminal"
+yarn run lint; yarn run lint:fix; yarn run lint:inspect
 ```
 
-Your entire project will be linted and fixable errors will be fixed. You should also see a browser tap open up with the address `localhost:7777`. This is the ESLint config inspector, which is only available for flat ESLint configs, like the one we just configured.
+```bash tab="bun" title="Terminal"
+bun run lint; bun run lint:fix; bun run lint:inspect
+```
 
+</InstallTabs>
+
+Your entire project will be linted and fixable errors will be fixed.
+
+You should also see a browser tap open up with the address `localhost:7777`. This is the [ESLint Config Inspector](https://github.com/eslint/config-inspector), which is only available for flat ESLint configs, like the one we just configured.
