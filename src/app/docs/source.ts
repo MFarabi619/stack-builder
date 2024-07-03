@@ -14,25 +14,25 @@ import {
 export const pages = [
   {
     title: 'Home',
-    description: 'Best decisions start with the best information',
+    description: 'Best decisions start with the best information.',
     url: '',
     icon: HomeIcon,
   },
   {
     title: 'Project Management',
-    description: 'Turn visions into reality with confidence',
+    description: 'Turn visions into reality with confidence.',
     url: 'project-management',
     icon: ProjectManagementIcon,
   },
   {
     title: 'Design',
-    description: 'Deliver outstanding UI/UX at record velocity',
+    description: 'Deliver outstanding UI/UX at record velocity.',
     url: 'design',
     icon: DesignIcon,
   },
   {
     title: 'Development',
-    description: 'Architect your solution for scale and longevity',
+    description: 'Architect your solution for scale and longevity.',
     url: 'development',
     icon: DevelopmentIcon,
   },

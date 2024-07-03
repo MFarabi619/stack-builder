@@ -1,40 +1,283 @@
 ---
 title: Shadcn/ui
+description: Own your design system.
 ---
 
-### Install Shadcn/ui
+import { File, Folder, Files } from "fumadocs-ui/components/files";
 
-Our next step will be to add [Shadcn/ui](https://ui.shadcn.com/). The problem is that it's not fully compatible with the Fumadocs UI design system, which also uses Tailwind CSS. Installing Shadcn will overwrite the current Tailwind CSS configuration, which will break Fumadocs UI.
+<Cards>
+  <Card
+    title="Shadcn/ui"
+    description="Open-system React component library powered by Radix UI Primitives, and Tailwind CSS."
+    icon=""
+    href="https://ui.shadcn.com/"
+  />
+  <Card
+    title="Radix UI Primitives"
+    description="Headless UI component library that complies with WAI-ARIA accessibility guidelines and handles complex interaction logic. Used by CodeSandbox, Node.js, Vercel, and more."
+    icon=""
+    href="https://www.radix-ui.com/primitives"
+  />
+  <Card
+    title="Tailwind CSS"
+    description="Provides low-level primitive tokens to rapidly create design systems and scale them with ease."
+    icon=""
+    href="https://tailwindcss.com/"
+  />
+</Cards>
+
+## Installation
+
+<Callout type="error">
+While the Fumadocs UI design system is inspired by [Shadcn/ui](https://ui.shadcn.com/) and also uses Tailwind CSS, it does not use the same tokens and is therefore not compatible. Installing Shadcn/ui will overwrite the current Tailwind CSS configuration, which will break Fumadocs UI.
 
 Next.js allows for separate Root layouts for different routes, which will allow us to use both design systems without conflicts.
 
-#### Separate design systems
+  </Callout>
 
-Create `(home)/` under `app/`. Copy `global.css`, `layout.tsx`, and `page.tsx` into it.
+### Separate design systems
 
-Now, cut `layout.tsx`, `layout.config.tsx`, `source.ts`, and `global.css` into `docs/`
+Create `(home)/` under `app/`. **Copy** `global.css`, `layout.tsx`, and `page.tsx` from `app/` into `app/(home)/`.
 
-Fix the paths in the following files:
+Then **cut/move** `layout.config.tsx`, `source.ts`, and `global.css` into `app/docs/`.
 
-```diff title="[[...slug]]/page.tsx"
--  presets: [createPreset({ preset: 'purple' })],
-+  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+Delete `layout.tsx` in `app/`.
+
+<Callout type="info">You can click on the folders to expand them.</Callout>
+
+<Tabs items={['Before', 'After']}>
+    <Tab value='Before'>
+     <Files>
+        <Folder name=".git">
+          <File name="Git files...." />
+        </Folder>
+        <Folder name=".next">
+          <File name="Next.js files...." />
+        </Folder>
+        <Folder name="src" defaultOpen>
+        <Folder name="app" defaultOpen>
+          <Folder name="api">
+            <Folder name="search">
+              <File name="route.ts" />
+            </Folder>
+          </Folder>
+          <Folder name="docs" defaultOpen>
+            <Folder name="[[...slug]]">
+              <File name="page.tsx" />
+            </Folder>
+            <File name="layout.tsx" />
+          </Folder>
+          <File name="global.css" className="text-primary bg-primary/10"/>
+          <File name="layout.config.tsx" className="text-primary bg-primary/10"/>
+          <File name="layout.tsx" className="text-primary bg-primary/10"/>
+          <File name="page.tsx" className="text-primary bg-primary/10"/>
+          <File name="source.ts" className="text-primary bg-primary/10"/>
+        </Folder>
+        <Folder name="content">
+          <Folder name="docs" defaultOpen>
+            <File name="index.mdx" />
+            <File name="test.mdx" />
+          </Folder>
+        </Folder>
+        </Folder>
+        <Folder name="node_modules">
+          <File name="dependencies...." />
+        </Folder>
+        <File name=".gitignore" />
+        <File name=".map.ts" />
+        <File name="README.md" />
+        <File name="mdx-components.tsx" />
+        <File name="next-env.d.ts" />
+        <File name="next.config.mjs" />
+        <File name="package.json" />
+        <File name="pnpm-lock.yaml" />
+        <File name="postcss.config.js" />
+        <File name="tailwind.config.js" />
+        <File name="tsconfig.json"/>
+      </Files>
+
+```bash title="Terminal"
+pwd # /home/mfarabi/workspace/dirname
+cd src/app
+mkdir -p (home)
+cp global.css layout.tsx page.tsx (home)/
+mv layout.config.tsx source.ts global.css docs/
+rm -rf layout.tsx
 ```
 
-```diff title="src/app/docs/layout.config.tsx"
--  presets: [createPreset({ preset: 'purple' })],
-+  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+Now see the `After` tab.
+
+</Tab>
+    <Tab value='After'>
+      <Files>
+        <Folder name=".git">
+          <File name="Git files...." />
+        </Folder>
+        <Folder name=".next">
+          <File name="Next.js files...." />
+        </Folder>
+        <Folder name="src" defaultOpen>
+          <Folder name="app" defaultOpen>
+            <Folder name="(home)" className="text-primary bg-primary/10" defaultOpen>
+              <File name="global.css" />
+              <File name="layout.tsx" />
+              <File name="page.tsx" />
+            </Folder>
+            <Folder name="api">
+              <Folder name="search">
+                <File name="route.ts" />
+              </Folder>
+            </Folder>
+            <Folder name="docs" defaultOpen>
+              <Folder name="[[...slug]]">
+                <File name="page.tsx" />
+              </Folder>
+              <File name="global.css" className="text-primary bg-primary/10"/>
+              <File name="layout.config.tsx" className="text-primary bg-primary/10"/>
+              <File name="layout.tsx"/>
+              <File name="source.ts" className="text-primary bg-primary/10"/>
+            </Folder>
+                      </Folder>
+          <Folder name="content">
+            <Folder name="docs" defaultOpen>
+              <File name="index.mdx" />
+              <File name="test.mdx" />
+            </Folder>
+          </Folder>
+        </Folder>
+        <Folder name="node_modules">
+          <File name="dependencies...." />
+        </Folder>
+        <File name=".gitignore" />
+        <File name=".map.ts" />
+        <File name="README.md" />
+        <File name="mdx-components.tsx" />
+        <File name="next-env.d.ts" />
+        <File name="next.config.mjs" />
+        <File name="package.json" />
+        <File name="pnpm-lock.yaml" />
+        <File name="postcss.config.js" />
+        <File name="tailwind.config.js" />
+        <File name="tsconfig.json"/>
+      </Files>
+</Tab>
+</Tabs>
+
+##### Rename and modify files
+
+Rename `src/app/docs/global.css` -> `src/app/docs/fumadocs.global.css`.
+
+Rename `tailwind.config.js`, to -> `tailwind.config.ts`.
+Duplicate `tailwind.config.ts`, name it to -> `tailwind.fumadocs.config.ts`.
+
+Make the following changes in the following files.
+
+<Tabs items={['Files', 'route.ts', 'fumadocs.global.css', 'page.tsx', 'layout.config.tsx', 'layout.tsx', 'tailwind.fumadocs.config.ts']}>
+
+  <Tab value='Files'>
+      You can use these commands to rename the files:
+
+      ```bash title="Terminal"
+      mv src/app/docs/global.css src/app/docs/fumadocs.global.css
+      mv tailwind.config.js tailwind.config.ts
+      cp tailwind.config.ts tailwind.fumadocs.config.ts
+      ```
+
+      <Files>
+        <Folder name="src" defaultOpen>
+          <Folder name="app" defaultOpen>
+            <Folder name="(home)">
+              <File name="global.css"/>
+              <File name="layout.tsx"/>
+              <File name="page.tsx"/>
+            </Folder>
+            <Folder name="api" defaultOpen>
+              <Folder name="search" defaultOpen>
+                <File name="route.ts" className="text-primary bg-primary/10"/>
+              </Folder>
+            </Folder>
+            <Folder name="docs" defaultOpen>
+              <Folder name="[[...slug]]" defaultOpen>
+                <File name="page.tsx" className="text-primary bg-primary/10"/>
+              </Folder>
+              <File name="fumadocs.global.css" className="text-primary bg-primary/10"/>
+              <File name="layout.config.tsx" className="text-primary bg-primary/10"/>
+              <File name="layout.tsx" className="text-primary bg-primary/10"/>
+              <File name="source.ts"/>
+            </Folder>
+                      </Folder>
+          <Folder name="content">
+            <Folder name="docs" defaultOpen>
+              <File name="index.mdx" />
+              <File name="test.mdx" />
+            </Folder>
+          </Folder>
+        </Folder>
+        <File name="mdx-components.tsx" />
+        <File name="next-env.d.ts" />
+        <File name="next.config.mjs" />
+        <File name="package.json" />
+        <File name="pnpm-lock.yaml" />
+        <File name="postcss.config.js" />
+        <File name="tailwind.config.ts" />
+        <File name="tailwind.fumadocs.config.ts" className="text-primary bg-primary/10"/>
+        <File name="tsconfig.json"/>
+      </Files>
+
+</Tab>
+
+ <Tab value="route.ts">
+
+    ```diff title="app/api/search/route.ts"
+    -import { getPages } from '@/app/source';
+    +import { getPages from '@/app/docs/source'; // [!code highlight]
+     import { createSearchAPI } from 'fumadocs-core/search/server';
+
+     export const { GET } = createSearchAPI('advanced', {
+    ```
+
+  </Tab>
+
+  <Tab value="fumadocs.global.css">
+
+    ```diff title="app/docs/fumadocs.global.css"
+    + @config '../../../tailwind.fumadocs.config.ts'; // [!code highlight]
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+    ```
+
+</Tab>
+
+<Tab value="page.tsx">
+
+```diff title="app/docs/[[...slug]]/page.tsx"
+-import { getPage, getPages } from '@/app/source';
++import { getPage, getPages } from '@/app/docs/source'; // [!code highlight]
+ import type { Metadata } from 'next';
+ import { DocsPage, DocsBody } from 'fumadocs-ui/page';
+ import { notFound } from 'next/navigation';
 ```
 
-```diff title="src/app/docs/route.ts"
--  presets: [createPreset({ preset: 'purple' })],
-+  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+</Tab>
+
+<Tab value="layout.config.tsx">
+
+```diff title="app/api/search/route.ts"
+import { type BaseLayoutProps, type DocsLayoutProps } from 'fumadocs-ui/layout';
+-import { pageTree } from '@/app/source';
++import { pageTree } from '@/app/docs/source'; // [!code highlight]
+
+// shared configuration
+export const baseOptions: BaseLayoutProps = {
 ```
 
-Change the code in `src/app/docs/layout.tsx` to this, which includes the RootProvider and stylesheet.
+</Tab>
 
-```diff title="src/app/docs/layout.tsx"
-+ import "./global.css"; // [!code highlight]
+<Tab value="layout.tsx">
+
+```diff title="app/docs/layout.tsx"
++ import "./fumadocs.global.css"; // [!code highlight]
 import { DocsLayout } from "fumadocs-ui/layout";
 import type { ReactNode } from "react";
 import { docsOptions } from "./layout.config";
@@ -53,48 +296,73 @@ export default function Layout({ children }: { children: ReactNode }) {
 }
 ```
 
-Rename `src/app/docs/global.css` -> `src/app/docs/fumadocs.global.css`
+</Tab>
 
-Duplicate `tailwind.config.js`, name it to -> `tailwind.fumadocs.config.ts`, and do the following:
+<Tab value="app/docs/(home)/layout.tsx">
+
+```diff title="app/(home)/layout.tsx"
+-import { RootProvider } from 'fumadocs-ui/provider';
+import { Inter } from 'next/font/google';
+import type { ReactNode } from 'react';
+
+export default function Layout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en" className={inter.className} suppressHydrationWarning>
+      <body>
+-        <RootProvider>{children}</RootProvider>
++        {children} // [!code highlight]
+      </body>
+    </html>
+  );
+```
+
+</Tab>
+
+<Tab value="tailwind.fumadocs.config.ts">
 
 ```diff title="tailwind.fumadocs.config.ts"
-+  // [!code highlight]
 import { createPreset } from 'fumadocs-ui/tailwind-plugin'
 + import type { Config } from "tailwindcss" // [!code highlight]
 
-- /** @type {import('tailwindcss').Config} */
-- export default {
+- /\*_@type {import('tailwindcss').Config}_/
+- export default
+  {
+
 + const config = { // [!code highlight]
-+   darkMode: ["class"], // [!code highlight]
-+   prefix: "", // [!code highlight]
++ darkMode: ["class"], // [!code highlight]
++ prefix: "", // [!code highlight]
   content: [
--   './src/components/**/*.{ts,tsx}',
--   './src/app/**/*.{ts,tsx}',
-+   './src/app/docs/**/*.{ts,tsx}', // [!code highlight]
-    './src/content/**/*.{md,mdx}',
-    './mdx-components.{ts,tsx}',
-    './node_modules/fumadocs-ui/dist/**/*.js',
+
+- './src/components/\*_/_.{ts,tsx}',
+- './src/app/\*_/_.{ts,tsx}',
+
++ './src/app/docs/**/\*.{ts,tsx}', // [!code highlight]
+  './src/content/**/_.{md,mdx}',
+  './mdx-components.{ts,tsx}',
+  './node_modules/fumadocs-ui/dist/\*\*/_.js',
   ],
   presets: [createPreset({ preset: 'purple' })],
--}
-+} satisfies Config // [!code highlight]
+- }
+  +} satisfies Config // [!code highlight]
 + // [!code highlight]
-+ export default config // [!code highlight]
++ export default config; // [!code highlight]
+  ]
 
 ```
 
-Remove `RootProvider` from `(home)/layout.tsx`
+</Tab>
+</Tabs>
 
-#### Run Shadcn/ui install script
+### Run Shadcn/ui install script
 
 Follow the below steps and cross-check with the instructions in the [Shadcn/ui docs](https://ui.shadcn.com/docs/installation/next) to install Shadcn.
-Step 1 can be skipped, as we've already set up a Next.js project.
+Step 1 on their docs can be skipped, as we've already set up a Next.js project.
 
-```bash
+```bash title="Terminal"
 pnpm dlx shadcn-ui@latest init
 ```
 
-```bash
+```bash title="Terminal"
 Would you like to use TypeScript (recommended)? yes
 Which style would you like to use? › New York
 Which color would you like to use as base color? › Neutral
@@ -108,105 +376,112 @@ Are you using React Server Components? Yes
 Write configurations to components.json. Proceed? Y
 ```
 
-### Add Favicon and Icon
+#### Add configurations
 
-Create a `public/` directory at the root level to store static assets.
+<Tabs items={['tailwind.config.ts', 'src/app/(home)/global.css']}>
 
-Put `favicon.ico` and `icon.ico` files in both the `(home)` and `docs` directories. Also add it under the 'app' directory as both 'favicon.ico' and 'icon.ico'. As of right now I'm not sure which one it was that made it work.
+  <Tab value="tailwind.config.ts">
+    ```diff title="tailwind.config.ts"
+    import type { Config } from 'tailwindcss'
+    + import tailwindcssAnimate from 'tailwindcss-animate' // [!code highlight]
 
-```diff title="tailwind.config.ts"
-import type { Config } from 'tailwindcss'
-+ import tailwindcssAnimate from 'tailwindcss-animate' // [!code highlight]
-
-const config = {
-  darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  prefix: '',
-  theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
+    const config = {
+      darkMode: ['class'],
+      content: [
+        './pages/**/*.{ts,tsx}',
+        './components/**/*.{ts,tsx}',
+        './app/**/*.{ts,tsx}',
+        './src/**/*.{ts,tsx}',
+      ],
+      prefix: '',
+      theme: {
+        container: {
+          center: true,
+          padding: '2rem',
+          screens: {
+            '2xl': '1400px',
+          },
+        },
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: 'hsl(var(--primary))',
+              foreground: 'hsl(var(--primary-foreground))',
+            },
+            secondary: {
+              DEFAULT: 'hsl(var(--secondary))',
+              foreground: 'hsl(var(--secondary-foreground))',
+            },
+            destructive: {
+              DEFAULT: 'hsl(var(--destructive))',
+              foreground: 'hsl(var(--destructive-foreground))',
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))',
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))',
+            },
+            popover: {
+              DEFAULT: 'hsl(var(--popover))',
+              foreground: 'hsl(var(--popover-foreground))',
+            },
+            card: {
+              DEFAULT: 'hsl(var(--card))',
+              foreground: 'hsl(var(--card-foreground))',
+            },
+          },
+          borderRadius: {
+            lg: 'var(--radius)',
+            md: 'calc(var(--radius) - 2px)',
+            sm: 'calc(var(--radius) - 4px)',
+          },
+          keyframes: {
+            'accordion-down': {
+              from: { height: '0' },
+              to: { height: 'var(--radix-accordion-content-height)' },
+            },
+            'accordion-up': {
+              from: { height: 'var(--radix-accordion-content-height)' },
+              to: { height: '0' },
+            },
+          },
+          animation: {
+            'accordion-down': 'accordion-down 0.2s ease-out',
+            'accordion-up': 'accordion-up 0.2s ease-out',
+          },
+        },
       },
-    },
-    extend: {
-      colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
-    },
-  },
--  plugins: [require("tailwindcss-animate")],
-+  plugins: [tailwindcssAnimate], // [!code highlight]
-} satisfies Config
+    -  plugins: [require("tailwindcss-animate")],
+    +  plugins: [tailwindcssAnimate], // [!code highlight]
+    } satisfies Config
 
-export default config
-```
+    export default config
+    ```
 
-```diff title="(home)/global.css"
- @tailwind components;
- @tailwind utilities;
-+ // [!code highlight]
-+ /*Easily customize theme: https://zippystarter.com/tools/shadcn-ui-theme-generator*/ // [!code highlight]
-+ /*Explore the Shadcn/ui ecosystem: https://github.com/birobirobiro/awesome-shadcn-ui*/ // [!code highlight]
-+ // [!code highlight]
- @layer base {
-   :root {
-     --background: 0 0% 100%;
-```
+  </Tab>
+
+  <Tab value="src/app/(home)/global.css">
+    ```diff title="src/app/(home)/global.css"
+    +@config '../../../tailwind.config.ts'; // [!code highlight]
+     @tailwind base;
+     @tailwind components;
+     @tailwind utilities;
+    + // [!code highlight]
+    + /*Easily customize theme: https://zippystarter.com/tools/shadcn-ui-theme-generator*/ // [!code highlight]
+    + /*Explore the Shadcn/ui ecosystem: https://github.com/birobirobiro/awesome-shadcn-ui*/ // [!code highlight]
+    + // [!code highlight]
+     @layer base {
+       :root {
+         --background: 0 0% 100%;
+    ```
+  </Tab>
+
+</Tabs>

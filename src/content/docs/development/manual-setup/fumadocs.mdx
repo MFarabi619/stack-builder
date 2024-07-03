@@ -1,6 +1,6 @@
 ---
 title: Fumadocs
-description: Make your documentation site with ease.
+description: Powering your current documentation reading experience. No further explanation needed.
 ---
 
 import { File, Folder, Files } from "fumadocs-ui/components/files";
@@ -8,19 +8,29 @@ import { File, Folder, Files } from "fumadocs-ui/components/files";
 <Cards>
   <Card
     title="Fumadocs"
-    description="Modern documentation site building framework compatible with Next.js 14 App Router. Used to create the documentation you're reading now."
+    description="Modern documentation site building framework compatible with Next.js 14 App Router."
     icon=""
     href="https://fumadocs.vercel.app/"
+  />
+  <Card
+    title="MDX"
+    description="Markdown extended with YAML and JSX to create supercharged content."
+    icon=""
+    href="https://mdxjs.com/"
   />
 </Cards>
 
 ## Installation
 
-You can either start with a folder, or let the Fumadocs command create one for you.
+<Tabs items={['New directory', 'Current directory']}>
+    <Tab value='New directory'>
 
-Option 1: Make a directory, and navigate to it.
-
-Once you're in your desired directory, run the Fumadocs quick start command:
+```sh
+pwd # See where you are
+#/home/mfarabi/workspace
+mkdir dirname # Create and navigate to new directory
+git init -b main # Initialize Git repository
+```
 
 <InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
 
@@ -42,11 +52,139 @@ bun create fumadocs-app
 
 </InstallTabs>
 
-Let it install with the default name. Copy everything from that directory into your root directory, then delete that directory.
+Follow the prompt with the responses.
 
-Option 2: Just run the command, and when prompted, pick the name. It doesn't make it a Git repo by default, so you'll have to initialize it.
+```
+┌  Create Fumadocs App
+│
+◇  Project name
+│  .
+│
+◇  Choose a content source
+│  Fumadocs MDX
+│
+◇  Use Tailwind CSS for styling?
+│  Yes
+│
+◇  Do you want to install packages automatically? (detected as pnpm)
+│  Yes
+│
+◇  . already exists, do you want to delete it?
+│  No
+│
+◓  Generating ProjectLockfile is up to date, resolution step is skipped
+◑  Generating ProjectAlready up to date
+◓  Generating ProjectDone in 605ms
+◇  Project Generated
+│
+└  Done
 
-Navigate into the directory, then run the following then navigate to `localhost:3000` to check if it works.
+✔ Tailwind CSS
+✔ Typescript
+
+Open the project
+cd .
+
+Run Development Server
+npm run dev | pnpm run dev | yarn dev
+
+You can now open the project and start writing documents
+```
+
+  </Tab>
+
+  <Tab value='Current directory'>
+
+```sh
+pwd # See where you are
+#/home/mfarabi/workspace
+```
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm"
+npx create-fumadocs-app
+```
+
+```bash tab="pnpm"
+pnpm create fumadocs-app
+```
+
+```bash tab="yarn"
+yarn create fumadocs-app
+```
+
+```bash tab="bun"
+bun create fumadocs-app
+```
+
+</InstallTabs>
+
+Follow the prompt with the responses.
+
+```
+┌  Create Fumadocs App
+│
+◇  Project name
+│  dirname
+│
+◇  Choose a content source
+│  Fumadocs MDX
+│
+◇  Use Tailwind CSS for styling?
+│  Yes
+│
+◇  Do you want to install packages automatically? (detected as pnpm)
+│  Yes
+│
+◓  Generating ProjectPackages: +370
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 37Progress: resolved 378, reused 370, downloaded 0, added 370, done
+◐  Generating Project.
+dependencies:
++ fumadocs-core 12.3.6
++ fumadocs-mdx 8.2.33
++ fumadocs-ui 12.3.6
++ next 14.2.4
++ react 18.3.1
++ react-dom 18.3.1
+
+devDependencies:
++ @types/mdx 2.0.13
++ @types/react 18.3.3
++ @types/react-dom 18.3.0
++ autoprefixer 10.4.19
++ postcss 8.4.39
++ tailwindcss 3.4.4
++ typescript 5.5.3
+
+Done in 3.6s
+◇  Project Generated
+│
+└  Done
+
+✔ Tailwind CSS
+✔ Typescript
+
+Open the project
+cd dirname
+
+Run Development Server
+npm run dev | pnpm run dev | yarn dev
+
+You can now open the project and start writing documents
+```
+
+```sh
+cd dirname # Navigate to directory
+pwd # See where you are
+#/home/mfarabi/workspace/dirname
+git init -b main # Initialize Git repository with `main` branch instead of the default `master`
+```
+
+  </Tab>
+
+</Tabs>
 
 <InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
 
@@ -68,79 +206,226 @@ bun i; bun dev
 
 </InstallTabs>
 
+You should see:
+
+```
+> next dev
+
+  ▲ Next.js 14.2.4
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+   automatically enabled Fast Refresh for 1 custom loader
+ ✓ Ready in 2.1s
+```
+
+Navigate to the localhost url in your browser to see the app running. You can also <kbd>⌘</kbd>+<kbd>Click</kbd> or <kbd>Ctrl</kbd>+<kbd>Click</kbd> it.
+
+If you have other servers running locally, it may be on a different port than `3000` and that's okay.
+
 ### Migrate project to use 'src' directory
+
+<Callout type="warn">
 
 As the time of writing this, Fumadocs creates a Next.js app with the `app` directory at the root level, and does not provide the option to use the `src` directory, which would be provided by the Next.js CLI.
 
 Therefore, we need to manually move the `app` directory into the `src` directory, and then make some pathing changes in various files.
 
-Create a `src` directory at the root level, and move the `app` and `content` directories into it. At this point, your project structure should look like this:
+</Callout>
 
-<Files>
-  <Folder name="src" defaultOpen>
-    <Folder name="app" defaultOpen>
-      <Folder name="api" defaultOpen></Folder>
-      <Folder name="docs" defaultOpen>
-        <Folder name="[[...slug]]">
-          <File name="page.tsx" />
+Create a `src` directory at the root level, and move the `app` and `content` directories into it.
+
+<Callout type="info">
+You can click on the folders to expand them.
+  </Callout>
+
+<Tabs items={['Before', 'After']}>
+    <Tab value='Before'>
+      <Files>
+        <Folder name=".git">
+          <File name="Git files...." />
         </Folder>
-        <File name="layout.tsx" />
-        <File name="global.css" />
-      </Folder>
-    </Folder>
-  </Folder>
-  <File name="package.json" />
-  <File name="other config files...." />
-</Files>
+        <Folder name=".next">
+          <File name="Next.js files...." />
+        </Folder>
+        <Folder name="app" className="text-primary bg-primary/10">
+          <Folder name="api">
+            <Folder name="search">
+              <File name="route.ts" />
+            </Folder>
+          </Folder>
+          <Folder name="docs">
+            <Folder name="[[...slug]]">
+              <File name="page.tsx" />
+            </Folder>
+            <File name="layout.tsx" />
+          </Folder>
+          <File name="global.css" />
+          <File name="layout.config.tsx" />
+          <File name="layout.tsx" />
+          <File name="page.tsx" />
+          <File name="source.ts" />
+        </Folder>
+        <Folder name="content" className="text-primary bg-primary/10">
+          <Folder name="docs" defaultOpen>
+            <File name="index.mdx" />
+            <File name="test.mdx" />
+          </Folder>
+        </Folder>
+        <Folder name="node_modules" >
+          <File name="dependencies...." />
+        </Folder>
+        <File name=".gitignore" />
+        <File name=".map.ts" />
+        <File name="README.md" />
+        <File name="mdx-components.tsx" />
+        <File name="next-env.d.ts" />
+        <File name="next.config.mjs" />
+        <File name="package.json" />
+        <File name="pnpm-lock.yaml" />
+        <File name="postcss.config.js" />
+        <File name="tailwind.config.js" />
+        <File name="tsconfig.json" />
+      </Files>
+
+```bash title="Terminal"
+pwd # /home/mfarabi/workspace/dirname
+mkdir src;
+mv app src/
+mv content src/
+```
+
+Now see the `After` tab.
+
+</Tab>
+    <Tab value='After'>
+      <Files>
+        <Folder name=".git">
+          <File name="Git files...." />
+        </Folder>
+        <Folder name=".next">
+          <File name="Next.js files...." />
+        </Folder>
+        <Folder name="src" defaultOpen className="text-primary bg-primary/10">
+        <Folder name="app">
+          <Folder name="api">
+            <Folder name="search">
+              <File name="route.ts" />
+            </Folder>
+          </Folder>
+          <Folder name="docs">
+            <Folder name="[[...slug]]">
+              <File name="page.tsx" />
+            </Folder>
+            <File name="layout.tsx" />
+          </Folder>
+          <File name="global.css" />
+          <File name="layout.config.tsx" />
+          <File name="layout.tsx" />
+          <File name="page.tsx" />
+          <File name="source.ts" />
+        </Folder>
+        <Folder name="content">
+          <Folder name="docs" defaultOpen>
+            <File name="index.mdx" />
+            <File name="test.mdx" />
+          </Folder>
+        </Folder>
+        </Folder>
+        <Folder name="node_modules">
+          <File name="dependencies...." />
+        </Folder>
+        <File name=".gitignore" />
+        <File name=".map.ts" />
+        <File name="README.md" />
+        <File name="mdx-components.tsx" />
+        <File name="next-env.d.ts" />
+        <File name="next.config.mjs" />
+        <File name="package.json" />
+        <File name="pnpm-lock.yaml" />
+        <File name="postcss.config.js" />
+        <File name="tailwind.config.js" />
+        <File name="tsconfig.json"/>
+      </Files>
+    </Tab>
+</Tabs>
 
 ### Fix Broken Paths
 
 If you try to run the app, you'll see that it doesn't work. This is because the paths in the `tsconfig.json`, `tailwind.config.js`, `route.ts`, `app/page.tsx`, `layout.config.tsx`, `source.ts`, and `next.config.mjs` files are still pointing to the `app` and `content` directories at the root level. Let's fix them.
 
-Make the following changes:
+<Tabs items={['route.ts', 'app/layout.config.tsx', 'app/page.tsx', 'app/source.ts', 'next.config.mjs', 'tailwind.config.js', 'tsconfig.json']}>
+  <Tab value="route.ts">
 
-```diff json title="tsconfig.json"
-"paths": {
--  "@/*": ["./*"],
-+  "@/*": ["./src/*"], // [!code highlight]
-+  "@root/*": ["./*"], // [!code highlight]
-}
-```
+    ```diff title="route.ts"
+    - import { getPages } from '@/source';
+    + import { getPages from '@/app/source'; // [!code highlight]
+    ```
 
-```diff title="tailwind.config.js"
-content: [
-- './components/**/*.{ts,tsx}',
-- './app/**/*.{ts,tsx}',
-- './content/**/*.{md,mdx}',
-+ './src/components/**/*.{ts,tsx}', // [!code highlight]
-+ './src/app/**/*.{ts,tsx}', // [!code highlight]
-+ './src/content/**/*.{md,mdx}', // [!code highlight]
-]
-```
+  </Tab>
+  <Tab value="app/layout.config.tsx">
 
-```diff title="route.ts"
-- import { getPages } from '@/source';
-+ import { getPages } from '@/app/source'; // [!code highlight]
-```
+    ```diff title="layout.config.tsx"
+    - import { pageTree } from '@/source';
+    + import { pageTree } from '@/app/source'; // [!code highlight]
+    ```
 
-```diff title="app/page.tsx"
-- import { get Page, getPages } from '@/source';
-+ import { get Page, getPages } from '@/app/source'; // [!code highlight]
-```
+  </Tab>
+  <Tab value="app/page.tsx">
 
-```diff title="layout.config.tsx"
-- import { pageTree } from '@/source';
-+ import { pageTree } from '@/app/source'; // [!code highlight]
-```
+    ```diff title="app/page.tsx"
+    - import { getPage, getPages } from '@/source';
+    + import { getPage, getPages } from '@/app/source'; // [!code highlight]
+    ```
 
-```diff title="source.ts"
-- import { map } from './map'
-+ import { map } from '@root/.map'; // [!code highlight]
-```
+  </Tab>
+  <Tab value="app/source.ts">
 
-```diff title="next.config.mjs"
-- const withMDX = createMDX({ rootContentPath: './content' })
-+ const withMDX = createMDX({ rootContentPath: './src/content' }) // [!code highlight]
+    ```diff title="source.ts"
+    - import { map } from './map';
+    + import { map } from '@root/.map'; // [!code highlight]
+    ```
+
+  </Tab>
+  <Tab value="next.config.mjs">
+
+    ```diff title="next.config.mjs"
+    - const withMDX = createMDX({ rootContentPath: './content' });
+    + const withMDX = createMDX({ rootContentPath: './src/content' }); // [!code highlight]
+    ```
+
+  </Tab>
+  <Tab value="tailwind.config.js">
+
+    ```diff title="tailwind.config.js"
+    content: [
+    - './components/**/*.{ts,tsx}',
+    - './app/**/*.{ts,tsx}',
+    - './content/**/*.{md,mdx}',
+    + './src/components/**/*.{ts,tsx}', // [!code highlight]
+    + './src/app/**/*.{ts,tsx}', // [!code highlight]
+    + './src/content/**/*.{md,mdx}', // [!code highlight]
+    ]
+    ```
+
+  </Tab>
+  <Tab value="tsconfig.json">
+
+    ```diff json title="tsconfig.json"
+    "paths": {
+    -  "@/*": ["./*"],
+    +  "@/*": ["./src/*"], // [!code highlight]
+    +  "@root/*": ["./*"], // [!code highlight]
+    }
+    ```
+
+  </Tab>
+</Tabs>
+
+Run the app again, everything should be working now.
+
+```bash title="Terminal"
+pnpm i; pnpm dev
 ```
 
 ## Configuration
@@ -161,12 +446,6 @@ Easily see the UI differences between the home route and the docs route. Use whi
 +    // preset: 'catppuccin', // [!code highlight]
 +  })], // [!code highlight]
 } satisfies Config
-```
-
-Run the app again, everything should be working now.
-
-```bash
-pnpm i; pnpm dev
 ```
 
 ### Document CSS Variables for future reference & customization
@@ -686,7 +965,7 @@ You can now use [Lucide React](https://lucide.dev/) icons in your docs.
 ```md title="index.mdx"
 ---
 title: Manual Setup
-description: Set up the template your way
+description: Set up the template your way.
 icon: GitBranch
 ---
 ```
@@ -963,7 +1242,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
 Use repository URL in `package.json` as source.
 
-```diff title="package.json"
+````diff title="package.json"
  {
    "name": "stack-builder",
    "version": "0.0.0",
@@ -979,7 +1258,7 @@ Use repository URL in `package.json` as source.
 +  "homepage": "https://github.com/MFarabi619/stack-builder", // [!code highlight]
    "scripts": {
  ...
-```
+````
 
 Create button.
 
@@ -1025,3 +1304,10 @@ Create button.
       ...
 ```
 
+## Add Favicon and Icon
+
+Create a `public/` directory at the root level to store static assets.
+
+I use [convert.io](https://convertio.co/svg-ico/) to convert SVGs into favicons.
+
+Paste the `favicon.ico` and `icon.ico` files in the `app`, `(home)`, and `docs` directories. As of right now I'm not sure which one it was that made it work.

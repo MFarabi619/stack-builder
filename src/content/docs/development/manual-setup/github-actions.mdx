@@ -1,5 +1,67 @@
 ---
 title: GitHub Actions
+description: Harness the power of cloud CI/CD pipelines to automate and ship with assurance.
 ---
 
-### Set up CI/CD with GitHub Actions
+<Cards>
+  <Card
+    title="GitHub Actions"
+    description="Automate your software development workflows."
+    icon=""
+    href="https://docs.github.com/en/actions"
+  />
+  <Card
+    title="GitHub Actions Marketplace"
+    description="Explore and use pre-built actions from the GitHub Actions marketplace."
+    icon=""
+    href="https://github.com/marketplace?type=actions"
+  />
+</Cards>
+
+## Installation
+
+Create a `.github/workflows` directory at the root level and add a `.yml` file with the following configuration.
+
+<Tabs items={['Terminal', 'main.yml']}>
+  <Tab value="Terminal">
+    ```bash
+    touch .github/workflows/main.yml
+    ```
+  </Tab>
+  <Tab value="main.yml">
+    ```yaml title=".github/workflows/main.yml"
+    name: CI
+
+    on:
+      push:
+        branches:
+          - main
+      pull_request:
+        branches:
+          - main
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+
+        steps:
+        - uses: actions/checkout@v2
+        - name: Set up Node.js
+          uses: actions/setup-node@v2
+          with:
+            node-version: '14'
+        - name: Install dependencies
+          run: npm install
+        - name: Run tests
+          run: npm test
+    ```
+
+  </Tab>
+</Tabs>
+
+### Test pipelines locally with act
+
+Install [act](https://nektosact.com/).
+```bash
+act # Run all workflows in your repo
+```
