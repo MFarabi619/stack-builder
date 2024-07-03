@@ -23,12 +23,18 @@ importers:
       fumadocs-core:
         specifier: 12.3.2
         version: 12.3.2(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      fumadocs-docgen:
+        specifier: ^1.0.2
+        version: 1.0.2(typescript@5.5.2)
       fumadocs-mdx:
         specifier: 8.2.33
         version: 8.2.33(fumadocs-core@12.3.2(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       fumadocs-ui:
         specifier: 12.3.2
         version: 12.3.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(tailwindcss@3.4.4)
+      lucide-react:
+        specifier: ^0.400.0
+        version: 0.400.0(react@18.3.1)
       next:
         specifier: ^14.2.4
         version: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2037,11 +2043,19 @@ packages:
       react: '>= 18'
       react-dom: '>= 18'
 
+  fumadocs-docgen@1.0.2:
+    resolution: {integrity: sha512-NwkQww+yRVONUDsPoJKiw/p+BNf2UTVRA1FYabuH8TCphCypvvVheCAhddlcH3l0wMF9bBobk9OtEoiL80OD9Q==}
+
   fumadocs-mdx@8.2.33:
     resolution: {integrity: sha512-bKT4CaFMWrPYUqsM2MD6uN4i2XIgZ2mCw9XoMJMpPS3Oq2Eq5MlNs9B5L6ItO7FfckCb9hoCA6LHdT1tVkgtyQ==}
     peerDependencies:
       fumadocs-core: 12.x.x
       next: '>= 14.1.0'
+
+  fumadocs-typescript@2.0.1:
+    resolution: {integrity: sha512-FKgO/g23tcRbXnv47blZ+KLs6HacKB5eO13d+LmQyBZxa3J5L+Ewi3vjjQmkf33Gva1WMojhYELe4m6YXZLErA==}
+    peerDependencies:
+      typescript: '*'
 
   fumadocs-ui@12.3.2:
     resolution: {integrity: sha512-1OalpAGwLt3FnRABwFPlmRp0sJAmYw78/2V1YuiLe9yQXWBWut9ldsB43Bg7bNRFMzWU1eYVlSjxbr+iZIE89Q==}
@@ -2506,6 +2520,11 @@ packages:
 
   lucide-react@0.399.0:
     resolution: {integrity: sha512-UyTNa3djBISdzL2UktgCrESXexQXaDQWi/WsDkbw6fBFfHlapajR58WoR+gxQ4laxfEyiHmoFrEIM3V+5XOVQg==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
+  lucide-react@0.400.0:
+    resolution: {integrity: sha512-rpp7pFHh3Xd93KHixNgB0SqThMHpYNzsGUu69UaQbSZ75Q/J3m5t6EhKyMT3m4w2WOxmJ2mY0tD3vebnXqQryQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -5939,6 +5958,17 @@ snapshots:
       - '@types/react'
       - supports-color
 
+  fumadocs-docgen@1.0.2(typescript@5.5.2):
+    dependencies:
+      estree-util-value-to-estree: 3.1.2
+      fumadocs-typescript: 2.0.1(typescript@5.5.2)
+      hast-util-to-estree: 3.1.0
+      npm-to-yarn: 2.2.1
+      unist-util-visit: 5.0.0
+    transitivePeerDependencies:
+      - supports-color
+      - typescript
+
   fumadocs-mdx@8.2.33(fumadocs-core@12.3.2(@types/react@18.3.3)(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(next@14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)):
     dependencies:
       '@mdx-js/mdx': 3.0.1
@@ -5949,6 +5979,17 @@ snapshots:
       gray-matter: 4.0.3
       next: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       zod: 3.23.8
+    transitivePeerDependencies:
+      - supports-color
+
+  fumadocs-typescript@2.0.1(typescript@5.5.2):
+    dependencies:
+      fast-glob: 3.3.2
+      hast-util-to-jsx-runtime: 2.3.0
+      mdast-util-from-markdown: 2.0.1
+      mdast-util-gfm: 3.0.0
+      mdast-util-to-hast: 13.2.0
+      typescript: 5.5.2
     transitivePeerDependencies:
       - supports-color
 
@@ -6446,6 +6487,10 @@ snapshots:
   lru-cache@10.3.0: {}
 
   lucide-react@0.399.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
+  lucide-react@0.400.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
