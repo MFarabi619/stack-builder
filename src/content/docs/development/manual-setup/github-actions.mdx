@@ -22,38 +22,98 @@ description: Harness the power of cloud CI/CD pipelines to automate and ship wit
 
 Create a `.github/workflows` directory at the root level and add a `.yml` file with the following configuration.
 
-<Tabs items={['Terminal', 'main.yml']}>
+
+<Tabs items={['Terminal', 'release.yml']}>
   <Tab value="Terminal">
-    ```bash
-    touch .github/workflows/main.yml
+
+    ```bash title="Terminal"
+    mkdir -p .github/workflows
+    touch .github/workflows/release.yml
     ```
+
   </Tab>
-  <Tab value="main.yml">
-    ```yaml title=".github/workflows/main.yml"
-    name: CI
+
+  <Tab value="release.yml">
+
+  Modify this template to fit your project's needs.
+
+    ```yaml title=".github/workflows/release.yml"
+    name: Release
 
     on:
       push:
-        branches:
-          - main
+        branches: '*'
       pull_request:
-        branches:
-          - main
+        branches: '*'
 
     jobs:
-      build:
+      release:
         runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            node-version: [20]
 
         steps:
-        - uses: actions/checkout@v2
-        - name: Set up Node.js
-          uses: actions/setup-node@v2
-          with:
-            node-version: '14'
-        - name: Install dependencies
-          run: npm install
-        - name: Run tests
-          run: npm test
+          - name: 🛎️ Checkout Code
+            uses: actions/checkout@v4
+            with:
+              fetch-depth: 0 # All history for branches and tags
+
+          - name: 📦 Install pnpm
+            uses: pnpm/action-setup@v4
+            with:
+              version: 9
+
+          - name: 🛠️ Setup Node.js ${{ matrix.node-version }}
+            uses: actions/setup-node@v4
+            with:
+              node-version: "${{ matrix.node-version }}"
+              cache: pnpm
+
+          - name: 📂 Install Dependencies
+            run: pnpm i
+
+          # - name: 🧐 Check Code Quality
+          #   run: pnpm lint
+
+          # - name: 🎭 Install Playwright
+          #   run: pnpm i playwright http-server wait-on; npx playwright install --with-deps
+
+          # - name: 📔 Build Storybook
+          #   run: pnpm build-storybook --quiet
+
+          # - name: 🧪 Serve Storybook and run tests
+          #   run: |
+          #     pnpx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+          #       "pnpm exec http-server storybook-static --port 6006 --silent" \
+          #       "pnpm exec wait-on tcp:6006 && pnpm test-storybook"
+
+          # - name: 🔬 Run Unit Tests
+          #   run: pnpm jest ...
+
+          # - name: 🔍 Run Integration Tests
+          #   run: pnpm jest ...
+
+          # - name: ⌚ 💀 Run E2E Tests
+          #   run: pnpx playwright test
+
+          # - name: 👀 Run Visual Tests
+          #   env:
+          #     CHROMATIC_PROJECT_TOKEN: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          #   run: pnpm run chromatic
+
+          - name: 🏗️ Build Project
+            # env:
+            #   SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
+            run: pnpm build
+
+          # - name: 🤖 Run Semantic Release
+          #   env:
+          #     GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          #   run: pnpm exec semantic-release
+
+          - name: 💰 Profit
+            run: echo 🐞
     ```
 
   </Tab>
@@ -62,6 +122,7 @@ Create a `.github/workflows` directory at the root level and add a `.yml` file w
 ### Test pipelines locally with act
 
 Install [act](https://nektosact.com/).
-```bash
+
+```bash title="Terminal"
 act # Run all workflows in your repo
 ```
