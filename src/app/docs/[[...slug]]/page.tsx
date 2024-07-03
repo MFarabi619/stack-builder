@@ -26,6 +26,9 @@ export default async function Page({
       <RollButton />
       <DocsBody>
         <h1>{page.data.title}</h1>
+        <p className="mb-8 text-lg text-muted-foreground">
+          {page.data.description}
+        </p>
         <MDX />
       </DocsBody>
     </DocsPage>
