@@ -1,0 +1,212 @@
+---
+title: Shadcn/ui
+---
+
+### Install Shadcn/ui
+
+Our next step will be to add [Shadcn/ui](https://ui.shadcn.com/). The problem is that it's not fully compatible with the Fumadocs UI design system, which also uses Tailwind CSS. Installing Shadcn will overwrite the current Tailwind CSS configuration, which will break Fumadocs UI.
+
+Next.js allows for separate Root layouts for different routes, which will allow us to use both design systems without conflicts.
+
+#### Separate design systems
+
+Create `(home)/` under `app/`. Copy `global.css`, `layout.tsx`, and `page.tsx` into it.
+
+Now, cut `layout.tsx`, `layout.config.tsx`, `source.ts`, and `global.css` into `docs/`
+
+Fix the paths in the following files:
+
+```diff title="[[...slug]]/page.tsx"
+-  presets: [createPreset({ preset: 'purple' })],
++  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+```
+
+```diff title="src/app/docs/layout.config.tsx"
+-  presets: [createPreset({ preset: 'purple' })],
++  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+```
+
+```diff title="src/app/docs/route.ts"
+-  presets: [createPreset({ preset: 'purple' })],
++  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
+```
+
+Change the code in `src/app/docs/layout.tsx` to this, which includes the RootProvider and stylesheet.
+
+```diff title="src/app/docs/layout.tsx"
++ import "./global.css"; // [!code highlight]
+import { DocsLayout } from "fumadocs-ui/layout";
+import type { ReactNode } from "react";
+import { docsOptions } from "./layout.config";
++ import { RootProvider } from "fumadocs-ui/provider"; // [!code highlight]
+
+export default function Layout({ children }: { children: ReactNode }) {
+  return (
++   <html lang="en" suppressHydrationWarning> // [!code highlight]
++     <body> // [!code highlight]
++       <RootProvider> // [!code highlight]
+          <DocsLayout {...docsOptions}>{children}</DocsLayout>
++       </RootProvider> // [!code highlight]
++     </body> // [!code highlight]
++   </html> // [!code highlight]
+  );
+}
+```
+
+Rename `src/app/docs/global.css` -> `src/app/docs/fumadocs.global.css`
+
+Duplicate `tailwind.config.js`, name it to -> `tailwind.fumadocs.config.ts`, and do the following:
+
+```diff title="tailwind.fumadocs.config.ts"
++  // [!code highlight]
+import { createPreset } from 'fumadocs-ui/tailwind-plugin'
++ import type { Config } from "tailwindcss" // [!code highlight]
+
+- /** @type {import('tailwindcss').Config} */
+- export default {
++ const config = { // [!code highlight]
++   darkMode: ["class"], // [!code highlight]
++   prefix: "", // [!code highlight]
+  content: [
+-   './src/components/**/*.{ts,tsx}',
+-   './src/app/**/*.{ts,tsx}',
++   './src/app/docs/**/*.{ts,tsx}', // [!code highlight]
+    './src/content/**/*.{md,mdx}',
+    './mdx-components.{ts,tsx}',
+    './node_modules/fumadocs-ui/dist/**/*.js',
+  ],
+  presets: [createPreset({ preset: 'purple' })],
+-}
++} satisfies Config // [!code highlight]
++ // [!code highlight]
++ export default config // [!code highlight]
+
+```
+
+Remove `RootProvider` from `(home)/layout.tsx`
+
+#### Run Shadcn/ui install script
+
+Follow the below steps and cross-check with the instructions in the [Shadcn/ui docs](https://ui.shadcn.com/docs/installation/next) to install Shadcn.
+Step 1 can be skipped, as we've already set up a Next.js project.
+
+```bash
+pnpm dlx shadcn-ui@latest init
+```
+
+```bash
+Would you like to use TypeScript (recommended)? yes
+Which style would you like to use? › New York
+Which color would you like to use as base color? › Neutral
+Where is your global CSS file? src/app/(home)/globals.css
+Do you want to use CSS variables for colors? Yes
+Are you using a custom tailwind prefix eg. tw-? (Leave blank if not)
+Where is your tailwind.config.js located?  tailwind.config.ts
+Configure the import alias for components:  @/components
+Configure the import alias for utils: @/lib/utils
+Are you using React Server Components? Yes
+Write configurations to components.json. Proceed? Y
+```
+
+### Add Favicon and Icon
+
+Create a `public/` directory at the root level to store static assets.
+
+Put `favicon.ico` and `icon.ico` files in both the `(home)` and `docs` directories. Also add it under the 'app' directory as both 'favicon.ico' and 'icon.ico'. As of right now I'm not sure which one it was that made it work.
+
+```diff title="tailwind.config.ts"
+import type { Config } from 'tailwindcss'
++ import tailwindcssAnimate from 'tailwindcss-animate' // [!code highlight]
+
+const config = {
+  darkMode: ['class'],
+  content: [
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
+  ],
+  prefix: '',
+  theme: {
+    container: {
+      center: true,
+      padding: '2rem',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
+    extend: {
+      colors: {
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' },
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+    },
+  },
+-  plugins: [require("tailwindcss-animate")],
++  plugins: [tailwindcssAnimate], // [!code highlight]
+} satisfies Config
+
+export default config
+```
+
+```diff title="(home)/global.css"
+ @tailwind components;
+ @tailwind utilities;
++ // [!code highlight]
++ /*Easily customize theme: https://zippystarter.com/tools/shadcn-ui-theme-generator*/ // [!code highlight]
++ /*Explore the Shadcn/ui ecosystem: https://github.com/birobirobiro/awesome-shadcn-ui*/ // [!code highlight]
++ // [!code highlight]
+ @layer base {
+   :root {
+     --background: 0 0% 100%;
+```

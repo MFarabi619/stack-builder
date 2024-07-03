@@ -1,0 +1,14 @@
+{
+  "root": true,
+  "pages": [
+    "index",
+    "--- Paths ---",
+    "project-management",
+    "design",
+    "development",
+    "--- Purpose ---",
+    "motivation",
+    "roadmap",
+    "other-templates"
+  ]
+}

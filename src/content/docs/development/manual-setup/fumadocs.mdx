@@ -1,14 +1,19 @@
 ---
-title: Manual Setup
-description: Set up the template your way
+title: Fumadocs
 ---
 
 import { File, Folder, Files } from "fumadocs-ui/components/files";
-import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 
-## Steps
+<Cards>
+  <Card
+    title="Fumadocs"
+    description="Modern documentation site building framework compatible with Next.js 14 App Router. Used to create the documentation you're reading now."
+    icon=""
+    href="https://fumadocs.vercel.app/"
+  />
+</Cards>
 
-### Install Fumadocs
+## Installation
 
 You can either start with a folder, or let the Fumadocs command create one for you.
 
@@ -30,7 +35,7 @@ Navigate into the directory, then run the following then navigate to `localhost:
 pnpm i; pnpm dev
 ```
 
-#### Migrate project to use 'src' directory
+### Migrate project to use 'src' directory
 
 As the time of writing this, Fumadocs creates a Next.js app with the `app` directory at the root level, and does not provide the option to use the `src` directory, which would be provided by the Next.js CLI.
 
@@ -55,7 +60,7 @@ Create a `src` directory at the root level, and move the `app` and `content` dir
   <File name="other config files...." />
 </Files>
 
-#### Fix broken paths
+### Fix Broken Paths
 
 If you try to run the app, you'll see that it doesn't work. This is because the paths in the `tsconfig.json`, `tailwind.config.js`, `route.ts`, `app/page.tsx`, `layout.config.tsx`, `source.ts`, and `next.config.mjs` files are still pointing to the `app` and `content` directories at the root level. Let's fix them.
 
@@ -105,7 +110,9 @@ content: [
 + const withMDX = createMDX({ rootContentPath: './src/content' }) // [!code highlight]
 ```
 
-#### Add theme presets
+## Configuration
+
+### Add Theme Presets
 
 Easily see the UI differences between the home route and the docs route. Use whichever one you prefer, this one uses purple.
 
@@ -129,7 +136,7 @@ Run the app again, everything should be working now.
 pnpm i; pnpm dev
 ```
 
-#### Document Fumadocs CSS Variables for future reference and easy customization
+### Document Fumadocs CSS Variables for future reference and easy customization
 
 ```css title="docs/fumadocs.global.css"
 @config '../../../tailwind.fumadocs.config.ts';
@@ -403,208 +410,7 @@ pnpm i; pnpm dev
 /*};*/
 ```
 
-### Install Shadcn/ui
-
-Our next step will be to add [Shadcn/ui](https://ui.shadcn.com/). The problem is that it's not fully compatible with the Fumadocs UI design system, which also uses Tailwind CSS. Installing Shadcn will overwrite the current Tailwind CSS configuration, which will break Fumadocs UI.
-
-Next.js allows for separate Root layouts for different routes, which will allow us to use both design systems without conflicts.
-
-#### Separate design systems
-
-Create `(home)/` under `app/`. Copy `global.css`, `layout.tsx`, and `page.tsx` into it.
-
-Now, cut `layout.tsx`, `layout.config.tsx`, `source.ts`, and `global.css` into `docs/`
-
-Fix the paths in the following files:
-
-```diff title="[[...slug]]/page.tsx"
--  presets: [createPreset({ preset: 'purple' })],
-+  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
-```
-
-```diff title="src/app/docs/layout.config.tsx"
--  presets: [createPreset({ preset: 'purple' })],
-+  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
-```
-
-```diff title="src/app/docs/route.ts"
--  presets: [createPreset({ preset: 'purple' })],
-+  presets: [createPreset({ preset: 'purple' })], // [!code highlight]
-```
-
-Change the code in `src/app/docs/layout.tsx` to this, which includes the RootProvider and stylesheet.
-
-```diff title="src/app/docs/layout.tsx"
-+ import "./global.css"; // [!code highlight]
-import { DocsLayout } from "fumadocs-ui/layout";
-import type { ReactNode } from "react";
-import { docsOptions } from "./layout.config";
-+ import { RootProvider } from "fumadocs-ui/provider"; // [!code highlight]
-
-export default function Layout({ children }: { children: ReactNode }) {
-  return (
-+   <html lang="en" suppressHydrationWarning> // [!code highlight]
-+     <body> // [!code highlight]
-+       <RootProvider> // [!code highlight]
-          <DocsLayout {...docsOptions}>{children}</DocsLayout>
-+       </RootProvider> // [!code highlight]
-+     </body> // [!code highlight]
-+   </html> // [!code highlight]
-  );
-}
-```
-
-Rename `src/app/docs/global.css` -> `src/app/docs/fumadocs.global.css`
-
-Duplicate `tailwind.config.js`, name it to -> `tailwind.fumadocs.config.ts`, and do the following:
-
-```diff title="tailwind.fumadocs.config.ts"
-+  // [!code highlight]
-import { createPreset } from 'fumadocs-ui/tailwind-plugin'
-+ import type { Config } from "tailwindcss" // [!code highlight]
-
-- /** @type {import('tailwindcss').Config} */
-- export default {
-+ const config = { // [!code highlight]
-+   darkMode: ["class"], // [!code highlight]
-+   prefix: "", // [!code highlight]
-  content: [
--   './src/components/**/*.{ts,tsx}',
--   './src/app/**/*.{ts,tsx}',
-+   './src/app/docs/**/*.{ts,tsx}', // [!code highlight]
-    './src/content/**/*.{md,mdx}',
-    './mdx-components.{ts,tsx}',
-    './node_modules/fumadocs-ui/dist/**/*.js',
-  ],
-  presets: [createPreset({ preset: 'purple' })],
--}
-+} satisfies Config // [!code highlight]
-+ // [!code highlight]
-+ export default config // [!code highlight]
-
-```
-
-Remove `RootProvider` from `(home)/layout.tsx`
-
-#### Run Shadcn/ui install script
-
-Follow the below steps and cross-check with the instructions in the [Shadcn/ui docs](https://ui.shadcn.com/docs/installation/next) to install Shadcn.
-Step 1 can be skipped, as we've already set up a Next.js project.
-
-```bash
-pnpm dlx shadcn-ui@latest init
-```
-
-```bash
-Would you like to use TypeScript (recommended)? yes
-Which style would you like to use? › New York
-Which color would you like to use as base color? › Neutral
-Where is your global CSS file? src/app/(home)/globals.css
-Do you want to use CSS variables for colors? Yes
-Are you using a custom tailwind prefix eg. tw-? (Leave blank if not)
-Where is your tailwind.config.js located?  tailwind.config.ts
-Configure the import alias for components:  @/components
-Configure the import alias for utils: @/lib/utils
-Are you using React Server Components? Yes
-Write configurations to components.json. Proceed? Y
-```
-
-### Add Favicon and Icon
-
-Create a `public/` directory at the root level to store static assets.
-
-Put `favicon.ico` and `icon.ico` files in both the `(home)` and `docs` directories. Also add it under the 'app' directory as both 'favicon.ico' and 'icon.ico'. As of right now I'm not sure which one it was that made it work.
-
-```diff title="tailwind.config.ts"
-import type { Config } from 'tailwindcss'
-+ import tailwindcssAnimate from 'tailwindcss-animate' // [!code highlight]
-
-const config = {
-  darkMode: ['class'],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-  ],
-  prefix: '',
-  theme: {
-    container: {
-      center: true,
-      padding: '2rem',
-      screens: {
-        '2xl': '1400px',
-      },
-    },
-    extend: {
-      colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
-      },
-      keyframes: {
-        'accordion-down': {
-          from: { height: '0' },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: '0' },
-        },
-      },
-      animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-      },
-    },
-  },
--  plugins: [require("tailwindcss-animate")],
-+  plugins: [tailwindcssAnimate], // [!code highlight]
-} satisfies Config
-
-export default config
-```
-
-### Customize docs site
-
-Now, let's further customize the docs site.
-
-#### Add GitHub Repo Link to Navbar
+### Navbar GitHub Link
 
 ```diff title="docs/layout.config.tsx"
 import type { BaseLayoutProps, DocsLayoutProps } from 'fumadocs-ui/layout'
@@ -632,7 +438,7 @@ export const docsOptions: DocsLayoutProps = {
 }
 ```
 
-#### Add a header to the docs site
+### Add Header
 
 The properties currently accepted by the Docs Layout can be accepted by the Home layout as well.
 
@@ -697,7 +503,7 @@ At this point the header should appear on the docs site. However, it contains ma
 
 Unfortunately, Fumadocs does not provide a way to customize the header(HomeLayout) and sidebar(DocsLayout) separately through a clean API due to opinion. Therefore we have to target the CSS classes directly to conditionally render them at different screen sizes.
 
-Add the following:
+#### Customize Header
 
 ```diff title="docs/fumadocs.global.css"
 @config '../../../tailwind.fumadocs.config.ts';
@@ -745,247 +551,268 @@ Add the following:
 ...
 ```
 
-### Install ESLint
+### Add Package Install plugin
 
-#### Use Anthony Fu's configuration
-
-[Anthony Fu's ESLint Configuration](https://github.com/antfu/eslint-config)
-
-```bash
-pnpm dlx @antfu/eslint-config@latest
+```package-install
+fumadocs-docgen
 ```
 
-This uses ESLint 9, which is still buggy and incompatible with many plugins. We're going to downversion to `8.57.0`.
+Add Remark plugin with custom Tabs configuration
 
-```bash
-pnpm i -D eslint@8
+```diff title="next.config.mjs"
+ import createMDX from 'fumadocs-mdx/config'
++ import { remarkInstall } from 'fumadocs-docgen' // [!code highlight]
+
+- const withMDX = createMDX({ rootContentPath: './src/content', mdxOptions: { lastModifiedTime: 'git' } })
+ const withMDX = createMDX({ // [!code highlight]
+   rootContentPath: './src/content', // [!code highlight]
+   mdxOptions: { // [!code highlight]
+     lastModifiedTime: 'git', // [!code highlight]
++     remarkPlugins: [ // [!code highlight]
++       [remarkInstall, { Tabs: 'InstallTabs' }], // [!code highlight]
++     ], // [!code highlight]
+   }, // [!code highlight]
+ }) // [!code highlight]
+
+ /** @type {import('next').NextConfig} */
+ const config = {
 ```
 
-Add compatibility function to the ESLint flat config file.
+Add Tabs configuration to `mdx-components.tsx`. Whichever tab the user chooses [will persist](https://fumadocs.vercel.app/docs/ui/components/tabs#shared-value), even if they navigate to another page.
 
-```diff title="eslint.config.mjs"
-+import { FlatCompat } from '@eslint/eslintrc' // [!code highlight]
+````diff title="mdx-components.tsx"
+ import type { MDXComponents } from 'mdx/types'
+ import defaultComponents from 'fumadocs-ui/mdx'
 
--export default antfu({
-+const compat = new FlatCompat() // [!code highlight]
+```diff title="mdx-components.tsx"
+ import type { MDXComponents } from 'mdx/types'
+ import defaultComponents from 'fumadocs-ui/mdx'
++import type { ReactNode } from 'react' // [!code highlight]
++import { Tab, Tabs } from 'fumadocs-ui/components/tabs' // [!code highlight]
 
--})
-+export default antfu( // [!code highlight]
-+  { // [!code highlight]
-+    ignores: [], // [!code highlight]
+ export function useMDXComponents(components: MDXComponents): MDXComponents {
+   return {
+     ...defaultComponents,
+     ...components,
++    Tab, // [!code highlight]
++    Tabs, // [!code highlight]
++    InstallTabs: ({ // [!code highlight]
++      items, // [!code highlight]
++      children, // [!code highlight]
++    }: { // [!code highlight]
++      items: string[] // [!code highlight]
++      children: ReactNode // [!code highlight]
++    }) => ( // [!code highlight]
++      <Tabs items={items} id="package-manager"> // [!code highlight]
++        {children} // [!code highlight]
++      </Tabs> // [!code highlight]
++    ), // [!code highlight]
+   }
+ }
+````
+
+### Add Lucide React Icons
+
+```package-install
+lucide-react
+```
+
+#### Add finder function to loader
+
+This allows us to use icons in docs without importing them.
+
+```diff title="docs/source.ts"
+
+ import { map } from '@root/.map'
+ import { createMDXSource } from 'fumadocs-mdx'
+ import { loader } from 'fumadocs-core/source'
++import { createElement } from 'react' // [!code highlight]
++import { icons } from 'lucide-react' // [!code highlight]
+
+ export const { getPage, getPages, pageTree } = loader({
+   baseUrl: '/docs',
+   rootDir: 'docs',
++  icon(icon) { // [!code highlight]
++    if (!icon) { // [!code highlight]
++      // You may set a default icon // [!code highlight]
++      // return createElement(HomeIcon) // [!code highlight]
++      return // [!code highlight]
++    } // [!code highlight]
++ // [!code highlight]
++    if (icon in icons) // [!code highlight]
++      return createElement(icons[icon as keyof typeof icons]) // [!code highlight]
 +  }, // [!code highlight]
 + // [!code highlight]
-+  // Legacy config // [!code highlight]
-+  ...compat.config({ // [!code highlight]
-+    extends: [ // [!code highlight]
-+      // 'eslint:recommended', // [!code highlight]
-+      // Other extends... // [!code highlight]
-+    ], // [!code highlight]
-+  }) // [!code highlight]
-+ // [!code highlight]
-+  // Other flat configs... // [!code highlight]
-+) // [!code highlight]
+   source: createMDXSource(map),
+ })
 ```
 
-#### Fix VS Code settings.json
+#### Use Icons in Docs
 
-Go to `.vscode/settings.json` and change the comments to key-value pairs, like so:
+You can now use [Lucide React](https://lucide.dev/) icons in your docs.
 
-```diff title=".vscode/settings.json"
+```md title="index.mdx"
+---
+title: Manual Setup
+description: Set up the template your way
+icon: GitBranch
+---
+```
+
+```json title="meta.json"
 {
-- // Disable the default formatter, use eslint instead
-+  "@comment1": "Disable the default formatter, use eslint instead", // [!code highlight]
-  "prettier.enable": false,
-  "editor.formatOnSave": false,
-
-- // Autofix
-+  "@comment2": "Autofix", // [!code highlight]
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "never"
-  },
-
-- // Silent the stylistic rules in you IDE, but still auto fix them
-+  "@comment3": "Silent the stylistic rules in you IDE, but still auto fix them", // [!code highlight]
-  "eslint.rules.customizations": [
-    { "rule": "style/*", "severity": "off" },
-    { "rule": "format/*", "severity": "off" },
-    { "rule": "*-indent", "severity": "off" },
-    { "rule": "*-spacing", "severity": "off" },
-    { "rule": "*-spaces", "severity": "off" },
-    { "rule": "*-order", "severity": "off" },
-    { "rule": "*-dangle", "severity": "off" },
-    { "rule": "*-newline", "severity": "off" },
-    { "rule": "*quotes", "severity": "off" },
-    { "rule": "*semi", "severity": "off" }
-  ],
-
-- // Enable ESlint for all supported languages
-+  "@comment4": "Enable ESlint for all supported languages", // [!code highlight]
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "vue",
-    "html",
-    "markdown",
-    "json",
-    "jsonc",
-    "yaml",
-    "toml",
-    "xml",
-    "gql",
-    "graphql",
-    "astro",
-    "css",
-    "less",
-    "scss",
-    "pcss",
-    "postcss"
-  ]
+  "title": "Manual Setup",
+  "icon": "GitBranch"
 }
 ```
 
-#### Activate ESLint React rules and Formatter rules
+### Define Pages
 
-```diff title="eslint.config.mjs"
-     ignores: [],
-+    react: true, // [!code highlight]
-+    formatters: { // [!code highlight]
-+      /** // [!code highlight]
-+      * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue // [!code highlight]
-+      * By default uses Prettier // [!code highlight]
-+      */ // [!code highlight]
-+      css: true, // [!code highlight]
-+      /** // [!code highlight]
-+      * Format HTML files // [!code highlight]
-+      * By default uses Prettier // [!code highlight]
-+      */ // [!code highlight]
-+      html: true, // [!code highlight]
-+      /** // [!code highlight]
-+      * Format Markdown files // [!code highlight]
-+      * Supports Prettier and dprint // [!code highlight]
-+      * By default uses Prettier // [!code highlight]
-+      */ // [!code highlight]
-+      // markdown: 'prettier' // [!code highlight]
+Use a `pages` variable for single source of truth.
+
+```diff title="docs/source.ts"
+
+ import { map } from '@root/.map'
+ import { createMDXSource } from 'fumadocs-mdx'
+ import { loader } from 'fumadocs-core/source'
+ import { createElement } from 'react'
++import { // [!code highlight]
++  Palette as DesignIcon, // [!code highlight]
++  GitPullRequestCreateArrow as DevelopmentIcon, // [!code highlight]
++  Dock as HomeIcon, // [!code highlight]
++  Kanban as ProjectManagementIcon, // [!code highlight]
+   icons,
++} from 'lucide-react' // [!code highlight]
++ // [!code highlight]
++export const pages = [ // [!code highlight]
++  { // [!code highlight]
++    title: 'Home', // [!code highlight]
++    description: 'Best decisions start with the best information', // [!code highlight]
++    url: '', // [!code highlight]
++    icon: HomeIcon, // [!code highlight]
 +  }, // [!code highlight]
++  { // [!code highlight]
++    title: 'Project Management', // [!code highlight]
++    description: 'Turn visions into reality with confidence', // [!code highlight]
++    url: 'project-management', // [!code highlight]
++    icon: ProjectManagementIcon, // [!code highlight]
++  }, // [!code highlight]
++  { // [!code highlight]
++    title: 'Design', // [!code highlight]
++    description: 'Deliver outstanding UI/UX at high velocity', // [!code highlight]
++    url: 'design', // [!code highlight]
++    icon: DesignIcon, // [!code highlight]
++  }, // [!code highlight]
++  { // [!code highlight]
++    title: 'Development', // [!code highlight]
++    description: 'Architect your solution for scale and longevity', // [!code highlight]
++    url: 'development', // [!code highlight]
++    icon: DevelopmentIcon, // [!code highlight]
++  }, // [!code highlight]
++] // [!code highlight]
 
-     // Legacy config
+ export const { getPage, getPages, pageTree } = loader({
+   baseUrl: '/docs',
+   ...
 ```
 
-#### Add ESLint scripts to package.json
+You can import these pages in `.mdx` files and use them like this:
+```mdx title="index.mdx"
+---
+title: Welcome to Stack Builder
+description: Your dream, your stack, your way.
+---
 
-```diff title="package.json"
-   "scripts": {
-     "build": "next build",
-     "dev": "next dev",
-     "start": "next start"
-+    "lint": "eslint .", // [!code highlight]
-+    "lint:fix": "eslint . --fix", // [!code highlight]
-+    "lint:inspect": "npx @eslint/config-inspector" // [!code highlight]
+import { pages } from "../../app/docs/source";
+
+## Choose your path
+
+<Cards>
+  {pages
+    .filter((page) => page.title !== "Home") // Filter out the Home page
+    .map((page) => (
+      <Card
+        key={page.title}
+        title={page.title}
+        description={page.description}
+        href={`/docs/${page.url}`}
+        icon={
+          <page.icon
+            style={{
+              color: `hsl(var(--accent-foreground))`,
+            }}
+          />
+        }
+      />
+    ))}
+</Cards>
+```
+
+As of right now, I haven't been able to get path aliasing to work, hence the spaghetti import.
+
+
+The `url` property must be specified in that format, otherwise `RootToggle` will not change options when clicked.
+
+### Add Root Toggle button
+
+```diff title="docs/layout.config.tsx"
+ import { pageTree, pages } from '@/app/docs/source'
+ import type { BaseLayoutProps, DocsLayoutProps } from 'fumadocs-ui/layout'
+-import { pageTree } from '@/app/docs/source'
++import { RootToggle } from 'fumadocs-ui/components/layout/root-toggle' // [!code highlight]
++import { Library as DocumentationPageIcon, Layers as StackBuilderIcon } from 'lucide-react' // [!code highlight]
++import { pageTree, pages } from '@/app/docs/source' // [!code highlight]
+
+ // shared configuration
+ export const baseOptions: BaseLayoutProps = {
+   nav: {
+-    title: 'Stack Builder Docs',
++    title: ( // [!code highlight]
++      <> // [!code highlight]
++        <StackBuilderIcon /> // [!code highlight]
++        <span className="text-lg font-bold">Stack Builder</span> // [!code highlight]
++      </> // [!code highlight]
++    ), // [!code highlight]
    },
+   githubUrl: 'https://github.com/MFarabi619/stack-builder',
+   links: [
+     {
+-      text: 'Documentation',
++      text: 'Home', // [!code highlight]
+       url: '/docs',
++      icon: <DocumentationPageIcon />, // [!code highlight]
+       active: 'nested-url',
+     },
+   ],
+
+...
+
+ // docs layout configuration
+ export const docsOptions: DocsLayoutProps = {
+   ...baseOptions,
++  sidebar: { // [!code highlight]
++    banner: ( // [!code highlight]
++      <RootToggle // [!code highlight]
++        options={pages.map(page => ({ // [!code highlight]
++          title: page.title, // [!code highlight]
++          description: page.description, // [!code highlight]
++          url: `/docs/${page.url}`, // [!code highlight]
++          icon: ( // [!code highlight]
++            <page.icon // [!code highlight]
++              className="size-9 shrink-0 rounded-md bg-gradient-to-t from-background/80 p-1.5" // [!code highlight]
++              style={{ // [!code highlight]
++                backgroundColor: `hsl(var(--primary)/.3)`, // [!code highlight]
++                color: `hsl(var(--accent-foreground))`, // [!code highlight]
++              }} // [!code highlight]
++            /> // [!code highlight]
++          ), // [!code highlight]
++        }))} // [!code highlight]
++      /> // [!code highlight]
++    ), // [!code highlight]
++  }, // [!code highlight]
+   tree: pageTree,
+ }
 ```
 
-The commands need to be run in order for all packages to be installed.
+The `url` property must be specified in that format, otherwise `RootToggle` will not change options when clicked.
 
-```bash
-pnpm lint; pnpm lint:fix; pnpm lint:inspect
-```
-
-Ensure that `eslint-plugin-format` is in your `package.json`, if not, install it.
-
-```bash
-pnpm i -D eslint-plugin-format
-```
-
-Your entire project will be linted and fixable errors will be fixed. You should also see a browser tap open up with the address `localhost:7777`. This is the ESLint config inspector, which is only available for flat ESLint configs, like the one we just configured.
-
-### Install Husky
-
-```bash
-pnpm i -D husky
-```
-
-In `.husky/` create a `pre-commit` file with the following content:
-
-```bash
-echo "Running pre-commit command"
-```
-
-### Install Lint Staged
-
-<Tabs items={["Terminal", ".gitignore", ".husky/pre-commit"]}>
-
-```bash tab="Terminal"
-pnpm i -D lint-staged
-```
- 
-```diff tab=".gitignore"
-/build
-*.tsbuildinfo
-+ // [!code highlight]
-+ # caches // [!code highlight]
-+ .eslintcache // [!code highlight]
-+ // [!code highlight]
-# misc
-.DS_Store
-*.pem
-```
- 
-```diff tab=".husky/pre-commit"
-- echo "Running pre-commit command"
-+ pnpm lint-staged // [!code highlight]
-```
- 
-</Tabs>
-
-### Install Commitlint
-
-#### Create Commitlint config
-
-#### Create Husky Git hook to run Commitint
-
-### Install Commitizen
-
-### Install Semantic Release
-
-### Set up CI/CD with GitHub Actions
-
-### Install Storybook
-
-#### Add essential Storybook plugins
-
-##### Dark Mode
-
-##### Backgrounds
-
-##### Accessibility
-
-##### Unit & Integration Testing with Jest, Testing Library, and Storybook Test Runner
-
-##### E2E Testing with Playwright
-
-##### Coverage Testing
-
-#### Run Storybook tests in CI pipeline
-
-### Install Chromatic
-
-#### Add project token
-
-#### Run Chromatic tests in CI pipeline
-
-### Set up Sanity
-
-#### Create new Sanity project
-
-#### Install Sanity CLI
-
-#### Install Sanity Client
-
-### Install Docker
-
-### Install Framer Motion
-
-### Install Swiper.js

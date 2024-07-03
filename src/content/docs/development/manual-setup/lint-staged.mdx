@@ -1,0 +1,30 @@
+---
+title: Lint Staged
+---
+
+## Install Lint Staged
+
+<Tabs items={["Terminal", ".gitignore", ".husky/pre-commit"]}>
+
+```bash tab="Terminal"
+pnpm i -D lint-staged
+```
+
+```diff tab=".gitignore"
+/build
+*.tsbuildinfo
++ // [!code highlight]
++ # caches // [!code highlight]
++ .eslintcache // [!code highlight]
++ // [!code highlight]
+# misc
+.DS_Store
+*.pem
+```
+
+```diff tab=".husky/pre-commit"
+- echo "Running pre-commit command"
++ pnpm lint-staged // [!code highlight]
+```
+
+</Tabs>

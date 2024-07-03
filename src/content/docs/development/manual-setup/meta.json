@@ -1,0 +1,21 @@
+{
+  "title": "Manual Setup",
+  "icon": "GitBranch",
+  "pages": [
+    "fumadocs",
+    "shadcn-ui",
+    "github-actions",
+    "eslint",
+    "lint-staged",
+    "commitlint",
+    "commitizen",
+    "husky",
+    "semantic-release",
+    "storybook",
+    "chromatic",
+    "sanity",
+    "framer-motion",
+    "swiper-js",
+    "docker"
+  ]
+}

@@ -1,0 +1,36 @@
+---
+title: Quick Start
+description: Outstanding UI/UX is non-negotiable.
+icon: LayoutTemplate
+---
+
+import { Figma, Workflow } from "lucide-react";
+
+> The best products are born from a deep empathy with the people who use them.
+
+<Cards>
+  <Card
+    title="Figma Courses"
+    description="Official Figma courses from Figma Learn, covering components, prototypes, design systems, plugins, and much more."
+    href="https://help.figma.com/hc/en-us/sections/23691657321239"
+    icon={
+      <Figma
+        style={{
+          color: `hsl(var(--accent-foreground))`,
+        }}
+      />
+    }
+  />
+  <Card
+    title="Figma Resources"
+    description="UI kits, plugin development frameworks, Rest API integrations, learning resources, and more."
+    href="https://github.com/react-figma/awesome-figma"
+    icon={
+      <Workflow
+        style={{
+          color: `hsl(var(--accent-foreground))`,
+        }}
+      />
+    }
+  />
+</Cards>

@@ -1,69 +1,28 @@
 ---
-title: Motivation
-description: Documentation for the Next.js Starter Template
+title: Welcome to Stack Builder
+description: Your dream, your stack, your way.
 ---
 
-## Background
+import { pages } from "../../app/docs/source";
 
-Over the course of my web development journey, participating in hackathons and working on various projects with student organizations, I've accumulated a wealth of knowledge and developed a list of best practices to streamline my work. This includes insights into design-dev integration, test-driven development, content management systems, back-end integration, documentation websites, and more.
-
-I have an extremely strong 'Solve the Problem First' approach with a [Design Thinking](https://en.wikipedia.org/wiki/Design_thinking) mindset. I plan and research thoroughly to the extent of my knowledge in order to minimize wasted effort later down the line. I believe that clear and concise expectations combined with well thought-out architecture + guardrails make for an excellent developer experience. I use [Agile](https://en.wikipedia.org/wiki/Agile_software_development) as a tool to stay organized and track progress. I place heavy emphasis on aggressively tackling communication challenges, which I've found to almost always be the root cause of all problems in software development.
-
-## Limitations with Starter Templates/Boilerplates
-
-Given the aforementioned philosophy, decision fatigue tends to be a significant challenge, which is resolved to some extent by starter templates.
-
-The biggest issues with starter templates are that they are **not really modular**. They're amazing, until they begin to diverge from your projects' requirements.
-
-You start with what you get and then have to manually either add/remove things, or modify them.
-
-There are many opinion-driven or situation-driven decisions to make along the way, and
-unfortunately that's where starter templates begin to quickly lose out.
-
-This project was inspired by a few other projects:
-
-- [Blazity/next-enterprise](https://github.com/Blazity/next-enterprise)
-- [ixartz/Next-js-Boilerplate](https://precedent.dev/)
-- [NextBase Starter](https://github.com/imbhargav5/nextbase-nextjs-supabase-starter)
-- [Precedent](https://github.com/steven-tey/precedent)
-- [Built at Lightspeed](https://www.builtatlightspeed.com/)
-- [Blitz.js](https://blitzjs.com/)
-- [OpenLogic](https://www.openlogic.com/open-source-stack-builder)
-- [Component party](https://component-party.dev/)
-- [CodebaseShow](https://codebase.show/)
-
-These projects served as excellent references for me to learn web development tooling + best practices. I found that they all have many things in common such as:
-
-- [TypeScript](https://www.typescriptlang.org/) configured with [path aliasing](https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases)
-- [Tailwind CSS](https://tailwindcss.com/) for styling
-- [Prettier](https://prettier.io/) for code formatting
-- [ESLint](https://eslint.org/) for linting code
-- [Husky](https://typicode.github.io/husky/) to easily configure [Git hooks](https://git-scm.com/docs/githooks)
-- [Lint-staged](https://github.com/lint-staged/lint-staged) for running linters on Git staged files
-- [Commitlint](https://commitlint.js.org/#/) for linting commit messages
-- [Semantic Release](https://semantic-release.gitbook.io/semantic-release) for automated versioning and changelog generation
-- [Jest](https://jestjs.io/) for Unit and Integration testing
-- [Playwright](https://playwright.dev/) for End-to-End testing
-- [CI/CD](https://en.wikipedia.org/wiki/CI/CD) pipelines with [GitHub Actions](https://docs.github.com/en/actions)
-- Easy deployment to [Vercel](https://vercel.com/)
-
-I needed all of the above, with the addition of the following:
-
-- [Commitizen](https://commitizen-tools.github.io/commitizen/) to provide a CLI for [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/), allowing others to contribute to the project while learning the specification at the same time
-- [Fumadocs](https://fumadocs.vercel.app) for beautiful and easily browsable project documentation
-- [Storybook](https://storybook.js.org/) for [Component-Driven Development](https://www.componentdriven.org/), along with [Accessibility Testing](https://storybook.js.org/docs/writing-tests/accessibility-testing), [Interaction Testing](https://storybook.js.org/docs/writing-tests/interaction-testing), and [Coverage Testing](https://storybook.js.org/docs/writing-tests/test-coverage)
-- [Chromatic](https://www.chromatic.com/) for [Visual Regression Testing](https://storybook.js.org/docs/writing-tests/visual-testing)
-- [Sanity](https://www.sanity.io/) for [Headless CMS (Content Management System)](https://en.wikipedia.org/wiki/Headless_content_management_system)
-
-I hadn't found a single starter template that included all of the above, so I decided to create my own.
-
-Another pain point was that the templates would be package manager specific. If they were using `npm` or `yarn`, I'd have to manually convert them to `pnpm`.
-
-Choosing ORMs, API layers, and Databases was where the real fun started, and the templates didn't really help with that. I needed something that would educate me on the pros and cons of each choice. If you'd like to get an idea of what I mean by 'decision fatigue', check out the [Roadmap](/docs/roadmap).
-
-As of right now, this project is a work in progress and I am still figuring out what I want to include in it. It's very front-end heavy, reflective of the stage that I am in of my development journey. I will continue to add and document other technologies as I gain experience in them.
+## Choose your path
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+  {pages
+    .filter((page) => page.title !== "Home") // Filter out the Home page
+    .map((page) => (
+      <Card
+        key={page.title}
+        title={page.title}
+        description={page.description}
+        href={`/docs/${page.url}`}
+        icon={
+          <page.icon
+            style={{
+              color: `hsl(var(--accent-foreground))`,
+            }}
+          />
+        }
+      />
+    ))}
 </Cards>
