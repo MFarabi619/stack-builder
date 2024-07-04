@@ -3,10 +3,6 @@
   "icon": "GitPullRequestCreateArrow",
   "pages": [
     "quick-start",
-    "manual-setup",
-    "fumadocs",
-    "shadcn-ui",
-    "eslint",
-    "husky"
+    "manual-setup"
   ]
 }

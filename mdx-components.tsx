@@ -4,11 +4,13 @@ import type { ReactNode } from 'react'
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
 import { Step, Steps } from 'fumadocs-ui/components/steps'
 import { Callout } from 'fumadocs-ui/components/callout'
+import { IndexPageCards } from '@/components/mdx/index-page-cards'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...defaultComponents,
     ...components,
+    IndexPageCards,
     Tab,
     Tabs,
     InstallTabs: ({

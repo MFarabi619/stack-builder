@@ -235,9 +235,7 @@ Therefore, we need to manually move the `app` directory into the `src` directory
 
 Create a `src` directory at the root level, and move the `app` and `content` directories into it.
 
-<Callout type="info">
-You can click on the folders to expand them.
-  </Callout>
+<Callout type="info">You can click on the folders to expand them.</Callout>
 
 <Tabs items={['Before', 'After']}>
     <Tab value='Before'>
@@ -1303,6 +1301,106 @@ Create button.
        <DocsBody>
       ...
 ```
+
+## Create Custom MDX Component for Index Page Cards
+
+As of writing, Fumadocs has no API to autogenerate index page cards, so create it.
+
+```bash title="Terminal"
+touch src/components/mdx/index-page-cards.tsx
+```
+
+<Tabs items={["index-page-cards.tsx", "mdx-components.tsx", "Usage"]}>
+
+```tsx tab="index-page-cards.tsx" title="src/components/mdx/index-page-cards.tsx"
+import { Card, Cards } from "fumadocs-ui/components/card";
+import { getPages } from "@/app/docs/source";
+
+// Render cards for each page in the directory
+export async function IndexPageCards(meta: { title: string; pages: string[] }) {
+  const allPages = getPages();
+
+  // Destructure title and pages from meta
+  const { title: INDEX_PAGE_TITLE, pages: INDEX_PAGE_SUBPAGES } = meta;
+
+  // Get the index page by title
+  const INDEX_PAGE = allPages.find(
+    ({ data }) => data.title === INDEX_PAGE_TITLE,
+  );
+  if (!INDEX_PAGE) return null;
+
+  // Destructure dirname and slugs from INDEX_PAGE
+  const {
+    file: { dirname: INDEX_PAGE_DIRNAME },
+    slugs: INDEX_PAGE_SLUGS,
+  } = INDEX_PAGE;
+
+  // Create an order map to sort the filtered pages
+  const orderMap = INDEX_PAGE_SUBPAGES.reduce(
+    (map, name, index) => {
+      map[name] = index;
+      return map;
+    },
+    {} as { [key: string]: number },
+  );
+
+  // Filter and sort pages by order in meta.json "pages" array
+  const filteredPages = allPages
+    .filter(
+      ({ file: { name }, slugs }) =>
+        (name === "index" &&
+          slugs.length === INDEX_PAGE_SLUGS.length + 1 &&
+          slugs[INDEX_PAGE_SLUGS.length - 1] === INDEX_PAGE_DIRNAME) ||
+        INDEX_PAGE_SUBPAGES.includes(name),
+    )
+    .sort((a, b) => orderMap[a.file.name] - orderMap[b.file.name]);
+
+  return (
+    <Cards>
+      {filteredPages.map((page) => (
+        <Card
+          key={page.file.name}
+          title={page.data.title}
+          description={page.data.description || "No description provided"}
+          href={page.url}
+        />
+      ))}
+    </Cards>
+  );
+}
+```
+
+```tsx tab="mdx-components.tsx" title="mdx-components.tsx"
+ import { Tab, Tabs } from 'fumadocs-ui/components/tabs'
+ import { Step, Steps } from 'fumadocs-ui/components/steps'
+ import { Callout } from 'fumadocs-ui/components/callout'
+ import { IndexPageCards } from '@/components/mdx/index-page-cards' // [!code highlight]
+
+ export function useMDXComponents(components: MDXComponents): MDXComponents {
+   return {
+     ...defaultComponents,
+     ...components,
+    IndexPageCards, // [!code highlight]
+     Tab,
+     Tabs,
+     InstallTabs: ({
+// other code
+```
+
+```md tab="Usage" title="content/docs/development/index.mdx"
+---
+title: Development
+index: true
+description: Break free from shackles of boilerplate and focus on complex problems.
+icon: GitFork
+---
+
+import meta from "./meta.json"; // [!code highlight]
+
+<IndexPageCards {...meta} /> // [!code highlight]
+```
+
+</Tabs>
 
 ## Add Favicon and Icon
 
