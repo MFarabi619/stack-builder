@@ -1,5 +1,66 @@
 ---
 title: Commitizen
+description: Standardize and streamline your commit messages with Commitizen, ensuring they adhere to your project's conventions.
 ---
 
-### Install Commitizen
+<Cards>
+  <Card
+    title="Commitizen"
+    description="Standardize and streamline your commit messages with Commitizen, ensuring they adhere to your project's conventions."
+    icon=""
+    href="https://commitizen.github.io/cz-cli/"
+  />
+  <Card
+    title="cz-commitlint"
+    description="Adapter for Commitizen that uses commitlint to enforce commit message conventions."
+    icon=""
+    href="https://www.npmjs.com/package/@commitlint/cz-commitlint"
+  />
+</Cards>
+
+## Installation
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm i -D commitizen @commitlint/cz-commitlin inquirer
+```
+
+```bash tab="pnpm" title="Terminal"
+pnpm i -D commitizen @commitlint/cz-commitlint inquirer
+```
+
+```bash tab="yarn" title="Terminal"
+yarn i -D commitizen @commitlint/cz-commitlint inquirer
+```
+
+```bash tab="bun" title="Terminal"
+bun i -D commitizen @commitlint/cz-commitlint inquirer
+```
+
+</InstallTabs>
+
+## Configuration
+
+
+```bash title="Terminal"
+touch .cz.json # In root directory
+echo '{ "path": "@commitlint/cz-commitlint" }' > .cz.json
+```
+
+### Add `package.json` script
+
+```diff title="package.json"
+...
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "start": "next start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:inspect": "npx @eslint/config-inspector",
+    "prepare": "husky"
++   "commit": "cz" // [!code highlight]
+  },
+  ...
+```
