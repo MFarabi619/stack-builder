@@ -1,5 +1,48 @@
 ---
 title: Semantic Release
+description: Version your software by parsing commit history.
 ---
 
-### Install Semantic Release
+<Cards>
+  <Card
+    title="Semantic Release"
+    description="Fully automated version management and package publishing based on the Semantic Versioning and Conventional Commit specifications."
+    icon=""
+    href="https://semantic-release.gitbook.io/semantic-release/"
+  />
+  <Card
+    title="Semantic Versioning"
+    description="A standardized way to version software, ensuring backwards compatibility."
+    icon=""
+    href="https://semver.org/"
+  />
+</Cards>
+
+## Installation
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm i -D semantic-release
+```
+
+```bash tab="pnpm" title="Terminal"
+pnpm i -D semantic-release
+```
+
+```bash tab="yarn" title="Terminal"
+yarn i -D semantic-release
+```
+
+```bash tab="bun" title="Terminal"
+bun i -D semantic-release
+```
+
+</InstallTabs>
+
+## Configuration
+
+```bash title="Terminal"
+touch release.config.ts
+echo "import type { GlobalConfig } from 'semantic-release'\n\nconst config: Partial<GlobalConfig> = {\n  branches: ['main']\n}\n\nexport default config" > release.config.ts
+```
