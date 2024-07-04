@@ -1,14 +1,37 @@
 ---
 title: Lint Staged
+description: Auto-lint staged code, preserve PR reviewers' sanity.
 ---
 
-## Install Lint Staged
+## Installation
 
-<Tabs items={["Terminal", ".gitignore", ".husky/pre-commit"]}>
+<Tabs items={["Terminal", ".gitignore"]}>
 
-```bash tab="Terminal"
-pnpm i -D lint-staged
+<Tab value="Terminal">
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm i -D lint-staged
+echo "npm run lint-staged" > .husky/pre-commit
 ```
+
+```bash tab="pnpm" title="Terminal"
+pnpm i -D lint-staged
+echo "pnpm lint-staged" > .husky/pre-commit
+```
+
+```bash tab="yarn" title="Terminal"
+yarn add --dev lint-staged
+echo "yarn run lint-staged" > .husky/pre-commit
+```
+
+```bash tab="bun" title="Terminal"
+bun add --dev lint-staged
+echo "burn run lint-staged" > .husky/pre-commit
+```
+
+</InstallTabs>
+  </Tab>
 
 ```diff tab=".gitignore"
 /build
@@ -20,11 +43,6 @@ pnpm i -D lint-staged
 # misc
 .DS_Store
 *.pem
-```
-
-```diff tab=".husky/pre-commit"
-- echo "Running pre-commit command"
-+ pnpm lint-staged // [!code highlight]
 ```
 
 </Tabs>
