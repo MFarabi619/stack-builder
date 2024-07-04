@@ -1,7 +1,150 @@
 ---
 title: Commitlint
+description: Lint commit messages, read commit history like a book.
 ---
 
-### Install Commitlint
+<Cards>
+  <Card
+    title="Commitlint"
+    description="Lint commit messages to ensure they adhere to a specified convention, improving code quality and team collaboration."
+    icon=""
+    href="https://commitlint.js.org/"
+  />
+  <Card
+    title="Conventional Commits"
+    description="A specification for adding human and machine-readable meaning to commit messages, facilitating better automation and readability."
+    icon=""
+    href="https://www.conventionalcommits.org/"
+  />
+</Cards>
 
-#### Create Commitlint config
+## Installation
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm i -D commitlint @commitlint/{cli,config-conventional,types}
+```
+
+```bash tab="pnpm" title="Terminal"
+pnpm i -D commitlint @commitlint/{cli,config-conventional,types}
+```
+
+```bash tab="yarn" title="Terminal"
+yarn i -D commitlint @commitlint/{cli,config-conventional,types}
+```
+
+```bash tab="bun" title="Terminal"
+bun i -D commitlint @commitlint/{cli,config-conventional,types}
+```
+
+</InstallTabs>
+
+## Create Commitlint config
+
+<Tabs items={['Create File','Customize Rules']}>
+
+```bash tab="Create File" title="Terminal"
+touch commitlint.config.ts # In root directory
+```
+
+```ts tab="Customize Rules" title="commitlint.config.ts"
+import type { UserConfig } from "@commitlint/types";
+import { RuleConfigSeverity } from "@commitlint/types";
+
+const Configuration: UserConfig = {
+  // Extend the conventional commit configurations
+  // https://www.conventionalcommits.org/en/v1.0.0/
+  extends: ["@commitlint/config-conventional"],
+
+  // Custom rules for commit message validation
+  rules: {
+    // Ensure the type is one of the specified values
+    "type-enum": [
+      RuleConfigSeverity.Error, // Level: Error (2)
+      "always", // Always enforce this rule
+      [
+        "build", // Build-related changes (e.g., compile, package)
+        "chore", // Other changes that don't modify src or test files
+        "ci", // Continuous Integration changes
+        "docs", // Documentation changes
+        "feat", // New features
+        "fix", // Bug fixes
+        "perf", // Performance improvements
+        "refactor", // Code refactoring without changing functionality
+        "revert", // Revert previous commits
+        "style", // Code style changes (formatting, white-space, etc.)
+        "test", // Adding or updating tests
+      ],
+    ],
+    // Ensure the scope is in PascalCase
+    "scope-case": [RuleConfigSeverity.Error, "always", "pascal-case"],
+
+    // Ensure the subject is in Sentence case
+    "subject-case": [RuleConfigSeverity.Error, "always", "sentence-case"],
+
+    // Ensure the type is in lowercase
+    "type-case": [RuleConfigSeverity.Error, "always", "lower-case"],
+
+    // Ensure that the type is not empty
+    "type-empty": [RuleConfigSeverity.Error, "never"],
+
+    // Ensure that the scope is not empty
+    // 'scope-empty': [RuleConfigSeverity.Error, 'never'],
+
+    // Ensure that the subject is not empty
+    // "subject-empty": [RuleConfigSeverity.Error, "never"],
+
+    // Ensure the header does not exceed 72 characters
+    // "header-max-length": [RuleConfigSeverity.Error, "always", 72],
+  },
+};
+
+export default Configuration;
+```
+
+</Tabs>
+
+## Add Husky Git Hook
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+echo "npx commitlint --edit $1" > .husky/commit-msg
+```
+
+```bash tab="pnpm" title="Terminal"
+echo "pnpm dlx commitlint --edit $1" > .husky/commit-msg
+```
+
+```bash tab="yarn" title="Terminal"
+echo "yarn exec commitlint --edit $1" > .husky/commit-msg
+```
+
+```bash tab="bun" title="Terminal"
+echo "bun exec commitlint --edit $1" > .husky/commit-msg
+```
+
+</InstallTabs>
+
+## Test Commitlint
+
+```bash title="Terminal"
+git commit -m "add commitlint" # Should fail
+```
+
+```bash title="Terminal"
+git commit -m "chore: add commitlint" # Should fail
+```
+
+```bash title="Terminal"
+git commit -m "Chore: add commitlint" # Should fail
+```
+
+```bash title="Terminal"
+git commit -m "chore(repo): Add commitlint" # Should fail
+```
+
+```bash title="Terminal"
+git commit -m "chore(Repo): Add Commitlint" # Should pass
+```
