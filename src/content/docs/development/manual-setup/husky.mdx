@@ -1,17 +1,91 @@
 ---
 title: Husky
+description: Configure Git hooks with ease.
 ---
 
-## Install Husky
+<Cards>
+  <Card
+    title="Husky"
+    description="Modern native Git hooks made easy."
+    icon=""
+    href="https://typicode.github.io/husky/"
+  />
+  <Card
+    title="Git Hooks"
+    description="Custom scripts that run at various points in your Git workflow."
+    icon=""
+    href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks"
+  />
+</Cards>
 
-```bash
+## Installation
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm i -D husky
+```
+
+```bash tab="pnpm" title="Terminal"
 pnpm i -D husky
 ```
 
-In `.husky/` create a `pre-commit` file with the following content:
-
-```bash
-echo "Running pre-commit command"
+```bash tab="yarn" title="Terminal"
+yarn add --dev husky
+# Add pinst ONLY if your package is not private
+yarn add --dev pinst
 ```
 
-### Create Husky Git hook to run Commitint
+```bash tab="bun" title="Terminal"
+bun add --dev husky
+```
+
+</InstallTabs>
+
+### Create hook
+
+`husky init` creates a `pre-commit` script in `.husky/` and updates the `prepare` script in `package.json`.
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npx husky init
+echo "echo 'Running pre-commit command'" > .husky/pre-commit
+```
+
+```bash tab="pnpm" title="Terminal"
+pnpx husky init
+echo "echo 'Running pre-commit command'" > .husky/pre-commit
+```
+
+```bash tab="yarn" title="Terminal"
+# Due to specific caveats and differences with other package managers,
+# refer to the Husky docs
+echo "echo 'Running pre-commit command'" > .husky/pre-commit
+```
+
+```bash tab="bun" title="Terminal"
+bunx husky init
+echo "echo 'Running pre-commit command'" > .husky/pre-commit
+```
+</InstallTabs>
+
+### Test hook
+
+```bash title="Terminal"
+# Add the pre-commit file to staging
+git add .husky/pre-commit
+
+# Create a temporary commit, which should trigger the pre-commit hook
+git commit -m "chore: Test pre-commit hook"
+
+# The output should be "Running pre-commit command"
+
+# Undo the last commit but keep the changes in the working directory
+git reset --soft HEAD~1
+```
+
+If the hook works, comment out the `echo` command.
+```bash title="Terminal"
+echo "# echo 'Running pre-commit command'" > .husky/pre-commit
+```
