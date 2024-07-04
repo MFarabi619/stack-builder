@@ -83,7 +83,21 @@ bun run storybook
 
 </InstallTabs>
 
+Include Storybook for Typescript and exclude build directories.
+
+```diff title="tsconfig.json"
+       }
+     ]
+   },
+-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+-  "exclude": ["node_modules"]
++  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", ".storybook/*"], // [!code highlight]
++  "exclude": ["node_modules", "build", "dist", "coverage"] // [!code highlight]
+ }
+
+```
   </Tab>
+
 
 </Tabs>
 
