@@ -1,8 +1,91 @@
 ---
 title: Storybook
+description: Where Front-End Development becomes a breeze.
 ---
 
-### Install Storybook
+### Installation
+
+<Tabs items={["Terminal", "Fix Storybook Crash"]}>
+
+<Tab value="Terminal">
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npx storybook@latest init
+```
+
+```bash tab="pnpm" title="Terminal"
+pnpm dlx storybook@latest init
+```
+
+```bash tab="yarn" title="Terminal"
+yarn dlx storybook@latest
+```
+
+```bash tab="bun" title="Terminal"
+bun dlx storybook@latest
+```
+
+</InstallTabs>
+
+A browser window open up at `localhost:6006`, and Storybook will crash due to picking up the Fumadocs `.mdx` files.
+
+  </Tab>
+
+  <Tab value="Fix Storybook Crash">
+
+Only look at `.mdx` files in the `src/stories` directory.
+
+```ts title=".storybook/main.ts"
+// [!code word:src/stories]
+import type { StorybookConfig } from "@storybook/nextjs";
+
+const config: StorybookConfig = {
+  stories: [
+    "../src/stories/**/*.mdx",
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+  ],
+  addons: [
+    "@storybook/addon-onboarding",
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@chromatic-com/storybook",
+    "@storybook/addon-interactions",
+  ],
+  framework: {
+    name: "@storybook/nextjs",
+    options: {},
+  },
+  staticDirs: ["../public"],
+};
+export default config;
+```
+
+The Storybook server will work now.
+
+<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+
+```bash tab="npm" title="Terminal"
+npm run storybook
+```
+
+```bash tab="pnpm" title="Terminal"
+pnpm storybook
+```
+
+```bash tab="yarn" title="Terminal"
+yarn storybook
+```
+
+```bash tab="bun" title="Terminal"
+bun run storybook
+```
+
+</InstallTabs>
+
+  </Tab>
+
+</Tabs>
 
 #### Essential Storybook plugins
 
@@ -20,3 +103,6 @@ title: Storybook
 
 #### Run Storybook tests in CI pipeline
 
+```
+
+```
