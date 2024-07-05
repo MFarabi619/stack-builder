@@ -3,7 +3,30 @@ title: Storybook
 description: Where Front-End Development becomes a breeze.
 ---
 
-### Installation
+
+<Cards>
+  <Card
+    title="Storybook"
+    description="Open-system React component library powered by Radix UI Primitives, and Tailwind CSS."
+    icon=""
+    href="https://ui.shadcn.com/"
+  />
+  <Card
+    title="Shadcn/ui Storybook - JheanAntunes"
+    description="Well-configured Storybook, no longer maintained."
+    icon=""
+    href="https://github.com/JheanAntunes/storybook-shadcn"
+  />
+  <Card
+    title="Shadcn/ui Storybook - LloydRichards"
+    description="Ongoing project to add Official Storybook support to Shadcn/ui through CLI."
+    icon=""
+    href="https://github.com/lloydrichards/shadcn-ui/tree/feat/storybook-cli"
+  />
+</Cards>
+
+
+## Installation
 
 <Tabs items={["Terminal", "Fix Storybook Crash"]}>
 
@@ -96,16 +119,86 @@ Include Storybook for Typescript and exclude build directories.
  }
 
 ```
-  </Tab>
 
+  </Tab>
 
 </Tabs>
 
-#### Essential Storybook plugins
+## Dark Mode
 
-##### Dark Mode
+Steps from [here](https://storybook.js.org/docs/configure/user-interface/theming)
 
-##### Backgrounds
+```bash title="Terminal"
+pnpm i -D @storybook/manager-api @storybook/theming
+```
+
+```bash title="Terminal"
+touch .storybook/manager.ts
+```
+
+The manager file can be used to apply themes separately.
+
+The difference between the manager iframe and the preview iframe is explained [here](https://storybook.js.org/blog/storybook-6-1/).
+
+```ts title=".storybook/manager.ts"
+import { addons } from '@storybook/manager-api'
+import { themes } from '@storybook/theming'
+
+addons.setConfig({
+  theme: themes.dark,
+})
+```
+
+Set default theme in the preview file.
+```ts title=".storybook/preview.ts"
+import type { Preview } from '@storybook/react'
+import { themes } from '@storybook/theming' // [!code highlight]
+
+const preview: Preview = {
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+    docs: { theme: themes.dark }, // [!code highlight]
+  },
+}
+
+export default preview
+```
+ 
+
+### Dark/Light Toggle
+
+```bash title="Terminal"
+pnpm i -D storybook-dark-mode
+```
+
+Activate addon.
+
+```ts title=".storybook/main.ts"
+import type { StorybookConfig } from '@storybook/nextjs'
+
+const config: StorybookConfig = {
+  stories: ['../src/stories/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
+  addons: [
+    '@storybook/addon-onboarding',
+    '@storybook/addon-links',
+    '@storybook/addon-essentials',
+    '@chromatic-com/storybook',
+    '@storybook/addon-interactions',
+    'storybook-dark-mode', // [!code highlight]
+  ],
+  framework: {
+    name: '@storybook/nextjs',
+    options: {},
+  },
+  staticDirs: ['../public'],
+}
+export default config
+```
 
 ##### Accessibility
 
@@ -120,3 +213,14 @@ Include Storybook for Typescript and exclude build directories.
 ```
 
 ```
+
+### Inspiration
+[Fin UI](https://ui.fin.africa/?path=/docs/foundations-installation--docs)
+
+// Hello 👋
+//
+// Came across this amazing website as the top result when I googled `pnpm commands cheatsheet`.
+//
+// Love the project and would love to contribute :) 
+//
+// Working on [something similar]() myself currently, feel free to check it out.
