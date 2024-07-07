@@ -47,7 +47,18 @@ const config: StorybookConfig = {
     // Custom toolbars
     // '@storybook/addon-toolbars',
     // Auto-generate MDX/React/JSX documentation for components
-    '@storybook/addon-docs',
+    // https://github.com/storybookjs/storybook/tree/next/code/addons/docs
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        // csfPluginOptions: null,
+        // mdxPluginOptions: {
+        //   mdxCompileOptions: {
+        //     remarkPlugins: [],
+        //   },
+        // },
+      },
+    },
   ],
   framework: {
     name: '@storybook/nextjs',
