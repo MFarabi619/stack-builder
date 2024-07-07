@@ -1,11 +1,20 @@
-import type { Preview, type ReactRenderer } from '@storybook/react'
+import * as React from 'react'
+import type { Preview } from '@storybook/react'
 
-import type { } from '@storybook/types'
-
-import { withThemeByClassName } from '@storybook/addon-themes'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
-import theme from './theme'
+import { ThemeProvider } from 'next-themes'
+import { themes } from '@storybook/theming'
+import { withThemeByClassName } from '@storybook/addon-themes'// Wide button with a pen and text. Toggles both Preview Components and Preview Background
+
+import { commonTheme, darkUIStorybook, lightUIStorybook } from './themes-storybook-ui'
+
+// import type { ThemeProviderProps } from 'next-themes/dist/types'
+// import customDocsTheme from './docs-theme'
+
+// import { Toaster } from '../src/components/ui/toaster'
+
+// import './globals.css'
 
 const customViewports = {
   '720p': {
@@ -45,34 +54,88 @@ const customViewports = {
   },
 }
 
-const preview = {
+const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    layout: 'centered',
+    // globalTypes: {
+    //   theme: {
+    //     description: 'Global theme for components',
+    //     defaultValue: 'light',
+    //     toolbar: { // Requires @storybook/addon-toolbars, included in @storybook/addon-essentials. Imported separately in main.ts.
+    //       // The label to show for this toolbar item
+    //       title: 'Theme',
+    //       icon: 'medium',
+    //       // Array of plain string values or MenuItem shape (see below)
+    //       items: ['light', 'dark'],
+    //       // Change title based on selected value
+    //       dynamicTitle: true,
+    //     },
+    //   },
+    // },
+    // https://storybook.js.org/addons/storybook-dark-mode
+    // darkMode: {
+    //   classTarget: 'html',
+    //   stylePreview: true,
+    //   darkClass: 'dark',
+    //   lightClass: 'light',
+    //   // Override the default dark theme
+    //   dark: {
+    //     ...themes.dark,
+    //     ...darkUIStorybook,
+    //     ...commonTheme,
+    //   },
+    //   // Override the default light theme
+    //   light: {
+    //     ...themes.normal,
+    //     ...lightUIStorybook,
+    //     ...commonTheme,
+    //   },
+    //   // Set the initial theme
+    //   current: 'dark',
+    // },
+    actions: {
+      argTypesRegex: '^on[A-Z].*',
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
     },
+    options: {
+      storySort: {
+        method: 'alphabetical',
+        order: ['Configure your project', 'Introduction', 'Examples', 'Shadcn', 'Colors', 'Typography'],
+      },
+    },
     viewport: {
       viewports: {
-        ...customViewports,
         ...INITIAL_VIEWPORTS,
+        ...customViewports,
       },
     },
-    docs: {
-      theme,
-    },
+    // docs: {
+    //   theme: darkUIStorybook,
+    // },
   },
-  decorators: [
-    withThemeByClassName<ReactRenderer>({
-      themes: {
-        light: 'light',
-        dark: 'dark',
-      },
-      defaultTheme: 'dark',
-    }),
-  ],
-} satisfies Preview
+  // decorators: [
+  //   (Story) => {
+  //     return (
+  //       <ThemeProvider>
+  //         <div>
+  //           <Story />
+  //         </div>
+  //       </ThemeProvider>
+  //     )
+  //   },
+  //   // withThemeByClassName({
+  //   //   themes: {
+  //   //     light: 'light',
+  //   //     dark: 'dark',
+  //   //   },
+  //   //   defaultTheme: 'dark',
+  //   // }),
+  // ],
+}
 
 export default preview
