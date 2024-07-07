@@ -25,7 +25,13 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
 
     // --------------- Action Bar ---------------
-    // '@storybook/addon-designs',
+    // Accessibility tab added by '@storybook/addon-a11y'
+    {
+      name: '@storybook/addon-designs', // Actually has amazing docs for once: https://storybookjs.github.io/addon-designs/?path=/docs/docs-quick-start--docs
+      options: {
+        // renderTarget: 'canvas' | 'tab'
+      },
+    },
     // '@storybook/addon-interactions',
     // '@storybook/addon-actions',
 
