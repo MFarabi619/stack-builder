@@ -10,8 +10,23 @@ const compat = new FlatCompat()
 
 export default antfu(
   {
-    ignores: [],
+    // Enable stylistic formatting rules
+    // stylistic: true,
+
+    // Or customize the stylistic rules
+    // stylistic: {
+    //   indent: 2, // 4, or 'tab'
+    //   quotes: 'single', // or 'double'
+    // },
+
     react: true,
+    // astro: true, // Need `eslint-plugin-astro` and `prettier-plugin-astro`
+
+    // Disable jsonc and yaml support
+    // jsonc: false,
+    // yaml: false,
+
+    ignores: [],
     formatters: {
       /**
        * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
@@ -28,7 +43,7 @@ export default antfu(
        * Supports Prettier and dprint
        * By default uses Prettier
        */
-      // markdown: 'prettier'
+      markdown: 'prettier',
     },
   },
 
