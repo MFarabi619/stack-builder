@@ -2,7 +2,7 @@ import type { StorybookConfig } from '@storybook/nextjs'
 
 const config: StorybookConfig = {
   stories: [
-    // '../src/components/**/*.mdx',
+    '../src/components/**/*.mdx',
     '../src/components/storybook-starters/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
@@ -10,13 +10,13 @@ const config: StorybookConfig = {
   addons: [
     // --------------- Toolbar Icons ---------------
     // Ruler
-    // '@storybook/addon-measure',
+    '@storybook/addon-measure',
     // Phone
-    // '@storybook/addon-viewport',
+    '@storybook/addon-viewport',
     // Dotted Outline
-    // '@storybook/addon-outline',
+    '@storybook/addon-outline',
     // Sun/Moon icon. Toggle Manager, Preview Components, and Preview Background
-    // 'storybook-dark-mode',
+    'storybook-dark-mode',
     // Pen. Toggle both Preview Components and Preview Background
     // '@storybook/addon-themes',
     // Portrait. Toggle only Preview Background. Not affected by other two, use to 'lock' the background.
@@ -38,8 +38,9 @@ const config: StorybookConfig = {
     '@storybook/addon-interactions', // Must be listed after @storybook/addon-actions or @storybook/addon-essentials
 
     // '@chromatic-com/storybook',
-    // '@storybook/addon-storysource',
-    // '@storybook/addon-links',
+    // Code for component story
+    '@storybook/addon-storysource',
+    '@storybook/addon-links',
 
     // --------------- No-icons ---------------
     // Onboarding flow

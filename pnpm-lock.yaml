@@ -126,6 +126,12 @@ importers:
       '@storybook/blocks':
         specifier: ^8.1.11
         version: 8.1.11(@types/react-dom@18.3.0)(@types/react@18.3.3)(prettier@3.3.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/components':
+        specifier: ^8.1.11
+        version: 8.1.11(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/icons':
+        specifier: ^1.2.9
+        version: 1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@storybook/manager-api':
         specifier: ^8.1.11
         version: 8.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -141,6 +147,9 @@ importers:
       '@storybook/theming':
         specifier: ^8.1.11
         version: 8.1.11(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/types':
+        specifier: ^8.1.11
+        version: 8.1.11
       '@types/mdx':
         specifier: ^2.0.13
         version: 2.0.13

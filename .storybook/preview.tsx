@@ -1,20 +1,13 @@
-import * as React from 'react'
 import type { Preview } from '@storybook/react'
 
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-
 import { ThemeProvider } from 'next-themes'
 import { themes } from '@storybook/theming'
 import { withThemeByClassName } from '@storybook/addon-themes'// Wide button with a pen and text. Toggles both Preview Components and Preview Background
 
 import { commonTheme, darkUIStorybook, lightUIStorybook } from './themes-storybook-ui'
 
-// import type { ThemeProviderProps } from 'next-themes/dist/types'
-// import customDocsTheme from './docs-theme'
-
-// import { Toaster } from '../src/components/ui/toaster'
-
-// import './globals.css'
+import './globals.css'
 
 const customViewports = {
   '720p': {
@@ -73,26 +66,26 @@ const preview: Preview = {
     //   },
     // },
     // https://storybook.js.org/addons/storybook-dark-mode
-    // darkMode: {
-    //   classTarget: 'html',
-    //   stylePreview: true,
-    //   darkClass: 'dark',
-    //   lightClass: 'light',
-    //   // Override the default dark theme
-    //   dark: {
-    //     ...themes.dark,
-    //     ...darkUIStorybook,
-    //     ...commonTheme,
-    //   },
-    //   // Override the default light theme
-    //   light: {
-    //     ...themes.normal,
-    //     ...lightUIStorybook,
-    //     ...commonTheme,
-    //   },
-    //   // Set the initial theme
-    //   current: 'dark',
-    // },
+    darkMode: {
+      classTarget: 'html',
+      stylePreview: true,
+      darkClass: 'dark',
+      lightClass: 'light',
+      // Set the initial theme
+      current: 'dark',
+      // Override the default dark theme
+      dark: {
+        ...themes.dark,
+        ...darkUIStorybook,
+        ...commonTheme,
+      },
+      // Override the default light theme
+      light: {
+        ...themes.normal,
+        ...lightUIStorybook,
+        ...commonTheme,
+      },
+    },
     actions: {
       argTypesRegex: '^on[A-Z].*',
     },
@@ -118,24 +111,26 @@ const preview: Preview = {
     //   theme: darkUIStorybook,
     // },
   },
-  // decorators: [
-  //   (Story) => {
-  //     return (
-  //       <ThemeProvider>
-  //         <div>
-  //           <Story />
-  //         </div>
-  //       </ThemeProvider>
-  //     )
-  //   },
-  //   // withThemeByClassName({
-  //   //   themes: {
-  //   //     light: 'light',
-  //   //     dark: 'dark',
-  //   //   },
-  //   //   defaultTheme: 'dark',
-  //   // }),
-  // ],
+  decorators: [
+    (Story) => {
+      return (
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          <Story />
+        </ThemeProvider>
+      )
+    },
+    withThemeByClassName({
+      themes: {
+        light: 'light',
+        dark: 'dark',
+      },
+      defaultTheme: 'dark',
+    }),
+  ],
 }
 
 export default preview

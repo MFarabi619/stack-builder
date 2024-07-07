@@ -12,6 +12,7 @@
       "@root/*": ["./*"]
     },
     "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
     "allowJs": true,
     "strict": true,
     "noEmit": true,
