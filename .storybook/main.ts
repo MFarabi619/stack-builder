@@ -32,8 +32,10 @@ const config: StorybookConfig = {
         // renderTarget: 'canvas' | 'tab'
       },
     },
-    // '@storybook/addon-interactions',
-    // '@storybook/addon-actions',
+    // https://storybook.js.org/docs/essentials/actions
+    '@storybook/addon-actions',
+    // https://storybook.js.org/docs/essentials/interactions
+    '@storybook/addon-interactions', // Must be listed after @storybook/addon-actions or @storybook/addon-essentials
 
     // '@chromatic-com/storybook',
     // '@storybook/addon-storysource',
