@@ -17,8 +17,8 @@
     "lint:inspect": "npx @eslint/config-inspector",
     "prepare": "husky",
     "commit": "cz",
-    "storybook": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "sb": "storybook dev -p 6006 --no-open",
+    "build-sb": "storybook build"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
