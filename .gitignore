@@ -11,6 +11,9 @@
 /out/
 /build
 *.tsbuildinfo
+/public/storybook
+/public/storybook
+/public/eslint-config-inspector
 
 # caches
 .eslintcache

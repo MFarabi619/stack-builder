@@ -11,7 +11,7 @@ const compat = new FlatCompat()
 export default antfu(
   {
     // Enable stylistic formatting rules
-    // stylistic: true,
+    stylistic: true,
 
     // Or customize the stylistic rules
     // stylistic: {
@@ -26,7 +26,7 @@ export default antfu(
     // jsonc: false,
     // yaml: false,
 
-    ignores: [],
+    ignores: ['**/public', '**/node_modules'],
     formatters: {
       /**
        * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue

@@ -10,16 +10,18 @@
     "url": "https://github.com/MFarabi619/stack-builder.git"
   },
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
     "start": "next start",
+    "sb": "storybook dev -p 6006 --no-open",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:inspect": "npx @eslint/config-inspector",
+    "build:next": "next build",
+    "build:storybook": "storybook build -o public/storybook",
+    "build:eslint": "npx @eslint/config-inspector build --outDir './public/eslint-config-inspector' --basePath './public/eslint-config-inspector' --base '/eslint-config-inspector'",
+    "build:all": "npm run build:storybook && npm run build:eslint && next build",
     "prepare": "husky",
-    "commit": "cz",
-    "sb": "storybook dev -p 6006 --no-open",
-    "build-sb": "storybook build"
+    "commit": "cz"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",

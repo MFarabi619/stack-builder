@@ -31,8 +31,8 @@ export const darkUIStorybook = {
 export const lightUIStorybook = {}
 
 export const commonTheme = {
-  brandTitle: 'Shadcn-ui',
-  brandUrl: '/',
+  brandTitle: 'Stack Builder',
+  brandUrl: '',
   // brandTarget: '_blank',
   brandImage: 'https://ui.shadcn.com/favicon-32x32.png',
 }
