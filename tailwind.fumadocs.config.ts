@@ -13,8 +13,8 @@ const config = {
   presets: [createPreset({
     // preset: 'default',
     // preset: 'neutral',
-    preset: 'dusk',
-    // preset: 'purple',
+    // preset: 'dusk',
+    preset: 'purple',
     // preset: 'ocean',
     // preset: 'catppuccin',
   })],
