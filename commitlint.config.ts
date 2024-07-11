@@ -26,11 +26,11 @@ const Configuration: UserConfig = {
         'test', // Adding or updating tests
       ],
     ],
-    // Ensure the scope is in PascalCase
-    'scope-case': [RuleConfigSeverity.Error, 'always', 'pascal-case'],
+    // Ensure the scope is in lowercase
+    'scope-case': [RuleConfigSeverity.Error, 'always', 'lower-case'],
 
-    // Ensure the subject is in Sentence case
-    'subject-case': [RuleConfigSeverity.Error, 'always', 'sentence-case'],
+    // Ensure the subject is in lowercase
+    'subject-case': [RuleConfigSeverity.Error, 'always', 'lower-case'],
 
     // Ensure the type is in lowercase
     'type-case': [RuleConfigSeverity.Error, 'always', 'lower-case'],
