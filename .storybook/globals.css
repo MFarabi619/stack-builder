@@ -142,7 +142,9 @@
   border-color: hsl(var(--border));
 }
 
-.dark #control-variant {
+.dark #control-variant,
+#control-children,
+#control-size {
   background-color: hsl(var(--input));
   color: hsl(var(--foreground));
 }
