@@ -112,6 +112,8 @@ const preview: Preview = {
     },
     // fix for theming docs page found here: https://github.com/hipstersmoothie/storybook-dark-mode/issues/282#issuecomment-2208816632
     docs: {
+      defaultName: 'Documentation',
+      toc: true,
       container: (props: {
         children: React.ReactNode
         context: DocsContextProps
