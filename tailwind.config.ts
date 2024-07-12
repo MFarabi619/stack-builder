@@ -59,6 +59,9 @@ const config = {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
       },
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(90deg, #e9d40d 0%, #e0ac72 33%, #ed6c6c 66%, #fa2dfd 100%)',
+      },
       keyframes: {
         'accordion-down': {
           from: { height: '0' },

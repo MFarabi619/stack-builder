@@ -4,9 +4,7 @@ export const buttons = [
     imgSrc: '',
     imgAlt: 'Stack Builder Button',
     text: 'Stack Builder',
-    className: 'text-2xl font-bold bg-gradient-to-r from-amber-500 to-pink-500 w-full mb-4 hover:text-white',
-    target: '_blank',
-    rel: 'noreferrer noopener',
+    className: 'text-2xl font-bold bg-custom-gradient w-full mb-4 hover:text-white',
   },
   {
     href: '/story/zenith-design-system-home-page-buttons--stack-builder',
@@ -14,8 +12,6 @@ export const buttons = [
     imgAlt: 'Storybook Logo',
     text: 'Storybook',
     className: 'bg-violet-950',
-    target: '_blank',
-    rel: 'noreferrer noopener',
   },
   {
     href: '/eslint-config-inspector/rules',
@@ -23,8 +19,6 @@ export const buttons = [
     imgAlt: 'ESLint Logo',
     text: 'Style Guide',
     className: 'bg-gray-900',
-    target: '_blank',
-    rel: 'noreferrer noopener',
   },
   {
     href: 'https://github.com/MFarabi619/stack-builder',
@@ -32,16 +26,13 @@ export const buttons = [
     imgAlt: 'GitHub Logo',
     text: 'GitHub',
     className: 'bg-green-600',
-    target: '_blank',
-    rel: 'noreferrer noopener',
   },
   {
     href: '/docs',
-    imgSrc: '/fumadocs_logo.svg',
+    // imgSrc: '/fumadocs_logo.svg',
+    imgSrc: 'https://svgshare.com/i/189M.svg',
     imgAlt: 'Fumadocs Logo',
     text: 'Docs',
     className: 'bg-slate-600',
-    target: '_blank',
-    rel: 'noreferrer noopener',
   },
 ]

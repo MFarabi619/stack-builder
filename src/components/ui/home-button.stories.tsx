@@ -6,8 +6,6 @@ const meta = {
   title: 'Zenith Design System/Home Page Buttons',
   component: HomePageButton,
   tags: ['autodocs'],
-  args: {
-  },
   argTypes: {
     href: { control: { type: 'text' } },
     imgSrc: { control: { type: 'text' } },
