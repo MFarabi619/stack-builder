@@ -1,95 +1,51 @@
-import {
-  ChevronRightIcon,
-  EnvelopeOpenIcon,
-  ReloadIcon,
-} from '@radix-ui/react-icons'
 import type { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
-import { Button } from './button'
+import { HomePageButton } from '@/components/ui/home-button'
+import { buttons } from '@/content/web/buttons'
 
 const meta = {
-  title: 'Zenith Design System/Button',
-  component: Button,
+  title: 'Zenith Design System/Home Page Buttons',
+  component: HomePageButton,
   tags: ['autodocs'],
   args: {
-    children: 'Button',
-    variant: 'default',
-    onClick: fn(),
   },
   argTypes: {
-    variant: {
-      options: [
-        'default',
-        'secondary',
-        'destructive',
-        'outline',
-        'ghost',
-        'link',
-      ],
-      control: { type: 'select' },
-    },
-    asChild: {
-      control: {
-        disable: true,
-      },
-    },
-    size: {
-      options: ['default', 'sm', 'lg', 'icon'],
-      control: { type: 'select' },
-    },
+    href: { control: { type: 'text' } },
+    imgSrc: { control: { type: 'text' } },
+    imgAlt: { control: { type: 'text' } },
+    text: { control: { type: 'text' } },
+    className: { control: { type: 'text' } },
   },
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof HomePageButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {}
-export const Secondary: Story = { args: { variant: 'secondary' } }
-export const Destructive: Story = { args: { variant: 'destructive' } }
-export const Outline: Story = { args: { variant: 'outline' } }
-export const Ghost: Story = { args: { variant: 'ghost' } }
-export const Link: Story = { args: { variant: 'link' } }
-
-export const Icon: Story = {
+export const StackBuilder: Story = {
   args: {
-    variant: 'outline',
-    size: 'icon',
-    children: (
-      <ChevronRightIcon className="size-4" />
-    ),
-  },
-  argTypes: {
-    children: { control: { disable: true } },
+    ...buttons[0],
   },
 }
 
-export const WithIcon: Story = {
+export const Storybook: Story = {
   args: {
-    children: (
-      <>
-        <EnvelopeOpenIcon className="mr-2 size-4" />
-        {' '}
-        Login with Email
-      </>
-    ),
-  },
-  argTypes: {
-    children: { control: { disable: true } },
+    ...buttons[1],
   },
 }
 
-export const Loading: Story = {
+export const EslintConfigInspector: Story = {
   args: {
-    variant: 'secondary',
-    disabled: true,
-    children: (
-      <>
-        <ReloadIcon className="mr-2 size-4 animate-spin" />
-        Please wait
-      </>
-    ),
+    ...buttons[2],
   },
-  argTypes: {
-    children: { control: { disable: true } },
+}
+
+export const Github: Story = {
+  args: {
+    ...buttons[3],
+  },
+}
+
+export const Fumadocs: Story = {
+  args: {
+    ...buttons[4],
   },
 }
