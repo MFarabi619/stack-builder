@@ -7,11 +7,11 @@ const meta = {
   component: HomePageButton,
   tags: ['autodocs'],
   argTypes: {
-    href: { control: { type: 'text' } },
-    imgSrc: { control: { type: 'text' } },
-    imgAlt: { control: { type: 'text' } },
-    text: { control: { type: 'text' } },
-    className: { control: { type: 'text' } },
+    href: { description: 'Link to route within the app', control: { type: 'text' } },
+    imgSrc: { description: 'Source URL of the image', control: { type: 'text' } },
+    imgAlt: { description: 'Alt text for the image', control: { type: 'text' } },
+    text: { description: 'Text to display on the button', control: { type: 'text' } },
+    className: { description: 'Additional CSS classes to apply', control: { type: 'text' } },
   },
 } satisfies Meta<typeof HomePageButton>
 
