@@ -3,7 +3,7 @@ import type { Preview } from '@storybook/react'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import { ThemeProvider } from 'next-themes'
 import type { ThemeVars } from '@storybook/theming'
-import { ensure, themes } from '@storybook/theming'
+import { themes } from '@storybook/theming'
 import { withThemeByClassName } from '@storybook/addon-themes'// Wide button with a pen and text. Toggles both Preview Components and Preview Background
 
 import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode'
@@ -81,13 +81,13 @@ const preview: Preview = {
       // Override the default dark theme
       dark: {
         ...themes.dark,
-        // ...darkUIStorybook,
+        ...darkUIStorybook,
         ...commonTheme,
       },
       // Override the default light theme
       light: {
         ...themes.normal,
-        // ...lightUIStorybook,
+        ...lightUIStorybook,
         ...commonTheme,
       },
     },
@@ -112,6 +112,7 @@ const preview: Preview = {
         ...customViewports,
       },
     },
+    // fix for theming docs page found here: https://github.com/hipstersmoothie/storybook-dark-mode/issues/282#issuecomment-2208816632
     docs: {
       container: (props: {
         children: React.ReactNode
@@ -123,10 +124,12 @@ const preview: Preview = {
         props.context.channel.on(DARK_MODE_EVENT_NAME, state =>
           setDark(state))
         const currentProps = { ...props }
-        currentProps.theme = isDark ? themes.dark : themes.light
-        // console.log(currentProps.theme)
-        // console.log(themes.dark)
-        // console.log(darkUIStorybook)
+        // currentProps.theme = isDark ? themes.dark : themes.light
+        currentProps.theme = isDark ? darkUIStorybook as ThemeVars : themes.light
+        // console.log('Current Props Theme:', currentProps.theme)
+        // console.log('Themes Dark:', themes.dark)
+        // console.log('Dark UI Storybook:', darkUIStorybook)
+        // console.log('Merged Theme:', { ...themes.dark, ...darkUIStorybook, ...commonTheme })
         return <DocsContainer {...currentProps} />
       },
     },
