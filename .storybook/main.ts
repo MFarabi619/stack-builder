@@ -11,9 +11,7 @@ const config: StorybookConfig = {
     options: {},
   },
   staticDirs: ['./'],
-  docs: {
-    autodocs: 'tag',
-  },
+  docs: {},
   // Did not use @storybook/addon-essentials due to lack of toolbar ordering API
   addons: [
     // --------------- Toolbar Icons ---------------
@@ -33,6 +31,7 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
 
     // --------------- Action Bar ---------------
+    '@storybook/addon-controls',
     // Accessibility tab added by '@storybook/addon-a11y'
     {
       name: '@storybook/addon-designs', // Actually has amazing docs for once: https://storybookjs.github.io/addon-designs/?path=/docs/docs-quick-start--docs
