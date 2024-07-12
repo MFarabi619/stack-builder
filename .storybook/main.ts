@@ -6,6 +6,14 @@ const config: StorybookConfig = {
     '../src/components/storybook-starters/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
+  framework: {
+    name: '@storybook/nextjs',
+    options: {},
+  },
+  staticDirs: ['./'],
+  docs: {
+    autodocs: 'tag',
+  },
   // Did not use @storybook/addon-essentials due to lack of toolbar ordering API
   addons: [
     // --------------- Toolbar Icons ---------------
@@ -18,9 +26,9 @@ const config: StorybookConfig = {
     // Sun/Moon icon. Toggle Manager, Preview Components, and Preview Background
     'storybook-dark-mode',
     // Pen. Toggle both Preview Components and Preview Background
-    // '@storybook/addon-themes',
+    '@storybook/addon-themes',
     // Portrait. Toggle only Preview Background. Not affected by other two, use to 'lock' the background.
-    // '@storybook/addon-backgrounds',
+    '@storybook/addon-backgrounds',
     // Person inside circle icon. Also 'Accessibility' tab to action bar
     '@storybook/addon-a11y',
 
@@ -61,13 +69,5 @@ const config: StorybookConfig = {
       },
     },
   ],
-  framework: {
-    name: '@storybook/nextjs',
-    options: {},
-  },
-  staticDirs: ['./'],
-  docs: {
-    autodocs: 'tag',
-  },
 }
 export default config
