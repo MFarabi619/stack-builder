@@ -1,24 +1,64 @@
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import { HomePageButton, type HomePageButtonType } from '@/components/ui/home-button'
+
+const buttons = [
+  {
+    href: 'https://github.com/MFarabi619/stack-builder',
+    imgSrc: '',
+    imgAlt: 'Stack Builder Button',
+    text: 'Stack Builder',
+    className: 'text-2xl font-bold bg-gradient-to-r from-amber-500 to-pink-500 w-full mb-4 hover:text-white',
+    target: '_blank',
+    rel: 'noreferrer noopener',
+  },
+  {
+    href: '/storybook/index.html?path=/docs/configure-your-project--docs',
+    imgSrc: 'https://github.com/storybookjs/brand/raw/main/icon/icon-storybook-default.svg',
+    imgAlt: 'Storybook Logo',
+    text: 'Storybook',
+    className: 'bg-violet-950',
+    target: '_blank',
+    rel: 'noreferrer noopener',
+  },
+  {
+    href: '/eslint-config-inspector/rules',
+    imgSrc: 'https://eslint-config.antfu.me/favicon.svg',
+    imgAlt: 'ESLint Logo',
+    text: 'Style Guide',
+    className: 'bg-gray-900',
+    target: '_blank',
+    rel: 'noreferrer noopener',
+  },
+  {
+    href: 'https://github.com/MFarabi619/stack-builder',
+    imgSrc: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg',
+    imgAlt: 'GitHub Logo',
+    text: 'GitHub',
+    className: 'bg-green-600',
+    target: '_blank',
+    rel: 'noreferrer noopener',
+  },
+  {
+    href: '/docs',
+    imgSrc: '/fumadocs_logo.svg',
+    imgAlt: 'Fumadocs Logo',
+    text: 'Docs',
+    className: 'bg-slate-600',
+    target: '_blank',
+    rel: 'noreferrer noopener',
+  },
+]
 
 export default function HomePage() {
   return (
-    <main className="flex h-screen flex-col justify-center text-center">
-      <h1 className="mb-4 text-2xl font-bold">
-        Welcome to
-        {' '}
-        <a href="https://github.com/MFarabi619/stack-builder" target="_blank" rel="noreferrer noopener" className="underline inline-flex transition-all duration-300 ease-in-out hover:scale-105">Stack Builder</a>
-      </h1>
-      <p className="text-muted-foreground">
-        <Button asChild>
-          <Link
-            href="/docs"
-            className="text-foreground font-semibold transition-transform duration-500 ease-in-out hover:scale-105"
-          >
-            Read the Docs
-          </Link>
-        </Button>
-      </p>
+    <main className="flex h-screen flex-col justify-center items-center text-center max-w-lg mx-auto">
+      {buttons.slice(0, 1).map(button => (
+        <HomePageButton key={button.href} {...(button as HomePageButtonType)} />
+      ))}
+      <section className="flex space-x-2">
+        {buttons.slice(1).map(button => (
+          <HomePageButton key={button.href} {...(button as HomePageButtonType)} />
+        ))}
+      </section>
     </main>
   )
 }

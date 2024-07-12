@@ -18,7 +18,7 @@ import {
 } from '../typography'
 
 const meta = {
-  title: 'Typography',
+  title: 'Shadcn-ui/Typography',
   component: TypographyH1,
   parameters: {
     layout: 'centered',

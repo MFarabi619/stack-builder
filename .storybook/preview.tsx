@@ -29,7 +29,19 @@ const preview: Preview = {
     options: {
       storySort: {
         method: 'alphabetical',
-        order: ['Configure your project', 'Zenith Design System', 'Shadcn-ui', 'Storybook Starters'],
+        order: [
+          'Configure your project',
+          'Zenith Design System',
+          'Shadcn-ui',
+          [
+            'Introduction',
+            'Semantic Color Palette',
+            'Font Size',
+            'Typography',
+          ],
+          'Tailwind CSS Primitives',
+          'Storybook Starters',
+        ],
       },
     },
     // https://storybook.js.org/docs/essentials/viewport
@@ -78,7 +90,7 @@ const preview: Preview = {
     // https://storybook.js.org/docs/essentials/backgrounds
     backgrounds: {
       // disable: true,
-      default: 'twitter',
+      // default: 'twitter',
       values: [
         {
           name: 'twitter',

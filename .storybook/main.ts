@@ -66,6 +66,9 @@ const config: StorybookConfig = {
         //     remarkPlugins: [],
         //   },
         // },
+        sourceLoaderOptions: {
+          injectStoryParameters: false,
+        },
       },
     },
   ],
