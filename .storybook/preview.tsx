@@ -2,8 +2,13 @@ import type { Preview } from '@storybook/react'
 
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import { ThemeProvider } from 'next-themes'
-import { themes } from '@storybook/theming'
+import type { ThemeVars } from '@storybook/theming'
+import { ensure, themes } from '@storybook/theming'
 import { withThemeByClassName } from '@storybook/addon-themes'// Wide button with a pen and text. Toggles both Preview Components and Preview Background
+
+import { DARK_MODE_EVENT_NAME } from 'storybook-dark-mode'
+import React from 'react'
+import { DocsContainer, type DocsContextProps } from '@storybook/blocks'
 
 import { commonTheme, darkUIStorybook, lightUIStorybook } from './themes-storybook-ui'
 
@@ -76,13 +81,13 @@ const preview: Preview = {
       // Override the default dark theme
       dark: {
         ...themes.dark,
-        ...darkUIStorybook,
+        // ...darkUIStorybook,
         ...commonTheme,
       },
       // Override the default light theme
       light: {
         ...themes.normal,
-        ...lightUIStorybook,
+        // ...lightUIStorybook,
         ...commonTheme,
       },
     },
@@ -107,9 +112,24 @@ const preview: Preview = {
         ...customViewports,
       },
     },
-    // docs: {
-    //   theme: darkUIStorybook,
-    // },
+    docs: {
+      container: (props: {
+        children: React.ReactNode
+        context: DocsContextProps
+        theme?: ThemeVars
+      }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const [isDark, setDark] = React.useState(true)
+        props.context.channel.on(DARK_MODE_EVENT_NAME, state =>
+          setDark(state))
+        const currentProps = { ...props }
+        currentProps.theme = isDark ? themes.dark : themes.light
+        // console.log(currentProps.theme)
+        // console.log(themes.dark)
+        // console.log(darkUIStorybook)
+        return <DocsContainer {...currentProps} />
+      },
+    },
   },
   decorators: [
     (Story) => {
