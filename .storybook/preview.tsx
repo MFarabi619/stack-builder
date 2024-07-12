@@ -17,9 +17,11 @@ import './globals.css'
 const preview: Preview = {
   parameters: {
     layout: 'centered',
+    // https://storybook.js.org/docs/essentials/actions
     actions: {
       argTypesRegex: '^on[A-Z].*',
     },
+    // https://storybook.js.org/docs/essentials/controls
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -27,6 +29,7 @@ const preview: Preview = {
       },
     },
     options: {
+    // https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy#sorting-stories
       storySort: {
         method: 'alphabetical',
         order: [

@@ -31,6 +31,7 @@ const config: StorybookConfig = {
     '@storybook/addon-a11y',
 
     // --------------- Action Bar ---------------
+    // https://storybook.js.org/docs/essentials/controls
     '@storybook/addon-controls',
     // Accessibility tab added by '@storybook/addon-a11y'
     {
