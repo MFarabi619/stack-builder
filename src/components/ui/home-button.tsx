@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 
 export interface HomePageButtonType {
   href: string
-  imgSrc: ''
+  imgSrc: string
   imgAlt: string
   text: string
   className: string
