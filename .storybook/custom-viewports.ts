@@ -1,4 +1,7 @@
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+
 export const customViewports = {
+  ...INITIAL_VIEWPORTS,
   '720p': {
     name: '720p',
     styles: {

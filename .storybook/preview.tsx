@@ -1,8 +1,6 @@
 import React from 'react'
 import type { Preview } from '@storybook/react'
 
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-
 import { ThemeProvider } from 'next-themes'
 import { withThemeByClassName } from '@storybook/addon-themes'// Wide button with a pen and text. Toggles both Preview Components and Preview Background
 import { type ThemeVars, themes } from '@storybook/theming'
@@ -50,7 +48,6 @@ const preview: Preview = {
     // https://storybook.js.org/docs/essentials/viewport
     viewport: {
       viewports: {
-        ...INITIAL_VIEWPORTS,
         ...customViewports,
       },
     },
