@@ -24,7 +24,6 @@ export function HomePageButton({
     'duration-500',
     'ease-in-out',
     'hover:scale-105',
-    'hover:text-black',
     className,
   )
 
