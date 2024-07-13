@@ -60,7 +60,8 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       backgroundImage: {
-        'custom-gradient': 'linear-gradient(90deg, #e9d40d 0%, #e0ac72 33%, #ed6c6c 66%, #fa2dfd 100%)',
+        'custom-gradient-ltr': 'linear-gradient(90deg, #e9d40d 0%, #e0ac72 33%, #ed6c6c 66%, #fa2dfd 100%)',
+        'custom-gradient-rtl': 'linear-gradient(270deg, #e9d40d 0%, #e0ac72 33%, #ed6c6c 66%, #fa2dfd 100%)',
       },
       keyframes: {
         'accordion-down': {

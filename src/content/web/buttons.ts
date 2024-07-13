@@ -1,10 +1,10 @@
 export const buttons = [
   {
     href: 'https://github.com/MFarabi619/stack-builder',
-    imgSrc: '',
+    imgSrc: 'https://svgshare.com/i/18CV.svg',
     imgAlt: 'Stack Builder Button',
     text: 'Stack Builder',
-    className: 'text-2xl font-bold bg-custom-gradient w-full mb-4 hover:text-white',
+    className: 'text-2xl font-bold bg-custom-gradient-ltr w-full mb-4 hover:text-white hover:bg-custom-gradient-rtl',
   },
   {
     href: '/story/zenith-design-system-home-page-buttons--stack-builder',
