@@ -6,8 +6,9 @@ Build your dream stack, your way.
 
 ## 🏗️ This project is a work in progress 🚧
 
-At the moment, it's just a well-documented [Next.js](https://nextjs.org/) Starter Template
+At the moment, it's just a well-documented [Next.js](https://nextjs.org/) Starter Template.
 
+![Stack Builder](https://img.shields.io/badge/stack_builder-v0.0-%23ed6c6c?style=plastic&logo=github&logoColor=%23fa2dfd&labelColor=%23e9d40d&color=%23ed6c6c&link=https%3A%2F%2Fgithub.com%2FMFarabi619%2Fstack-builder)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white)](https://conventionalcommits.org)
 [![Commitizen Friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Code Style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
