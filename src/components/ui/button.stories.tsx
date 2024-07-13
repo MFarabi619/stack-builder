@@ -11,6 +11,9 @@ const meta = {
   title: 'Shadcn-ui/Button',
   component: Button,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: {
     children: 'Button',
     variant: 'default',

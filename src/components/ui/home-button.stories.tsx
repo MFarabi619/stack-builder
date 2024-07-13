@@ -6,6 +6,9 @@ const meta = {
   title: 'Zenith Design System/Home Page Buttons',
   component: HomePageButton,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     href: { description: 'Link to route within the app', control: { type: 'text' } },
     imgSrc: { description: 'Source URL of the image', control: { type: 'text' } },

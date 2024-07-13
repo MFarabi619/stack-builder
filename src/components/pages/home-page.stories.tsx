@@ -5,6 +5,9 @@ const meta = {
   title: 'Stack Builder Website',
   component: Page,
   tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {},
 
 } satisfies Meta<typeof Page>
