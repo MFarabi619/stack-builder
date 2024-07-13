@@ -112,6 +112,6 @@ export const lightUIStorybook = {
 export const commonTheme = {
   brandTitle: 'Stack Builder',
   brandUrl: '/',
-  brandTarget: '_blank',
+  brandTarget: '_self',
   brandImage: 'https://ui.shadcn.com/favicon-32x32.png',
 }
