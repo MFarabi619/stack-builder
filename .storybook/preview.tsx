@@ -14,6 +14,7 @@ import './globals.css'
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
     // https://storybook.js.org/docs/essentials/actions
     actions: {
       argTypesRegex: '^on[A-Z].*',
