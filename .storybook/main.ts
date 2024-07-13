@@ -8,7 +8,9 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: '@storybook/nextjs',
-    options: {},
+    options: {
+      appDirectory: true,
+    },
   },
   staticDirs: ['./'],
   docs: {},
