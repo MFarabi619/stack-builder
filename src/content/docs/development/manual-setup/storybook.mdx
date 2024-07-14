@@ -3,6 +3,7 @@ title: Storybook
 description: Where Front-End Development becomes a breeze.
 ---
 
+import { File, Folder, Files } from "fumadocs-ui/components/files";
 
 <Cards>
   <Card
@@ -128,5 +129,77 @@ The state of Storybook is currently an absolute mess. Still figuring out its qui
 
 You can view my progress [here](https://github.com/MFarabi619/stack-builder/tree/dev/.storybook). It's mostly complete, including a sane dark mode.
 
+For convenience, the following code is in sync based on the current Storybook configuration of this project using `doc-gen`.
+
+```bash
+pnpm i -D \
+  @storybook/{addon-a11y,addon-actions,addon-backgrounds,addon-controls,addon-designs,addon-docs,addon-interactions,addon-links,addon-measure,addon-onboarding,addon-outline,addon-storysource,addon-themes,addon-toolbars,addon-viewport,blocks,components,icons,manager-api,nextjs,react,source-loader,test,test-runner,theming,types} \
+  @chromatic-com/storybook \
+  storybook \
+  storybook-dark-mode
+```
+
+<Files>
+  <Folder name=".storybook" defaultOpen>
+    <File name="custom-viewports.ts" />
+    <File name="main.ts" />
+    <File name="preview.tsx" />
+    <File name="stack-builder.svg" />
+    <File name="themes-storybook-ui.ts" />
+  </Folder>
+</Files>
+
+<Tabs items={['custom-viewports.ts', 'main.ts', 'preview.tsx', 'themes-storybook-ui.ts']}>
+  <Tab value='custom-viewports.ts'>
+Extend the range of viewports with more options.
+```json doc-gen:file
+{
+  "file": ".storybook/custom-viewports.ts",
+  "codeblock": {
+    "lang": "ts",
+    "meta": "title=custom-viewports.ts"
+  }
+}
+```
+  </Tab>
+  <Tab value='main.ts'>
+  Tell Storybook where to look for files, and activate plugins. 
+```json doc-gen:file
+{
+  "file": ".storybook/main.ts",
+  "codeblock": {
+    "lang": "ts",
+    "meta": "title=main.ts"
+  }
+}
+```
+  </Tab>
+<Tab value='preview.tsx'>
+  Configure and fine-tune Storybook plugins.
+```json doc-gen:file
+{
+  "file": ".storybook/preview.tsx",
+  "codeblock": {
+    "lang": "tsx",
+    "meta": "title=preview.tsx"
+  }
+}
+```
+</Tab>
+<Tab value='themes-storybook-ui.ts'>
+  Override the default Storybook themes for dark mode workaround.
+```json doc-gen:file
+{
+  "file": ".storybook/themes-storybook-ui.ts",
+  "codeblock": {
+    "lang": "ts",
+    "meta": "title=themes-storybook-ui.ts"
+  }
+}
+```
+</Tab>
+</Tabs>
+
 ### Inspiration
+
 [Fin UI](https://ui.fin.africa/?path=/docs/foundations-installation--docs)
