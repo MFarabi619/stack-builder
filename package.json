@@ -3,11 +3,16 @@
   "type": "module",
   "version": "0.0.0",
   "description": "Your dream, your stack, your way.",
-  "author": "Mumtahin Farabi",
+  "author": {
+    "name": "Mumtahin Farabi"
+  },
   "homepage": "https://github.com/MFarabi619/stack-builder",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MFarabi619/stack-builder.git"
+    "url": "git+https://github.com/MFarabi619/stack-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MFarabi619/stack-builder/issues"
   },
   "scripts": {
     "dev": "next dev",
@@ -24,11 +29,12 @@
     "lint:inspect": "npx @eslint/config-inspector --no-open",
     "lint:inspect-open": "npx @eslint/config-inspector",
     "build:next": "next build",
-    "build:storybook": "storybook build -o public/storybook",
+    "build-storybook": "storybook build",
     "build:eslint": "npx @eslint/config-inspector build --outDir './public/eslint-config-inspector' --basePath './public/eslint-config-inspector' --base '/eslint-config-inspector'",
-    "build:all": "npm run build:storybook && npm run build:eslint && next build",
+    "build:all": "npm run build:eslint && next build",
     "prepare": "husky",
-    "commit": "cz"
+    "commit": "cz",
+    "chromatic": "npx chromatic "
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.0",
@@ -91,6 +97,7 @@
     "@types/react-dom": "^18.3.0",
     "@whitespace/storybook-addon-html": "^6.1.1",
     "autoprefixer": "^10.4.19",
+    "chromatic": "^11.5.5",
     "commitizen": "^4.3.0",
     "commitlint": "^19.3.0",
     "eslint": "8.57.0",

@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss'
 import tailwindcssAnimate from 'tailwindcss-animate'
 
 import colors from 'tailwindcss/colors'
+// @ts-expect-error: This works and doesn't cause any issues
 import flattenColorPalette from 'tailwindcss/lib/util/flattenColorPalette'
 
 const config = {

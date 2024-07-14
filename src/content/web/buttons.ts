@@ -16,7 +16,8 @@ export const buttons = [
     className: 'bg-indigo-500 hover:bg-indigo-400',
   },
   {
-    href: '/story/zenith-design-system-home-page-buttons--stack-builder',
+    // href: '/story/zenith-design-system-home-page-buttons--stack-builder',
+    href: 'https://66940475e3e13dde7d47c07f-ssiehonydf.chromatic.com/?path=/story/zenith-design-system-home-page-buttons--stack-builder',
     imgSrc: '/stack-builder-storybook-screenshot.png',
     imgAlt: 'Stack Builder Storybook screenshot',
     logoSrc: '/logos/storybook.svg',
