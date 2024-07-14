@@ -32,6 +32,8 @@ const preview: Preview = {
         method: 'alphabetical',
         order: [
           'Configure your project',
+          'Stack Builder Website',
+          ['Hero Section', 'Features Section'],
           'Zenith Design System',
           'Shadcn-ui',
           [

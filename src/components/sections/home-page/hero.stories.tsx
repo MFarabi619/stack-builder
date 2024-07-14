@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import Page from '@/app/(home)/page'
+import { Hero } from '@/components/sections/home-page/hero'
 
 const meta = {
-  title: 'Stack Builder Website',
-  component: Page,
+  title: 'Stack Builder Website/Hero Section',
+  component: Hero,
   tags: ['autodocs'],
   parameters: {
     design: {
@@ -14,11 +14,11 @@ const meta = {
   },
   argTypes: {},
 
-} satisfies Meta<typeof Page>
+} satisfies Meta<typeof Hero>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const HomePage: Story = {
+export const HeroSection: Story = {
   args: {},
 }
