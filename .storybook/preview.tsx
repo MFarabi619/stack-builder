@@ -133,21 +133,21 @@ const preview: Preview = {
         return <DocsContainer {...currentProps} />
       },
     },
+    // https://github.com/whitespace-se/storybook-addon-html
+    html: {
+      prettier: {
+        tabWidth: 4,
+        useTabs: false,
+        htmlWhitespaceSensitivity: 'strict',
+      },
+      highlighter: {
+        showLineNumbers: true, // default: false
+        wrapLines: true, // default: true
+      },
+      // disable: true, // default: false
+    },
   },
 
-  // https://github.com/whitespace-se/storybook-addon-html
-  html: {
-    prettier: {
-      tabWidth: 4,
-      useTabs: false,
-      htmlWhitespaceSensitivity: 'strict',
-    },
-    highlighter: {
-      showLineNumbers: true, // default: false
-      wrapLines: true, // default: true
-    },
-    // disable: true, // default: false
-  },
   decorators: [
     (Story) => {
       return (
