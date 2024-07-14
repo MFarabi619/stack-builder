@@ -1,10 +1,7 @@
-import { MotionGlobalConfig } from 'framer-motion'
 import { FlipWords } from '@/components/ui/flip-words'
 import { HomePageButton } from '@/components/ui/home-button'
 import { buttons } from '@/content/web/buttons'
 import { Boxes } from '@/components/ui/background-boxes'
-
-// MotionGlobalConfig.skipAnimations = true
 
 const words = ['vision', 'ideas', 'stack', 'way']
 

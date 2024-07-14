@@ -30,7 +30,7 @@
     "lint:inspect-open": "npx @eslint/config-inspector",
     "build:next": "next build",
     "build-storybook": "storybook build",
-    "build:eslint": "npx @eslint/config-inspector build --outDir './public/eslint-config-inspector' --basePath './public/eslint-config-inspector' --base '/eslint-config-inspector'",
+    "build:eslint": "mkdir -p ./public/eslint-config-inspector && npx @eslint/config-inspector build --outDir './public/eslint-config-inspector' --basePath './public/eslint-config-inspector' --base '/eslint-config-inspector'",
     "build:all": "npm run build:eslint && next build",
     "prepare": "husky",
     "commit": "cz",

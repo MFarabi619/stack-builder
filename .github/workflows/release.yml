@@ -65,7 +65,7 @@ jobs:
       - name: 🏗️ Build Project
         # env:
         #   SANITY_API_READ_TOKEN: ${{ secrets.SANITY_API_READ_TOKEN }}
-        run: pnpm build
+        run: pnpm build:all
 
       - name: 🤖 Run Semantic Release
         env:

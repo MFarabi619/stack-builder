@@ -1,8 +1,8 @@
 'use client'
 // https://ui.aceternity.com/components/flip-words
 
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
+import React, { useCallback, useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export function FlipWords({
