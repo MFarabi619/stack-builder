@@ -34,6 +34,11 @@ const config = {
       },
     ]
   },
+  images: {
+    domains: [
+      'api.microlink.io', // Microlink Image Preview
+    ],
+  },
 }
 
 export default withMDX(config)

@@ -2,21 +2,24 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { LinkPreview } from '@/components/ui/link-preview'
 
 export function HomePageButton({
   href = '/',
   imgSrc = '',
-  imgAlt = 'Image',
+  logoSrc = '',
   text = '',
   className = '',
 }: {
   href?: string
   imgSrc?: string
   imgAlt?: string
+  logoSrc?: string
   text?: string
   className?: string
 }) {
   const buttonClasses = clsx(
+    'w-full',
     'space-x-2',
     'text-white',
     'font-semibold',
@@ -28,26 +31,28 @@ export function HomePageButton({
   )
 
   return (
-    <Button
-      className={buttonClasses}
-      asChild
+    <LinkPreview
+      url={href}
+      imageSrc={imgSrc}
+      isStatic
     >
-      <Link
-        href={href}
-        target="_blank"
-        rel="noreferrer noopener"
+      <Button
+        className={buttonClasses}
+        asChild
       >
-        {imgSrc && (
-          <Image
-            priority
-            alt={imgAlt}
-            src={imgSrc}
-            width={24}
-            height={24}
-          />
-        )}
-        <span>{text}</span>
-      </Link>
-    </Button>
+        <div>
+          {imgSrc && (
+            <Image
+              alt={`${text} logo`}
+              src={logoSrc}
+              width={24}
+              height={24}
+              priority
+            />
+          )}
+          <span>{text}</span>
+        </div>
+      </Button>
+    </LinkPreview>
   )
 }
