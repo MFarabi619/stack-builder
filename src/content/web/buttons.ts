@@ -4,7 +4,7 @@ export const buttons = [
     imgSrc: 'https://svgshare.com/i/18CV.svg',
     imgAlt: 'Stack Builder Button',
     text: 'Stack Builder',
-    className: 'text-2xl font-bold bg-custom-gradient-ltr w-full mb-4 hover:text-white hover:bg-custom-gradient-rtl',
+    className: 'text-2xl text-black bg-custom-gradient-ltr w-full mb-4 hover:bg-custom-gradient-rtl',
   },
   {
     href: '/story/zenith-design-system-home-page-buttons--stack-builder',

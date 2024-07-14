@@ -1,3 +1,4 @@
+import path from 'node:path'
 import type { StorybookConfig } from '@storybook/nextjs'
 
 const config: StorybookConfig = {
@@ -49,7 +50,22 @@ const config: StorybookConfig = {
 
     // '@chromatic-com/storybook',
     // Code for component story
-    '@storybook/addon-storysource',
+    // '@storybook/source-loader',
+    {
+      name: '@storybook/addon-storysource',
+      options: {
+        rule: {
+          test: [/\.stories\.tsx?$/],
+          include: [path.resolve(__dirname, '../src')], // You can specify directories
+        },
+        loaderOptions: {
+          parser: 'typescript',
+          injectStoryParameters: false,
+          prettierConfig: { printWidth: 80, singleQuote: false },
+        },
+        enforce: 'pre',
+      },
+    },
     '@storybook/addon-links',
 
     // --------------- No-icons ---------------
@@ -74,5 +90,16 @@ const config: StorybookConfig = {
       },
     },
   ],
+  webpackFinal: async (config) => {
+    if (!config.resolve)
+      return config
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@/': path.resolve(__dirname, '../src/'),
+    }
+
+    return config
+  },
 }
 export default config
