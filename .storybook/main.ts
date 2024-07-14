@@ -50,7 +50,6 @@ const config: StorybookConfig = {
 
     // '@chromatic-com/storybook',
     // Code for component story
-    // '@storybook/source-loader',
     {
       name: '@storybook/addon-storysource',
       options: {
