@@ -31,14 +31,25 @@ export const StackBuilder: Story = {
   },
   parameters: {
     design: {
-      url: 'https://www.figma.com/design/xild6bwrsygnvphzpwqqke/zenith-design-system?node-id=67-2411&t=1cojdzrd9retw6wv-11',
+      url: 'https://www.figma.com/design/XILd6bWRSYGnvpHzPWqqkE/Zenith-Design-System?node-id=67-2411&t=helPlLiU9UcstWzx-11',
+    },
+  },
+}
+
+export const Figma: Story = {
+  args: {
+    ...buttons[1],
+  },
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/design/XILd6bWRSYGnvpHzPWqqkE/Zenith-Design-System?node-id=135-93&t=helPlLiU9UcstWzx-11',
     },
   },
 }
 
 export const Storybook: Story = {
   args: {
-    ...buttons[1],
+    ...buttons[2],
   },
   parameters: {
     design: {
@@ -49,7 +60,7 @@ export const Storybook: Story = {
 
 export const EslintConfigInspector: Story = {
   args: {
-    ...buttons[2],
+    ...buttons[3],
   },
   parameters: {
     design: {
@@ -60,7 +71,7 @@ export const EslintConfigInspector: Story = {
 
 export const Github: Story = {
   args: {
-    ...buttons[3],
+    ...buttons[4],
   },
   parameters: {
     design: {
@@ -71,7 +82,7 @@ export const Github: Story = {
 
 export const Fumadocs: Story = {
   args: {
-    ...buttons[4],
+    ...buttons[5],
   },
   parameters: {
     design: {

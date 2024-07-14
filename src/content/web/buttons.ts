@@ -8,6 +8,14 @@ export const buttons = [
     className: 'text-2xl text-black bg-custom-gradient-ltr w-full mb-4 hover:bg-custom-gradient-rtl',
   },
   {
+    href: 'https://www.figma.com/design/XILd6bWRSYGnvpHzPWqqkE/Zenith-Design-System?node-id=6-48&t=helPlLiU9UcstWzx-1',
+    imgSrc: '/stack-builder-figma-screenshot.png',
+    imgAlt: 'Stack Builder Figma screenshot',
+    logoSrc: '/logos/figma.svg',
+    text: 'Figma',
+    className: 'bg-indigo-500 hover:bg-indigo-400',
+  },
+  {
     href: '/story/zenith-design-system-home-page-buttons--stack-builder',
     imgSrc: '/stack-builder-storybook-screenshot.png',
     imgAlt: 'Stack Builder Storybook screenshot',
