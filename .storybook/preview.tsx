@@ -27,7 +27,7 @@ const preview: Preview = {
       },
     },
     options: {
-    // https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy#sorting-stories
+      // https://storybook.js.org/docs/writing-stories/naming-components-and-hierarchy#sorting-stories
       storySort: {
         method: 'alphabetical',
         order: [
@@ -133,6 +133,20 @@ const preview: Preview = {
         return <DocsContainer {...currentProps} />
       },
     },
+  },
+
+  // https://github.com/whitespace-se/storybook-addon-html
+  html: {
+    prettier: {
+      tabWidth: 4,
+      useTabs: false,
+      htmlWhitespaceSensitivity: 'strict',
+    },
+    highlighter: {
+      showLineNumbers: true, // default: false
+      wrapLines: true, // default: true
+    },
+    // disable: true, // default: false
   },
   decorators: [
     (Story) => {

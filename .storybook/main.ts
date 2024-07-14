@@ -88,6 +88,9 @@ const config: StorybookConfig = {
         },
       },
     },
+    // HTML Tab in action bar
+    // https://github.com/whitespace-se/storybook-addon-html
+    '@whitespace/storybook-addon-html',
   ],
   webpackFinal: async (config) => {
     if (!config.resolve)
