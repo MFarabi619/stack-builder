@@ -36,6 +36,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.3.2",
     "fumadocs-core": "12.3.2",
     "fumadocs-docgen": "^1.0.2",
     "fumadocs-mdx": "8.2.33",
