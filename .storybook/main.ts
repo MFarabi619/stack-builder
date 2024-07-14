@@ -50,21 +50,21 @@ const config: StorybookConfig = {
 
     // '@chromatic-com/storybook',
     // Code for component story
-    {
-      name: '@storybook/addon-storysource',
-      options: {
-        rule: {
-          test: [/\.stories\.tsx?$/],
-          include: [path.resolve(__dirname, '../src')], // You can specify directories
-        },
-        loaderOptions: {
-          parser: 'typescript',
-          injectStoryParameters: false,
-          prettierConfig: { printWidth: 80, singleQuote: false },
-        },
-        enforce: 'pre',
-      },
-    },
+    // {
+    //   name: '@storybook/addon-storysource',
+    //   options: {
+    //     rule: {
+    //       test: [/\.stories\.tsx?$/],
+    //       include: [path.resolve(__dirname, '../src')], // You can specify directories
+    //     },
+    //     loaderOptions: {
+    //       parser: 'typescript',
+    //       injectStoryParameters: false,
+    //       prettierConfig: { printWidth: 80, singleQuote: false },
+    //     },
+    //     enforce: 'pre',
+    //   },
+    // },
     '@storybook/addon-links',
 
     // --------------- No-icons ---------------
