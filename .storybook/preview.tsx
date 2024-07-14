@@ -10,7 +10,7 @@ import { DocsContainer, type DocsContextProps } from '@storybook/blocks'
 
 import { customViewports } from './custom-viewports'
 import { commonTheme, darkUIStorybook, lightUIStorybook } from './themes-storybook-ui'
-import './globals.css'
+import '@/app/(home)/global.css'
 
 const preview: Preview = {
   parameters: {
