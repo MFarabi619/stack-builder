@@ -13,7 +13,7 @@ const config: StorybookConfig = {
       appDirectory: true,
     },
   },
-  staticDirs: ['./'],
+  staticDirs: ['../public'],
   docs: {},
   // Did not use @storybook/addon-essentials due to lack of toolbar ordering API
   addons: [
