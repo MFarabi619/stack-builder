@@ -8,6 +8,10 @@ const meta = {
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+    design: {
+      type: 'figma',
+      allowFullscreen: true,
+    },
   },
   argTypes: {
     href: { description: 'Link to route within the app', control: { type: 'text' } },
@@ -25,11 +29,21 @@ export const StackBuilder: Story = {
   args: {
     ...buttons[0],
   },
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/design/xild6bwrsygnvphzpwqqke/zenith-design-system?node-id=67-2411&t=1cojdzrd9retw6wv-11',
+    },
+  },
 }
 
 export const Storybook: Story = {
   args: {
     ...buttons[1],
+  },
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/design/XILd6bWRSYGnvpHzPWqqkE/Zenith-Design-System?node-id=67-2413&t=1CoJdZrd9retW6WV-11',
+    },
   },
 }
 
@@ -37,16 +51,31 @@ export const EslintConfigInspector: Story = {
   args: {
     ...buttons[2],
   },
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/design/XILd6bWRSYGnvpHzPWqqkE/Zenith-Design-System?node-id=67-2414&t=1CoJdZrd9retW6WV-11',
+    },
+  },
 }
 
 export const Github: Story = {
   args: {
     ...buttons[3],
   },
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/design/XILd6bWRSYGnvpHzPWqqkE/Zenith-Design-System?node-id=67-2416&t=1CoJdZrd9retW6WV-11',
+    },
+  },
 }
 
 export const Fumadocs: Story = {
   args: {
     ...buttons[4],
+  },
+  parameters: {
+    design: {
+      url: 'https://www.figma.com/design/XILd6bWRSYGnvpHzPWqqkE/Zenith-Design-System?node-id=67-2415&t=1CoJdZrd9retW6WV-11',
+    },
   },
 }
