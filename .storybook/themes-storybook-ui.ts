@@ -113,5 +113,5 @@ export const commonTheme = {
   brandTitle: 'Stack Builder',
   brandUrl: '/',
   brandTarget: '_self',
-  brandImage: 'https://ui.shadcn.com/favicon-32x32.png',
+  brandImage: './stack_builder.svg',
 }
