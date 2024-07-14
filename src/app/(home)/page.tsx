@@ -21,7 +21,7 @@ export default function HomePage() {
         {buttons.slice(0, 1).map(button => (
           <HomePageButton key={button.href} {...(button)} />
         ))}
-        <section className="flex flex-col space-y-3 sm:flex-row sm:space-x-2 sm:space-y-0 w-1/2 sm:w-fit">
+        <section className="flex flex-col space-y-3 sm:flex-row sm:space-x-2 sm:space-y-0 w-2/3 sm:w-fit">
           {buttons.slice(1).map(button => (
             <HomePageButton key={button.href} {...(button)} />
           ))}
