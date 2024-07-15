@@ -37,6 +37,10 @@
     "chromatic": "npx chromatic "
   },
   "dependencies": {
+    "@payloadcms/db-postgres": "3.0.0-beta.63",
+    "@payloadcms/next": "3.0.0-beta.63",
+    "@payloadcms/plugin-cloud": "3.0.0-beta.63",
+    "@payloadcms/richtext-lexical": "3.0.0-beta.63",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-hover-card": "^1.1.1",
     "@radix-ui/react-icons": "^1.3.0",
@@ -48,9 +52,11 @@
     "fumadocs-docgen": "^1.0.2",
     "fumadocs-mdx": "8.2.33",
     "fumadocs-ui": "12.3.2",
+    "graphql": "^16.8.1",
     "lucide-react": "^0.400.0",
     "next": "^14.2.4",
     "next-themes": "^0.3.0",
+    "payload": "3.0.0-beta.63",
     "qss": "^3.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

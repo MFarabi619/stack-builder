@@ -1,3 +1,4 @@
+import { withPayload } from '@payloadcms/next/withPayload'
 import createMDX from 'fumadocs-mdx/config'
 import { fileGenerator, remarkDocGen, remarkInstall } from 'fumadocs-docgen'
 
@@ -41,4 +42,4 @@ const config = {
   },
 }
 
-export default withMDX(config)
+export default withPayload(withMDX(config))
