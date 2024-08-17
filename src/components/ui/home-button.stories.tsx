@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { HomePageButton } from '@/components/ui/home-button'
-import { buttons } from '@/content/web/buttons'
+import { hero_section_buttons_content } from '@/content/home-page/hero-section-buttons-content'
 
 const meta = {
   title: 'Zenith Design System/Home Page Buttons',
@@ -27,7 +27,7 @@ type Story = StoryObj<typeof meta>
 
 export const StackBuilder: Story = {
   args: {
-    ...buttons[0],
+    ...hero_section_buttons_content[0],
   },
   parameters: {
     design: {
@@ -38,7 +38,7 @@ export const StackBuilder: Story = {
 
 export const Figma: Story = {
   args: {
-    ...buttons[1],
+    ...hero_section_buttons_content[1],
   },
   parameters: {
     design: {
@@ -49,7 +49,7 @@ export const Figma: Story = {
 
 export const Storybook: Story = {
   args: {
-    ...buttons[2],
+    ...hero_section_buttons_content[2],
   },
   parameters: {
     design: {
@@ -60,7 +60,7 @@ export const Storybook: Story = {
 
 export const EslintConfigInspector: Story = {
   args: {
-    ...buttons[3],
+    ...hero_section_buttons_content[3],
   },
   parameters: {
     design: {
@@ -71,7 +71,7 @@ export const EslintConfigInspector: Story = {
 
 export const Github: Story = {
   args: {
-    ...buttons[4],
+    ...hero_section_buttons_content[4],
   },
   parameters: {
     design: {
@@ -82,7 +82,7 @@ export const Github: Story = {
 
 export const Fumadocs: Story = {
   args: {
-    ...buttons[5],
+    ...hero_section_buttons_content[5],
   },
   parameters: {
     design: {

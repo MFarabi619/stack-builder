@@ -133,10 +133,12 @@ For convenience, the following code is in sync based on the current Storybook co
 
 ```bash
 pnpm i -D \
-  @storybook/{addon-a11y,addon-actions,addon-backgrounds,addon-controls,addon-designs,addon-docs,addon-interactions,addon-links,addon-measure,addon-onboarding,addon-outline,addon-storysource,addon-themes,addon-toolbars,addon-viewport,blocks,components,icons,manager-api,nextjs,react,source-loader,test,test-runner,theming,types} \
+  @storybook/{addon-a11y,addon-actions,addon-backgrounds,addon-controls,addon-designs,addon-docs,addon-interactions,addon-links,addon-measure,addon-onboarding,addon-outline,addon-storysource,addon-themes,addon-toolbars,addon-viewport,blocks,components,icons,manager-api,source-loader,test,test-runner,theming,types} \
   @chromatic-com/storybook \
   storybook \
-  storybook-dark-mode
+  storybook-dark-mode \
+  @whitespace/storybook-addon-html \
+  next-themes \
 ```
 
 <Files>
@@ -199,6 +201,8 @@ Extend the range of viewports with more options.
 ```
 </Tab>
 </Tabs>
+
+You will also need have the dark class applied to the layout body in (home)/layout.tsx.
 
 ### Inspiration
 

@@ -2,16 +2,17 @@
 import path from 'node:path'
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
-
-import { postgresAdapter } from '@payloadcms/db-postgres'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { buildConfig } from 'payload'
 import sharp from 'sharp'
 
+import { buildConfig } from 'payload'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { s3Storage } from '@payloadcms/storage-s3'
-import { Users } from './collections/Users'
-import { Media } from './collections/Media'
-import { Documents } from './collections/Documents'
+import { postgresAdapter } from '@payloadcms/db-postgres'
+
+import { Users } from '@/collections/users'
+import { Media } from '@/collections/media'
+import { Documents } from '@/collections/documents'
+import { Features } from '@/collections/features'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,7 +21,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
   },
-  collections: [Users, Media, Documents],
+  collections: [Users, Media, Documents, Features],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

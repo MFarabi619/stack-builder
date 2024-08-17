@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Features } from '@/components/sections/home-page/features'
-import { FEATURES_CONTENT } from '@/content/web/features'
+import { FEATURES_CONTENT } from '@/content/home-page/features'
 
 const meta = {
   title: 'Stack Builder Website/Features Section',

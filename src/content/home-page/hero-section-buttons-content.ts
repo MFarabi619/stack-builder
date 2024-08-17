@@ -1,4 +1,4 @@
-export const buttons = [
+export const hero_section_buttons_content = [
   {
     href: 'https://github.com/MFarabi619/stack-builder',
     imgSrc: '/stack-builder-home-screenshot.png',
