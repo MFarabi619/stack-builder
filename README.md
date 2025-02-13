@@ -4,7 +4,11 @@ Build your dream stack, your way.
 
 <hr/>
 
-## 🏗️ This project is a work in progress 🚧
+## 🏗️ This project is on hold indefinitely 🚧 maybe even abandoned 😔
+
+I took a break from working on this to focus on building out [cuHacking's 2025 Platform](https://github.com/cuhacking/2025).
+
+Much of the tooling, infrastructure, and DevOps foundations that led to the outstanding technical success of the project was taken from my work here 💚
 
 At the moment, it's just a well-documented [Next.js](https://nextjs.org/) Starter Template.
 
